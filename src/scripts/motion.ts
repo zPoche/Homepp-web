@@ -174,6 +174,85 @@ function initNav() {
 }
 
 /* ------------------------------------------------------------------ *
+ * Onepager: Navigation zeigt den Abschnitt, in dem man gerade steht
+ * ------------------------------------------------------------------ */
+function initActiveSection() {
+  const links = [
+    ...document.querySelectorAll<HTMLAnchorElement>('a[href^="/#"], a[href^="#"]'),
+  ].filter((link) => link.closest("header"));
+  if (!links.length) return;
+
+  const byId = new Map<string, HTMLAnchorElement[]>();
+  for (const link of links) {
+    const id = link.getAttribute("href")?.split("#")[1];
+    if (!id) continue;
+    byId.set(id, [...(byId.get(id) ?? []), link]);
+  }
+
+  const sections = [...byId.keys()]
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => Boolean(el));
+  if (!sections.length) return;
+
+  let active = "";
+  const setActive = (id: string) => {
+    if (id === active) return;
+    active = id;
+    for (const [sectionId, sectionLinks] of byId) {
+      for (const link of sectionLinks) {
+        const on = sectionId === id;
+        link.classList.toggle("text-ink-50", on);
+        link.classList.toggle("text-ink-400", !on);
+        if (on) link.setAttribute("aria-current", "true");
+        else link.removeAttribute("aria-current");
+      }
+    }
+  };
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    },
+    // Der Streifen liegt knapp unter der Navigationsleiste, damit der
+    // Abschnitt wechselt, sobald seine Überschrift oben ankommt.
+    { rootMargin: "-20% 0px -70% 0px", threshold: [0, 0.25, 0.5] },
+  );
+
+  sections.forEach((section) => io.observe(section));
+}
+
+/* ------------------------------------------------------------------ *
+ * Scroll-Fortschritt unter der Navigationsleiste
+ * ------------------------------------------------------------------ */
+function initScrollProgress() {
+  const bar = document.querySelector<HTMLElement>("[data-scroll-progress]");
+  if (!bar) return;
+
+  let ticking = false;
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+    bar.style.transform = `scaleX(${progress})`;
+    ticking = false;
+  };
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    },
+    { passive: true },
+  );
+  window.addEventListener("resize", update, { passive: true });
+  update();
+}
+
+/* ------------------------------------------------------------------ *
  * FAQ-Akkordeon: immer nur eine Antwort offen
  * ------------------------------------------------------------------ */
 function initAccordion() {
@@ -230,6 +309,8 @@ function initParallax() {
 
 function boot() {
   initNav();
+  initActiveSection();
+  initScrollProgress();
   initReveal();
   initSpotlight();
   initMagnetic();
