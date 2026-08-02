@@ -25,22 +25,57 @@ export const site = {
 } as const;
 
 /**
- * Pflichtangaben für Impressum (§ 5 DDG) und Datenschutzerklärung.
- * TODO_IMPRESSUM markiert Werte, die nirgends öffentlich hinterlegt sind und
- * vom Betreiber selbst ergänzt werden müssen, bevor die Seite live geht.
+ * Anbieterkennzeichnung (§ 5 DDG) und Angaben für die Datenschutzerklärung.
+ *
+ * `provider` und `contentResponsible` sind die Pflichtangaben – ohne sie darf
+ * die Seite nicht online gehen. Die Felder darunter sind optional und werden
+ * nur gerendert, wenn sie gefüllt sind; sie werden erst dann zur Pflicht, wenn
+ * die Seite gewerblich betrieben wird (dazu scripts/check-legal.mjs).
  */
 export const legal = {
-  representative: "TODO_IMPRESSUM: Vor- und Nachname des Inhabers",
-  vatId: "TODO_IMPRESSUM: USt-IdNr. gem. § 27a UStG (oder Kleinunternehmer-Hinweis)",
-  chamber: "TODO_IMPRESSUM: Zuständige Handwerkskammer",
-  jobTitle: "TODO_IMPRESSUM: Gesetzliche Berufsbezeichnung und Verleihungsstaat",
-  supervisoryAuthority: "TODO_IMPRESSUM: Zuständige Aufsichtsbehörde",
-  contentResponsible: "TODO_IMPRESSUM: Verantwortlich i. S. d. § 18 Abs. 2 MStV",
+  provider: {
+    name: "Johannes Schäfer",
+    careOf: "c/o Online-Impressum.de #6287",
+    street: "Europaring 90",
+    postalCode: "53757",
+    city: "Sankt Augustin",
+    country: "Deutschland",
+  },
+
+  /** Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV */
+  contentResponsible: "Johannes Schäfer",
+
+  /**
+   * Nur bei gewerblichem Betrieb erforderlich. Das Elektrotechnikerhandwerk
+   * ist nach Anlage A der Handwerksordnung zulassungspflichtig – dann sind
+   * Kammer, Berufsbezeichnung und Verleihungsstaat Pflicht (§ 5 Abs. 1 Nr. 5
+   * DDG), die USt-IdNr. zusätzlich nach § 5 Abs. 1 Nr. 6 DDG, sofern vorhanden.
+   */
+  vatId: "",
+  chamber: "",
+  jobTitle: "",
+  jobTitleState: "",
+  professionalRules: "",
+
+  /**
+   * Hosting-Anbieter für die Datenschutzerklärung. Bleibt das Feld leer, nennt
+   * die Erklärung die Kategorie statt des Namens – das genügt Art. 13 Abs. 1
+   * lit. e DSGVO ("Empfänger oder Kategorien von Empfängern"). Sobald das
+   * Hosting feststeht, gehört der Anbieter hier namentlich hinein.
+   */
+  hostingProvider: "",
+
+  /**
+   * Datenschutz-Aufsichtsbehörde richtet sich nach dem Sitz des
+   * Verantwortlichen – hier Nordrhein-Westfalen.
+   */
+  dataProtectionAuthority: {
+    name: "Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen",
+    address: "Kavalleriestraße 2–4, 40213 Düsseldorf",
+  },
+
   lastUpdated: "2026-08-02",
 } as const;
-
-/** Ist ein Wert noch ein unausgefüllter Platzhalter? */
-export const isTodo = (value: string) => value.startsWith("TODO_IMPRESSUM");
 
 export type Service = {
   slug: string;
@@ -152,7 +187,7 @@ export const stats = [
   { value: 10, suffix: "+", label: "Jahre Erfahrung in der Elektrotechnik" },
   { value: 250, suffix: "+", label: "Umgesetzte Automationen & Szenen" },
   { value: 60, suffix: " km", label: "Einsatzradius rund um Geiselwind" },
-  { value: 24, suffix: " h", label: "Rückmeldung auf jede Anfrage" },
+  { value: 1, suffix: " Werktag", label: "bis zur Rückmeldung auf Deine Anfrage" },
 ];
 
 export const process = [

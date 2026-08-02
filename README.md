@@ -28,7 +28,8 @@ Node 22.12 oder neuer wird vorausgesetzt.
 | `npm run format`           | Prettier über das Projekt                                           |
 | `npm run check:links`      | interne Links und Sprungmarken im Build prüfen                      |
 | `npm run check:typography` | zusammengeklebte Wörter im gerenderten Text finden                  |
-| `npm run check:legal`      | offene Pflichtangaben in Impressum/Datenschutz melden               |
+| `npm run check:privacy`    | Build auf Ressourcen von Drittanbietern durchsuchen                 |
+| `npm run check:legal`      | Impressum und Datenschutzerklärung auf Pflichtinhalte prüfen        |
 | `npm run check`            | alles der Reihe nach – das, was auch die CI ausführt                |
 | `npm run lighthouse`       | Lighthouse CI gegen den Build                                       |
 
@@ -49,29 +50,35 @@ Inhalte werden nicht in den Komponenten gepflegt, sondern in
 [`src/data/site.ts`](src/data/site.ts). Leistungen, FAQ-Einträge, Prozessschritte
 und Kontaktdaten liegen dort als typisierte Arrays.
 
-## Vor dem Go-live: offene Pflichtangaben
+## Rechtstexte
 
-Impressum und Datenschutzerklärung enthalten Platzhalter, die nur der Betreiber
-selbst ausfüllen kann. Sie sind im Code mit `TODO_IMPRESSUM` markiert und werden
-auf der Seite als gelb umrandeter Hinweis dargestellt, damit sie nicht
-übersehen werden.
+Impressum und Datenschutzerklärung werden aus dem Objekt `legal` in
+[`src/data/site.ts`](src/data/site.ts) gespeist. Pflichtangaben nach § 5 DDG –
+Anbieter, Anschrift, E-Mail und der Verantwortliche nach § 18 Abs. 2 MStV –
+sind gesetzt.
 
-```bash
-npm run build && npm run check:legal
-```
+Vier Felder sind bewusst leer und werden nur gerendert, wenn sie gefüllt sind:
 
-listet auf, was noch fehlt:
+| Feld                              | Wann nötig                                                                                            |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `vatId`                           | bei gewerblichem Betrieb, sofern eine USt-IdNr. vorhanden ist (§ 5 Abs. 1 Nr. 6 DDG)                    |
+| `chamber`, `jobTitle`             | bei gewerblichem Betrieb Pflicht – das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig |
+| `hostingProvider`                 | optional; ohne Angabe nennt die Erklärung die Kategorie statt des Namens, was Art. 13 Abs. 1 lit. e DSGVO genügt |
 
-- Vor- und Nachname des Inhabers (§ 5 DDG)
-- USt-IdNr. nach § 27a UStG oder Hinweis auf die Kleinunternehmerregelung
-- zuständige Handwerkskammer, Berufsbezeichnung und Aufsichtsbehörde
-- Verantwortlicher nach § 18 Abs. 2 MStV
-- Name und Anschrift des Hosting-Anbieters (in `src/pages/datenschutz.astro`)
+`npm run check:legal` meldet diese Punkte als Hinweis und prüft zusätzlich die
+harten Anforderungen: Erreichbarkeit beider Seiten von jeder Seite aus,
+E-Mail-Adresse im Impressum, § 18 MStV, Verweis auf das DDG statt auf das
+abgelöste TMG sowie die Kernangaben nach Art. 13 DSGVO.
 
-Gepflegt wird das im Objekt `legal` in `src/data/site.ts`. Der Workflow
-[`release-check.yml`](.github/workflows/release-check.yml) schlägt fehl, solange
-noch Platzhalter im Build stehen – so kann die Seite nicht versehentlich
-unvollständig online gehen.
+Der Check schlägt außerdem fehl, sobald irgendwo wieder ein Hinweis auf die
+**OS-Plattform** auftaucht. Die EU hat sie am 20.07.2025 abgeschaltet; ein
+verbliebener Verweis gilt als irreführend und ist abmahnfähig.
+
+`npm run check:privacy` durchsucht den Build nach Subressourcen fremder
+Herkunft – Schriften-CDNs, eingebettete Karten, Analyse-Skripte. Solange nichts
+gefunden wird, stimmt die Zusage der Datenschutzerklärung, dass beim Aufruf
+keine Anfrage an einen fremden Server geht. Reine `<a href>`-Links werden nicht
+beanstandet, weil sie erst beim Klick eine Verbindung auslösen.
 
 ## Kontaktformular
 
@@ -108,10 +115,10 @@ Zwei Punkte sind wichtig:
 
 ## Automationen
 
-| Workflow                                                     | Auslöser                | Aufgabe                                                                     |
-| ------------------------------------------------------------ | ----------------------- | --------------------------------------------------------------------------- |
-| [`ci.yml`](.github/workflows/ci.yml)                         | Push, Pull Request      | Format, Typen, Build, Link-Check, Typografie-Check, Lighthouse               |
-| [`release-check.yml`](.github/workflows/release-check.yml)   | manuell, Tag `v*`       | wie oben, schlägt aber bei offenen Pflichtangaben fehl                       |
+| Workflow                                                   | Auslöser           | Aufgabe                                                                            |
+| ---------------------------------------------------------- | ------------------ | ---------------------------------------------------------------------------------- |
+| [`ci.yml`](.github/workflows/ci.yml)                       | Push, Pull Request | Format, Typen, Build, Link-, Typografie-, Datenschutz- und Rechtstext-Check, Lighthouse |
+| [`release-check.yml`](.github/workflows/release-check.yml) | manuell, Tag `v*`  | wie oben, schlägt aber zusätzlich bei offenen Platzhaltern fehl                      |
 
 Die Prüfskripte in `scripts/` laufen ohne Netzwerk gegen `dist/` und lassen sich
 jederzeit lokal ausführen.

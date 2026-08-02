@@ -24,6 +24,7 @@ jobs:
       - run: npm run build
       - run: npm run check:links
       - run: npm run check:typography
+      - run: npm run check:privacy
 
-      - name: Pflichtangaben vollständig?
+      - name: Rechtstexte vollständig?
         run: npm run check:legal:strict

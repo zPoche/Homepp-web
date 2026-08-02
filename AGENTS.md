@@ -27,10 +27,19 @@ lassen. Die Prüfskripte arbeiten gegen `dist/`, brauchen also einen Build.
 
 ## Rechtliches
 
-Impressum und Datenschutzerklärung enthalten Platzhalter mit dem Präfix
-`TODO_IMPRESSUM`. Diese Werte dürfen **nicht** erfunden werden – sie kann nur
-der Betreiber ausfüllen. `npm run check:legal` listet die offenen Punkte auf,
-`npm run check:legal:strict` lässt den Build daran scheitern.
+Impressum und Datenschutzerklärung speisen sich aus dem Objekt `legal` in
+`src/data/site.ts`. Angaben dort werden **nie erfunden** – fehlende Werte
+bleiben leer und werden dann gar nicht gerendert, statt mit einer Vermutung
+gefüllt zu werden.
+
+Zwei Regeln, die `npm run check:legal` erzwingt:
+
+- **Kein Verweis auf die OS-Plattform.** Die EU hat sie am 20.07.2025
+  abgeschaltet; ein verbliebener Hinweis ist irreführend und abmahnfähig.
+- **DDG statt TMG.** Das Telemediengesetz wurde im Mai 2024 abgelöst.
+
+`npm run check:privacy` stellt sicher, dass keine Ressource von Drittanbietern
+in den Build gelangt – sonst wird die Datenschutzerklärung unwahr.
 
 ## Dokumentation
 

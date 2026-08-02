@@ -23,7 +23,8 @@
     "check:legal:strict": "node scripts/check-legal.mjs --strict",
     "check:links": "node scripts/check-links.mjs",
     "check:typography": "node scripts/check-typography.mjs",
-    "check": "npm run format:check && npm run typecheck && npm run build && npm run check:links && npm run check:typography && npm run check:legal",
+    "check:privacy": "node scripts/check-privacy.mjs",
+    "check": "npm run format:check && npm run typecheck && npm run build && npm run check:links && npm run check:typography && npm run check:privacy && npm run check:legal",
     "lighthouse": "lhci autorun"
   },
   "dependencies": {
