@@ -175,15 +175,15 @@ export const services: Service[] = [
   },
   {
     slug: "edv-datentechnik",
-    title: "EDV & IT",
-    teaser: "Die Basis für alles Weitere.",
+    title: "EDV, Web & IT",
+    teaser: "Kleine Systeme, sauber betreut.",
     description:
-      "Synology für NAS, Backups, Monitoring und Surveillance Station, Telefonanlagen mit AGFEO (Mitel optional) sowie Domains, Hosting und laufende IT-Betreuung.",
+      "Websites und IT-Verwaltung im überschaubaren Maßstab: Domains, Hosting, Pflege und laufende Betreuung, dazu Synology-NAS, Backups und Telefonanlagen mit AGFEO.",
     bullets: [
+      "Websites einrichten, hosten und pflegen",
+      "Domains, Webspace, Server und IT-Verwaltung",
       "Synology: NAS, Backup, Monitoring, Surveillance",
       "AGFEO Telefonanlagen, Mitel optional",
-      "PC-, Server- und Kundensysteme",
-      "Domains, Webspace, Hosting und Website-Betreuung",
     ],
     icon: "server",
     accent: "volt",
@@ -277,7 +277,7 @@ export const techStack = [
 export const faqs = [
   {
     q: "Was macht HomePower+ besonders?",
-    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik. Von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, IT und Messungen.",
+    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik. Von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, kleiner IT- und Website-Betreuung und Messungen.",
   },
   {
     q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",
