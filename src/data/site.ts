@@ -3,7 +3,7 @@ export const site = {
   legalName: "HomePower+",
   tagline: "Das Plus für Dein Zuhause",
   description:
-    "Smart Home, Netzwerk, Sicherheitstechnik und Elektroinstallation aus Geiselwind – für Würzburg, Kitzingen und Umgebung.",
+    "Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik aus Geiselwind – für Würzburg, Kitzingen und Umgebung.",
   url: "https://homepowerplus.de",
   email: "info@homepp.de",
   phone: "+49 9556 9217717",
@@ -141,10 +141,10 @@ export const services: Service[] = [
     title: "Sicherheitstechnik",
     teaser: "Sehen, was zuhause passiert.",
     description:
-      "Videoüberwachung, Alarmanlagen und Zutrittskontrolle – datenschutzkonform geplant und sauber ins Smart Home integriert.",
+      "Videoüberwachung, Einbruchmeldeanlagen und Zutrittskontrolle – datenschutzkonform geplant, mit EMA-Wartung und sauber ins Smart Home integriert.",
     bullets: [
+      "Einbruchmeldeanlagen inkl. EMA-Wartung (u. a. Telenot)",
       "Videoüberwachung mit lokaler Aufzeichnung",
-      "Alarmanlagen & Sensorik",
       "Zutrittskontrolle und Türsprechanlagen",
       "DSGVO-konforme Planung",
     ],
@@ -153,29 +153,29 @@ export const services: Service[] = [
   },
   {
     slug: "edv-datentechnik",
-    title: "EDV & Datentechnik",
+    title: "EDV & IT",
     teaser: "Die Basis für alles Weitere.",
     description:
-      "Strukturierte Verkabelung, Serverschränke und individuelle PC- bzw. Server-Lösungen – sauber dokumentiert und zukunftssicher dimensioniert.",
+      "Netzwerk- und IT-Infrastruktur, PC- und Serversysteme, Telefon-/TK-Anlagen sowie Domains, Hosting und laufende Betreuung – vom Schrank bis zur Website.",
     bullets: [
-      "Strukturierte Verkabelung Cat.6A / Glasfaser",
-      "Patchfelder & Schrankaufbau",
-      "NAS-, Server- und Backup-Konzepte",
-      "Messprotokolle für jede Strecke",
+      "Strukturierte Verkabelung Cat.6A / Glasfaser (LWL)",
+      "PC-, Server- und NAS-Systeme inkl. Zusammenbau",
+      "Telefon-/TK-Anlagen und Netzwerkinfrastruktur",
+      "Domains, Webspace, Hosting und Website-Betreuung",
     ],
     icon: "server",
     accent: "volt",
   },
   {
     slug: "vde-messungen",
-    title: "VDE-Messungen",
+    title: "Messungen & Prüfung",
     teaser: "Sicherheit mit Protokoll.",
     description:
-      "Prüfung ortsfester und ortsveränderlicher Anlagen nach DIN VDE – inklusive vollständiger Prüfprotokolle für Versicherung und Vermieter.",
+      "VDE-, DGUV-, EDV- und LWL-Messungen – inklusive vollständiger Prüfprotokolle für Versicherung, Arbeitgeber und Vermieter.",
     bullets: [
-      "E-Check & Erstprüfung nach DIN VDE 0100-600",
-      "Wiederholungsprüfung nach DIN VDE 0105-100",
-      "Geräteprüfung nach DIN VDE 0701-0702",
+      "E-Check & Prüfungen nach DIN VDE",
+      "DGUV-Prüfungen ortsveränderlicher Geräte",
+      "EDV- und LWL-/Glasfasermessungen",
       "Digitale Protokolle als PDF",
     ],
     icon: "gauge",
@@ -186,7 +186,7 @@ export const services: Service[] = [
     title: "3D-Druck & Sonderteile",
     teaser: "Wenn es das Teil nicht gibt.",
     description:
-      "Halterungen, Gehäuse und Adapter, die es so nicht zu kaufen gibt – konstruiert und gedruckt, passgenau für Deine Hardware.",
+      "Individuelle 3D-Druck-Lösungen für Halterungen und Gehäuse – konstruiert und gedruckt, passgenau für Deine Hardware.",
     bullets: [
       "Sensor- und Kamerahalterungen",
       "Gehäuse für Elektronik & Hutschiene",
@@ -233,18 +233,25 @@ export const process = [
   },
 ];
 
-/** Systeme, mit denen HomePower+ arbeitet – keine Großhändler-Marken. */
+/**
+ * Hersteller und Systeme aus dem Leistungsportfolio.
+ * Keine Großhändler (Sonepar/Yesss) – die sind Einkauf, keine Leistung.
+ */
 export const techStack = [
   "Home Assistant",
   "KNX",
   "Shelly",
   "Ubiquiti UniFi",
+  "Telenot",
+  "Synology",
+  "AVM FRITZ!",
+  "Auerswald",
 ];
 
 export const faqs = [
   {
     q: "Was macht HomePower+ besonders?",
-    a: "HomePower+ bietet maßgeschneiderte Lösungen im Bereich Elektroinstallation, Smart Home und Netzwerktechnik – und bringt das System danach auch zum Laufen, vom Netzwerk über die Automation bis zur Kamera.",
+    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik – Planung, Installation und Wartung aus einer Hand, vom Smart Home über EMA und Video bis zu IT, Hosting und Messungen.",
   },
   {
     q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",

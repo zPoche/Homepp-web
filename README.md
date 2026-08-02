@@ -108,9 +108,9 @@ per FTP auf einen Webspace).
 
 Zwei Punkte sind wichtig:
 
-- **`trailingSlash: "never"`** – der Host sollte `/impressum` auf
-  `/impressum/index.html` auflösen. Netlify, Vercel und Cloudflare Pages tun das
-  von Haus aus.
+- **`trailingSlash: "always"`** – Links lauten `/impressum/` und
+  `/datenschutz/`. Auf Plesk/Passenger liefert der Pfad ohne Slash einen 500;
+  `public/.htaccess` leitet Verzeichnisse zusätzlich auf die Slash-Variante um.
 - **`site` in `astro.config.mjs`** – steht auf `https://homepowerplus.de` und
   bestimmt Canonical-URLs, Sitemap und Open-Graph-Bild. Bei einer anderen Domain
   anpassen.

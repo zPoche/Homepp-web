@@ -7,7 +7,9 @@ import sitemap from "@astrojs/sitemap";
 // https://astro.build/config
 export default defineConfig({
   site: "https://homepowerplus.de",
-  trailingSlash: "never",
+  // "always": Links enden auf /impressum/ – auf Plesk/Passenger liefert
+  // /impressum ohne Slash einen 500, mit Slash die statische index.html.
+  trailingSlash: "always",
 
   // Astros HTML-Kompression entfernt auch bedeutungstragende Leerzeichen vor
   // Inline-Elementen ("die <span>Standardinstallation</span>" wird zu
