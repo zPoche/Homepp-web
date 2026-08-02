@@ -1,0 +1,62 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { navLinks } from "../data/site";
+---
+
+<Base title="Seite nicht gefunden" noindex>
+  <section
+    class="relative grid min-h-[100svh] place-items-center overflow-hidden pt-[var(--nav-h)]"
+  >
+    <canvas
+      data-energy-field
+      class="absolute inset-0 -z-20 size-full"
+      aria-hidden="true"></canvas>
+    <div class="grid-lines absolute inset-0 -z-30 opacity-50" aria-hidden="true"></div>
+    <div
+      class="absolute inset-0 -z-30 bg-[radial-gradient(ellipse_60%_50%_at_50%_30%,rgba(30,239,242,0.15),transparent_70%)]"
+      aria-hidden="true"
+    >
+    </div>
+
+    <div
+      class="container-x pointer-events-none py-20 text-center [&_a]:pointer-events-auto"
+    >
+      <p
+        class="font-display text-gradient text-[clamp(6rem,22vw,14rem)] leading-none font-bold"
+      >
+        404
+      </p>
+      <h1 class="mt-4 text-[clamp(1.75rem,4vw,2.75rem)] font-bold">
+        Hier ist der Strom weg.
+      </h1>
+      <p class="text-ink-400 mx-auto mt-5 max-w-md text-lg leading-relaxed">
+        Diese Seite existiert nicht (mehr). Kein Grund zur Sorge – die Sicherung ist
+        ganz woanders.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a
+          href="/"
+          class="group bg-brand-400 text-ink-950 shadow-brand-400/25 inline-flex items-center gap-2 rounded-full px-7 py-3.5 font-semibold shadow-lg transition-transform duration-300 hover:-translate-y-0.5"
+        >
+          Zur Startseite
+          <Icon
+            name="arrow"
+            class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </a>
+        {
+          navLinks.slice(0, 3).map((link) => (
+            <a
+              href={link.href}
+              class="glass text-ink-50 hover:border-brand-400/40 rounded-full px-6 py-3.5 font-medium transition-colors"
+            >
+              {link.label}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

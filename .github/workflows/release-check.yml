@@ -1,0 +1,29 @@
+name: Release-Readiness
+
+# Strenge Variante der Checks: schlägt fehl, solange im Impressum oder in der
+# Datenschutzerklärung noch Platzhalter stehen. Vor dem Go-live manuell oder
+# über einen Tag ausführen.
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release-check:
+    name: Go-live bereit?
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check:links
+      - run: npm run check:typography
+
+      - name: Pflichtangaben vollständig?
+        run: npm run check:legal:strict

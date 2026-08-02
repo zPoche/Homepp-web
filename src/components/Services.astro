@@ -1,0 +1,79 @@
+---
+import Icon from "./Icon.astro";
+import { services } from "../data/site";
+
+const accentClasses: Record<string, string> = {
+  brand: "text-brand-400 from-brand-400/20",
+  volt: "text-volt-400 from-volt-400/20",
+  signal: "text-signal-400 from-signal-400/20",
+};
+---
+
+<section id="leistungen" class="relative scroll-mt-24 py-24 md:py-32">
+  <div class="container-x">
+    <div class="max-w-3xl">
+      <p class="eyebrow" data-reveal>Leistungen</p>
+      <h2
+        class="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold"
+        data-reveal
+        style="--reveal-delay:80ms"
+      >
+        Alles, was über die
+        <span class="text-highlight">Standardinstallation</span> hinausgeht.
+      </h2>
+      <p
+        class="text-ink-400 mt-6 text-lg leading-relaxed"
+        data-reveal
+        style="--reveal-delay:160ms"
+      >
+        Steckdosen kann jeder. Wir kümmern uns um das, was danach kommt: Systeme, die
+        miteinander reden, ein Netzwerk, das trägt, und Technik, die auch in fünf Jahren
+        noch läuft.
+      </p>
+    </div>
+
+    <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map((service, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <article class="glass spotlight group relative flex h-full flex-col rounded-3xl p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/16">
+              <span
+                class={`absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-current to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-70 ${accentClasses[service.accent].split(" ")[0]}`}
+                aria-hidden="true"
+              />
+
+              <span
+                class={`inline-flex size-12 items-center justify-center rounded-2xl bg-linear-to-br to-transparent ring-1 ring-white/10 ${accentClasses[service.accent]}`}
+              >
+                <Icon name={service.icon} class="size-6" />
+              </span>
+
+              <h3 class="font-display mt-6 text-xl font-semibold">{service.title}</h3>
+              <p
+                class={`mt-1 text-sm font-medium ${accentClasses[service.accent].split(" ")[0]}`}
+              >
+                {service.teaser}
+              </p>
+
+              <p class="text-ink-400 mt-4 text-[0.95rem] leading-relaxed">
+                {service.description}
+              </p>
+
+              <ul class="text-ink-400 mt-6 space-y-2.5 text-sm">
+                {service.bullets.map((bullet) => (
+                  <li class="flex gap-2.5">
+                    <Icon
+                      name="check"
+                      class="text-brand-400/80 mt-0.5 size-4 shrink-0"
+                    />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

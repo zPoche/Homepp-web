@@ -1,0 +1,58 @@
+---
+import { process } from "../data/site";
+---
+
+<section id="ablauf" class="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+  <div
+    class="bg-volt-500/8 absolute top-1/3 -right-52 size-[36rem] rounded-full blur-[130px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x relative">
+    <div class="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+      <div class="lg:sticky lg:top-32 lg:self-start">
+        <p class="eyebrow" data-reveal>Ablauf</p>
+        <h2
+          class="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold"
+          data-reveal
+          style="--reveal-delay:80ms"
+        >
+          Vom Gespräch zur <span class="text-highlight">fertigen Anlage</span>.
+        </h2>
+        <p
+          class="text-ink-400 mt-6 text-lg leading-relaxed"
+          data-reveal
+          style="--reveal-delay:160ms"
+        >
+          Vier Schritte, keine bösen Überraschungen. Du weißt jederzeit, was passiert,
+          was es kostet und wann wir fertig sind.
+        </p>
+      </div>
+
+      <ol class="relative space-y-4">
+        <span
+          class="via-brand-400/25 absolute top-4 bottom-4 left-[2.1rem] hidden w-px bg-linear-to-b from-transparent to-transparent sm:block"
+          aria-hidden="true"></span>
+
+        {
+          process.map((item, i) => (
+            <li
+              class="glass spotlight relative flex gap-5 rounded-3xl p-6 transition-all duration-500 hover:-translate-y-1 hover:border-white/16 sm:gap-7 sm:p-7"
+              data-reveal
+              style={`--reveal-delay:${i * 90}ms`}
+            >
+              <span class="bg-ink-900 text-brand-300 font-display ring-brand-400/20 relative z-10 inline-flex size-[3.25rem] shrink-0 items-center justify-center rounded-2xl text-lg font-bold ring-1">
+                {item.step}
+              </span>
+              <div>
+                <h3 class="font-display text-xl font-semibold">{item.title}</h3>
+                <p class="text-ink-400 mt-2.5 leading-relaxed">{item.text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
