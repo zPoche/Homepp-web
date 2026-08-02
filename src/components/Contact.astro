@@ -1,0 +1,270 @@
+---
+import Icon from "./Icon.astro";
+import { site, services } from "../data/site";
+
+/**
+ * Formular-Ziel. Ist nichts gesetzt, baut das Skript aus den Feldern eine
+ * mailto-Nachricht – so funktioniert das Formular auch ohne Backend.
+ */
+const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+
+const channels = [
+  {
+    icon: "phone" as const,
+    label: "Telefon",
+    value: site.phone,
+    href: `tel:${site.phoneHref}`,
+  },
+  {
+    icon: "mail" as const,
+    label: "E-Mail",
+    value: site.email,
+    href: `mailto:${site.email}`,
+  },
+  {
+    icon: "pin" as const,
+    label: "Adresse",
+    value: `${site.street}, ${site.postalCode} ${site.city}`,
+    href: `https://www.openstreetmap.org/search?query=${encodeURIComponent(
+      `${site.street}, ${site.postalCode} ${site.city}`,
+    )}`,
+  },
+];
+---
+
+<section id="kontakt" class="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+  <div
+    class="absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_100%,rgba(30,239,242,0.12),transparent_70%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x relative">
+    <!-- min-w-0: ohne das zwingt die Mindestbreite des Formulars die
+         Grid-Spalte über die Viewport-Breite hinaus -->
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <div class="min-w-0">
+        <p class="eyebrow" data-reveal>Kontakt</p>
+        <h2
+          class="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold"
+          data-reveal
+          style="--reveal-delay:80ms"
+        >
+          Erzähl uns von <span class="text-highlight">Deinem Projekt</span>.
+        </h2>
+        <p
+          class="text-ink-400 mt-6 text-lg leading-relaxed"
+          data-reveal
+          style="--reveal-delay:140ms"
+        >
+          Ob konkrete Planung oder erste Idee – das Erstgespräch ist kostenlos und
+          unverbindlich. Wir melden uns innerhalb eines Werktages zurück.
+        </p>
+
+        <ul class="mt-10 space-y-3">
+          {
+            channels.map((channel, i) => (
+              <li data-reveal style={`--reveal-delay:${180 + i * 80}ms`}>
+                <a
+                  href={channel.href}
+                  class="glass spotlight group hover:border-brand-400/30 flex items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5"
+                  rel={
+                    channel.href.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
+                  target={channel.href.startsWith("http") ? "_blank" : undefined}
+                >
+                  <span class="bg-brand-400/10 text-brand-400 ring-brand-400/20 inline-flex size-11 shrink-0 items-center justify-center rounded-xl ring-1">
+                    <Icon name={channel.icon} class="size-5" />
+                  </span>
+                  <span class="min-w-0">
+                    <span class="text-ink-500 block text-xs tracking-widest uppercase">
+                      {channel.label}
+                    </span>
+                    <span class="group-hover:text-brand-300 block font-semibold break-words transition-colors">
+                      {channel.value}
+                    </span>
+                  </span>
+                  <Icon
+                    name="arrow"
+                    class="text-ink-500 group-hover:text-brand-400 ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1"
+                  />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="text-ink-500 mt-8 flex items-center gap-2 text-sm" data-reveal>
+          <Icon name="clock" class="size-4" />
+          {site.openingHours}
+        </p>
+      </div>
+
+      <div class="min-w-0" data-reveal style="--reveal-delay:160ms">
+        <form
+          class="glass rounded-3xl p-6 sm:p-8"
+          data-contact-form
+          data-endpoint={endpoint}
+          data-mailto={site.email}
+          action={endpoint || undefined}
+          method="post"
+          novalidate
+        >
+          <!-- Honeypot gegen Bots -->
+          <div class="absolute -left-[9999px]" aria-hidden="true">
+            <label for="company">Firma nicht ausfüllen</label>
+            <input
+              id="company"
+              name="company"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="grid gap-5 sm:grid-cols-2">
+            <div class="sm:col-span-1">
+              <label for="name" class="text-ink-400 mb-2 block text-sm font-medium">
+                Name <span class="text-brand-400">*</span>
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                autocomplete="name"
+                class="focus:border-brand-400/50 focus:bg-brand-400/5 placeholder:text-ink-500 w-full rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-base transition-colors outline-none"
+                placeholder="Vor- und Nachname"
+              />
+            </div>
+
+            <div class="sm:col-span-1">
+              <label for="email" class="text-ink-400 mb-2 block text-sm font-medium">
+                E-Mail <span class="text-brand-400">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                autocomplete="email"
+                class="focus:border-brand-400/50 focus:bg-brand-400/5 placeholder:text-ink-500 w-full rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-base transition-colors outline-none"
+                placeholder="name@beispiel.de"
+              />
+            </div>
+
+            <div class="sm:col-span-1">
+              <label for="phone" class="text-ink-400 mb-2 block text-sm font-medium">
+                Telefon
+              </label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                class="focus:border-brand-400/50 focus:bg-brand-400/5 placeholder:text-ink-500 w-full rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-base transition-colors outline-none"
+                placeholder="Optional"
+              />
+            </div>
+
+            <div class="sm:col-span-1">
+              <label for="topic" class="text-ink-400 mb-2 block text-sm font-medium">
+                Thema
+              </label>
+              <select
+                id="topic"
+                name="topic"
+                class="focus:border-brand-400/50 focus:bg-brand-400/5 select-chevron w-full appearance-none rounded-xl border border-white/10 bg-white/4 py-3 pr-11 pl-4 text-base transition-colors outline-none"
+              >
+                <option value="">Bitte wählen</option>
+                {services.map((s) => <option value={s.title}>{s.title}</option>)}
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="message" class="text-ink-400 mb-2 block text-sm font-medium">
+                Nachricht <span class="text-brand-400">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                required
+                class="focus:border-brand-400/50 focus:bg-brand-400/5 placeholder:text-ink-500 w-full resize-y rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-base transition-colors outline-none"
+                placeholder="Worum geht es? Neubau, Sanierung, konkrete Frage …"
+              ></textarea>
+            </div>
+
+            <div class="sm:col-span-2">
+              <label
+                class="text-ink-400 flex cursor-pointer items-start gap-3 text-sm leading-relaxed"
+              >
+                <input
+                  type="checkbox"
+                  name="privacy"
+                  required
+                  class="accent-brand-400 mt-0.5 size-4 shrink-0 rounded"
+                />
+                <span>
+                  Ich habe die <a
+                    href="/datenschutz"
+                    class="text-brand-300 hover:text-brand-200 underline underline-offset-4"
+                    >Datenschutzerklärung</a
+                  > gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung der Anfrage
+                  zu. <span class="text-brand-400">*</span>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="group bg-brand-400 text-ink-950 shadow-brand-400/20 hover:shadow-brand-400/35 relative mt-7 inline-flex w-full items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-4 font-semibold shadow-lg transition-all duration-300 hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          >
+            <span class="relative z-10" data-submit-label>Nachricht senden</span>
+            <Icon
+              name="arrow"
+              class="relative z-10 size-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+            <span
+              class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+            ></span>
+          </button>
+
+          <p
+            class="mt-4 hidden text-sm"
+            role="status"
+            aria-live="polite"
+            data-form-status
+          >
+          </p>
+
+          <p class="text-ink-500 mt-4 text-xs leading-relaxed">
+            Pflichtfelder sind mit <span class="text-brand-400">*</span> markiert. Deine Angaben
+            nutzen wir ausschließlich zur Beantwortung der Anfrage.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import "../scripts/contact-form";
+  </script>
+</section>
+
+<style>
+  /* appearance-none entfernt auch den Pfeil – hier kommt er als Hintergrund zurück */
+  .select-chevron {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238a97a6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+  }
+
+  /* Ohne das rendern Chrome und Firefox die Optionen hell auf hell */
+  .select-chevron option {
+    background-color: #111823;
+    color: #f3f6f8;
+  }
+</style>

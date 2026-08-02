@@ -1,0 +1,146 @@
+---
+import Icon from "./Icon.astro";
+import { site } from "../data/site";
+
+const highlights = [
+  {
+    title: "Elektrotechnik trifft IT",
+    text: "Wir ziehen nicht nur die Leitung, wir bringen das System danach auch zum Laufen – inklusive Netzwerk, Server und Automation.",
+  },
+  {
+    title: "Lokal statt Cloud",
+    text: "Deine Anlage läuft im Haus. Kein Abo, keine Abhängigkeit von einem Hersteller, der morgen den Dienst abschaltet.",
+  },
+  {
+    title: "Ein Ansprechpartner",
+    text: "Von der Planung bis zum Support redest Du mit derselben Person. Ohne Ticketsystem und ohne Warteschleife.",
+  },
+];
+
+/** Positionen der Orte auf dem dekorativen Radar (Prozent) */
+const places = [
+  { name: site.city, x: 50, y: 50, home: true },
+  { name: "Würzburg", x: 24, y: 38 },
+  { name: "Kitzingen", x: 68, y: 62 },
+];
+---
+
+<section id="ueber-uns" class="relative scroll-mt-24 py-24 md:py-32">
+  <div class="container-x">
+    <div class="grid items-center gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <p class="eyebrow" data-reveal>Über uns</p>
+        <h2
+          class="mt-5 text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.05] font-bold"
+          data-reveal
+          style="--reveal-delay:80ms"
+        >
+          Der Betrieb, der auch die
+          <span class="text-highlight">Software</span> versteht.
+        </h2>
+        <p
+          class="text-ink-400 mt-6 text-lg leading-relaxed"
+          data-reveal
+          style="--reveal-delay:140ms"
+        >
+          HomePower+ ist Dein Partner für alles, was über die
+          Standard-Elektroinstallation hinausgeht: Smart Home, KI-Lösungen,
+          Netzwerktechnik und Sicherheitstechnik. Wir arbeiten von {site.city} aus in der
+          Region Würzburg und Kitzingen – im Neubau genauso wie in der Sanierung, für Privathaushalte
+          und für Gewerbe.
+        </p>
+
+        <!-- dt und dd müssen direkte Kinder des div bleiben, sonst verliert
+             die Definitionsliste ihre Semantik -->
+        <dl class="mt-10 space-y-6">
+          {
+            highlights.map((item, i) => (
+              <div
+                class="grid grid-cols-[auto_1fr] items-start gap-x-4"
+                data-reveal
+                style={`--reveal-delay:${200 + i * 90}ms`}
+              >
+                <span
+                  class="bg-brand-400/10 text-brand-400 ring-brand-400/20 row-span-2 mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-xl ring-1"
+                  aria-hidden="true"
+                >
+                  <Icon name="spark" class="size-4" />
+                </span>
+                <dt class="font-display text-lg font-semibold">{item.title}</dt>
+                <dd class="text-ink-400 mt-1.5 leading-relaxed">{item.text}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+
+      <!-- Einsatzgebiet als Radar -->
+      <div class="relative" data-reveal style="--reveal-delay:180ms">
+        <div
+          class="glass relative aspect-square overflow-hidden rounded-[2rem] p-6"
+          role="img"
+          aria-label={`Einsatzgebiet von ${site.name}: ${site.areaServed.join(", ")}`}
+        >
+          <div class="grid-lines absolute inset-0 opacity-70" aria-hidden="true"></div>
+
+          <div class="absolute inset-0 grid place-items-center" aria-hidden="true">
+            {
+              [0.35, 0.6, 0.85].map((scale, i) => (
+                <span
+                  class="border-brand-400/15 absolute rounded-full border"
+                  style={`width:${scale * 100}%;height:${scale * 100}%;animation: pulse-ring 4s ease-out ${i * 1.2}s infinite`}
+                />
+              ))
+            }
+            {
+              [0.35, 0.6, 0.85].map((scale) => (
+                <span
+                  class="border-brand-400/10 absolute rounded-full border"
+                  style={`width:${scale * 100}%;height:${scale * 100}%`}
+                />
+              ))
+            }
+          </div>
+
+          {
+            places.map((place, i) => (
+              <span
+                class="absolute -translate-x-1/2 -translate-y-1/2"
+                style={`left:${place.x}%;top:${place.y}%`}
+              >
+                <span class="flex flex-col items-center gap-2">
+                  <span
+                    class={
+                      place.home
+                        ? "bg-brand-400 shadow-brand-400/60 block size-3.5 rounded-full shadow-[0_0_20px]"
+                        : "bg-brand-400/50 block size-2 rounded-full"
+                    }
+                    style={`animation: float-slow ${5 + i}s ease-in-out infinite`}
+                  />
+                  <span
+                    class={`text-[0.7rem] font-semibold tracking-wide whitespace-nowrap ${
+                      place.home ? "text-brand-300" : "text-ink-500"
+                    }`}
+                  >
+                    {place.name}
+                  </span>
+                </span>
+              </span>
+            ))
+          }
+
+          <div class="absolute inset-x-6 bottom-6">
+            <div class="glass rounded-2xl px-4 py-3">
+              <p class="text-ink-500 text-[0.7rem] tracking-widest uppercase">
+                Einsatzgebiet
+              </p>
+              <p class="mt-1 text-sm font-semibold">
+                {site.areaServed.join(" · ")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

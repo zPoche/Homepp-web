@@ -1,0 +1,236 @@
+---
+import Icon from "./Icon.astro";
+
+const trust = [
+  { icon: "clock" as const, text: "Antwort in einem Werktag" },
+  { icon: "check" as const, text: "Unverbindliche Beratung" },
+  { icon: "shield" as const, text: "Lokal statt Cloud" },
+];
+
+const dashboardRows = [
+  { room: "Wohnzimmer", detail: "Licht · Szene „Abend“", on: true, delay: "0ms" },
+  { room: "Heizung EG", detail: "21,5 °C · Eco ab 22:00", on: true, delay: "120ms" },
+  { room: "Rollläden", detail: "Automatik · Sonnenstand", on: true, delay: "240ms" },
+  { room: "Garage", detail: "Verriegelt · Kamera aktiv", on: false, delay: "360ms" },
+];
+---
+
+<section
+  class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-[var(--nav-h)]"
+  aria-labelledby="hero-title"
+>
+  <!-- Hintergrundebenen -->
+  <canvas
+    data-energy-field
+    class="pointer-events-auto absolute inset-0 -z-20 size-full"
+    aria-hidden="true"></canvas>
+
+  <div class="grid-lines absolute inset-0 -z-30 opacity-60" aria-hidden="true"></div>
+
+  <div
+    class="absolute inset-0 -z-30 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(30,239,242,0.18),transparent_70%)]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="bg-volt-500/10 absolute -bottom-40 -left-40 -z-30 size-[34rem] rounded-full blur-[120px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="from-ink-950 absolute inset-x-0 bottom-0 -z-10 h-40 bg-linear-to-t to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x relative py-16 md:py-24">
+    <div class="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+      <!-- Text -->
+      <div class="pointer-events-none max-w-2xl [&_a]:pointer-events-auto">
+        <p class="eyebrow" data-reveal>
+          Elektrotechnik &amp; Smart Home · Region Würzburg
+        </p>
+
+        <h1
+          id="hero-title"
+          class="mt-6 text-[clamp(2.75rem,7.5vw,5.25rem)] leading-[0.95] font-bold"
+        >
+          <span class="block" data-reveal style="--reveal-delay:80ms"
+            >Dein Zuhause,</span
+          >
+          <span
+            class="text-gradient block bg-[length:200%_auto]"
+            data-reveal
+            style="--reveal-delay:200ms"
+          >
+            intelligent verkabelt.
+          </span>
+        </h1>
+
+        <p
+          class="text-ink-400 mt-7 max-w-xl text-lg leading-relaxed md:text-xl"
+          data-reveal
+          style="--reveal-delay:320ms"
+        >
+          Smart Home, Netzwerk und Sicherheitstechnik aus einer Hand – geplant,
+          installiert und betreut. Von Elektrotechnik und IT in Personalunion, zwischen
+          Geiselwind, Würzburg und Kitzingen.
+        </p>
+
+        <div
+          class="mt-10 flex flex-wrap items-center gap-4"
+          data-reveal
+          style="--reveal-delay:420ms"
+        >
+          <a
+            href="#kontakt"
+            class="group bg-brand-400 text-ink-950 shadow-brand-400/25 hover:shadow-brand-400/40 relative inline-flex items-center gap-2 overflow-hidden rounded-full px-7 py-4 text-base font-semibold shadow-xl transition-shadow duration-300"
+            data-magnetic
+            data-magnetic-strength="0.22"
+          >
+            <span class="relative z-10">Beratung anfragen</span>
+            <Icon
+              name="arrow"
+              class="relative z-10 size-4 transition-transform duration-300 group-hover:translate-x-1"
+            />
+            <span
+              class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+            ></span>
+          </a>
+
+          <a
+            href="#leistungen"
+            class="glass text-ink-50 hover:border-brand-400/40 inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-semibold transition-colors duration-300"
+          >
+            Leistungen ansehen
+          </a>
+        </div>
+
+        <ul
+          class="text-ink-400 mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-sm"
+          data-reveal
+          style="--reveal-delay:520ms"
+        >
+          {
+            trust.map((item) => (
+              <li class="flex items-center gap-2">
+                <Icon name={item.icon} class="text-brand-400 size-4" />
+                {item.text}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Dashboard-Mockup -->
+      <div class="relative" data-reveal style="--reveal-delay:260ms">
+        <div
+          class="bg-brand-400/10 absolute -inset-6 rounded-[2.5rem] blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div
+          class="glass relative rounded-[1.75rem] p-5 shadow-2xl shadow-black/40 sm:p-6"
+          data-parallax="0.05"
+          role="img"
+          aria-label="Beispielhafte Smart-Home-Steuerung: Wohnzimmerlicht, Heizung, Rollläden und Garage im Überblick"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-ink-500 text-xs font-medium tracking-widest uppercase">
+                Zuhause
+              </p>
+              <p class="font-display mt-1 text-xl font-semibold">Alles im Blick</p>
+            </div>
+            <span
+              class="text-brand-300 border-brand-400/25 bg-brand-400/10 relative inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold"
+            >
+              <span class="relative flex size-2">
+                <span
+                  class="bg-brand-400 absolute inline-flex size-full rounded-full"
+                  style="animation: pulse-ring 2s ease-out infinite"></span>
+                <span class="bg-brand-400 relative inline-flex size-2 rounded-full"
+                ></span>
+              </span>
+              Online
+            </span>
+          </div>
+
+          <ul class="mt-6 space-y-2.5">
+            {
+              dashboardRows.map((row) => (
+                <li
+                  class="hover:border-brand-400/30 hover:bg-brand-400/5 flex items-center justify-between gap-4 rounded-2xl border border-white/6 bg-white/3 px-4 py-3.5 transition-colors duration-300"
+                  style={`animation: float-slow 7s ease-in-out infinite; animation-delay: ${row.delay}`}
+                >
+                  <div class="min-w-0">
+                    <p class="truncate text-sm font-semibold">{row.room}</p>
+                    <p class="text-ink-500 truncate text-xs">{row.detail}</p>
+                  </div>
+                  <span
+                    class={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                      row.on ? "bg-brand-400/80" : "bg-white/12"
+                    }`}
+                  >
+                    <span
+                      class={`size-[1.15rem] rounded-full bg-white shadow-sm transition-transform duration-500 ${
+                        row.on ? "translate-x-[1.4rem]" : "translate-x-[0.15rem]"
+                      }`}
+                    />
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="mt-5 grid grid-cols-3 gap-2.5">
+            {
+              [
+                { label: "Verbrauch", value: "412 W" },
+                { label: "Geräte", value: "38" },
+                { label: "WLAN", value: "912 Mbit" },
+              ].map((kpi) => (
+                <div class="rounded-2xl border border-white/6 bg-white/3 px-3 py-3 text-center">
+                  <p class="text-brand-300 font-display text-lg font-semibold">
+                    {kpi.value}
+                  </p>
+                  <p class="text-ink-500 mt-0.5 text-[0.7rem] tracking-wide uppercase">
+                    {kpi.label}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="#leistungen"
+    class="text-ink-500 hover:text-brand-300 absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-[0.7rem] tracking-[0.25em] uppercase transition-colors md:flex"
+    aria-label="Scrollen – weiter zu den Leistungen"
+  >
+    Scrollen
+    <span class="relative block h-10 w-px overflow-hidden bg-white/12">
+      <span
+        class="bg-brand-400 absolute inset-x-0 top-0 h-4"
+        style="animation: scroll-hint 2.2s ease-in-out infinite"></span>
+    </span>
+  </a>
+</section>
+
+<style>
+  @keyframes scroll-hint {
+    0% {
+      transform: translateY(-100%);
+    }
+    60%,
+    100% {
+      transform: translateY(250%);
+    }
+  }
+</style>

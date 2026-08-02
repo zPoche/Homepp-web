@@ -1,0 +1,196 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site, legal } from "../data/site";
+
+const { provider, dataProtectionAuthority: authority } = legal;
+
+/**
+ * Ist ein Formular-Dienstleister konfiguriert, verlassen die Formulardaten
+ * unseren Server. Das ist offenlegungspflichtig (Art. 13 Abs. 1 lit. e DSGVO),
+ * deshalb erscheint der Absatz automatisch mit.
+ */
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+const contactEndpointHost = contactEndpoint ? new URL(contactEndpoint).host : "";
+---
+
+<Legal
+  title="Datenschutzerklärung"
+  description={`Informationen zur Verarbeitung personenbezogener Daten auf der Website von ${site.name}.`}
+  intro="Diese Website ist bewusst datensparsam gebaut: keine Werbe-Cookies, kein Tracking, keine externen Schriftarten-CDNs."
+  updated={new Date(legal.lastUpdated).toLocaleDateString("de-DE", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  })}
+>
+  <h2>1. Verantwortliche Stelle</h2>
+  <p>
+    Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne von Art. 4 Nr.
+    7 DSGVO ist:
+  </p>
+  <p>
+    <strong>{provider.name}</strong><br />
+    {site.legalName}<br />
+    {`${site.street}, ${site.postalCode} ${site.city}`}<br />
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Telefon: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+  </p>
+  <p>
+    Ein Datenschutzbeauftragter ist nicht bestellt, da die Voraussetzungen des § 38 BDSG
+    nicht vorliegen. Für alle Fragen zum Datenschutz kannst Du Dich direkt an die oben
+    genannte Adresse wenden.
+  </p>
+
+  <h2>2. Überblick: Was diese Website tut – und was nicht</h2>
+  <ul>
+    <li>
+      <strong>Keine Cookies.</strong> Die Seite setzt weder eigene noch fremde Cookies und
+      legt nichts im Local Storage ab. Ein Cookie-Banner ist damit weder nötig noch vorhanden.
+    </li>
+    <li>
+      <strong>Kein Web-Tracking.</strong> Es sind keine Analyse- oder Marketing-Dienste eingebunden,
+      auch keine Pixel oder Social-Plugins.
+    </li>
+    <li>
+      <strong>Schriftarten lokal.</strong> Alle Schriftarten werden vom eigenen Server ausgeliefert.
+      Es besteht keine Verbindung zu Google Fonts oder einem anderen Schriften-CDN.
+    </li>
+    <li>
+      <strong>Keine externen Inhalte.</strong> Es werden keine Karten, Videos oder Skripte
+      von Drittanbietern nachgeladen. Beim Aufruf der Seite geht keine einzige Anfrage an
+      einen fremden Server.
+    </li>
+  </ul>
+
+  <h2>3. Hosting und Server-Logfiles</h2>
+  <p>
+    {
+      legal.hostingProvider
+        ? `Diese Website wird gehostet bei: ${legal.hostingProvider}.`
+        : "Diese Website wird bei einem externen Hosting-Dienstleister betrieben. Empfänger der nachfolgend genannten Daten ist damit unser Hosting-Anbieter, der die Daten ausschließlich weisungsgebunden für uns verarbeitet."
+    }
+  </p>
+  <p>
+    Beim Aufruf der Website erfasst der Hosting-Anbieter automatisch Informationen, die
+    Dein Browser übermittelt und die technisch erforderlich sind, um die Seite
+    auszuliefern sowie ihre Stabilität und Sicherheit zu gewährleisten:
+  </p>
+  <ul>
+    <li>Browsertyp und Browserversion</li>
+    <li>verwendetes Betriebssystem</li>
+    <li>Referrer-URL</li>
+    <li>Hostname des zugreifenden Rechners</li>
+    <li>Uhrzeit der Serveranfrage</li>
+    <li>IP-Adresse</li>
+  </ul>
+  <p>
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse liegt
+    in der technisch fehlerfreien Darstellung und der Sicherheit dieser Website. Eine
+    Zusammenführung dieser Daten mit anderen Datenquellen findet nicht statt. Die
+    Logdaten werden nach spätestens 30 Tagen gelöscht.
+  </p>
+  <p>
+    Mit dem Hosting-Anbieter besteht ein Vertrag über Auftragsverarbeitung nach Art. 28
+    DSGVO.
+  </p>
+
+  <h2>4. SSL- bzw. TLS-Verschlüsselung</h2>
+  <p>
+    Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung
+    vertraulicher Inhalte eine TLS-Verschlüsselung. Eine verschlüsselte Verbindung
+    erkennst Du daran, dass die Adresszeile des Browsers von „http://“ auf „https://“
+    wechselt.
+  </p>
+
+  <h2>5. Kontaktaufnahme</h2>
+
+  <h3>Kontaktformular</h3>
+  <p>
+    Wenn Du uns über das Kontaktformular eine Anfrage schickst, werden Deine Angaben aus
+    dem Formular inklusive der dort angegebenen Kontaktdaten zur Bearbeitung der Anfrage
+    und für den Fall von Anschlussfragen bei uns gespeichert. Pflichtfelder sind Name,
+    E-Mail-Adresse und Nachricht; die Angabe einer Telefonnummer ist freiwillig. Diese
+    Daten geben wir nicht ohne Deine Einwilligung weiter.
+  </p>
+  <p>
+    Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Deine
+    Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung
+    vorvertraglicher Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die
+    Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an
+    uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) bzw. auf Deiner Einwilligung
+    (Art. 6 Abs. 1 lit. a DSGVO), die Du jederzeit mit Wirkung für die Zukunft
+    widerrufen kannst.
+  </p>
+  <p>
+    Die Daten verbleiben bei uns, bis Du uns zur Löschung aufforderst, Deine
+    Einwilligung widerrufst oder der Zweck der Speicherung entfällt. Zwingende
+    gesetzliche Aufbewahrungsfristen – insbesondere handels- und steuerrechtliche –
+    bleiben unberührt.
+  </p>
+
+  {
+    contactEndpointHost ? (
+      <p>
+        Zur technischen Übermittlung des Formulars setzen wir den Dienst{" "}
+        <strong>{contactEndpointHost}</strong> ein. Deine Eingaben werden dabei an
+        diesen Anbieter übertragen, der sie ausschließlich weisungsgebunden für uns
+        verarbeitet. Mit dem Anbieter besteht ein Vertrag über Auftragsverarbeitung nach
+        Art. 28 DSGVO.
+      </p>
+    ) : (
+      <p>
+        Ein externer Formulardienst ist derzeit nicht eingebunden: Beim Absenden öffnet
+        sich Dein eigenes E-Mail-Programm mit der fertigen Nachricht. Deine Eingaben
+        verlassen Deinen Rechner also erst, wenn Du die E-Mail selbst abschickst.
+      </p>
+    )
+  }
+
+  <h3>Anfragen per E-Mail oder Telefon</h3>
+  <p>
+    Kontaktierst Du uns per E-Mail oder Telefon, werden Deine Anfrage und alle daraus
+    hervorgehenden personenbezogenen Daten zum Zweck der Bearbeitung gespeichert und
+    verarbeitet. Es gelten dieselben Rechtsgrundlagen und Löschfristen wie beim
+    Kontaktformular.
+  </p>
+
+  <h2>6. Deine Rechte</h2>
+  <p>Du hast uns gegenüber jederzeit das Recht auf:</p>
+  <ul>
+    <li>Auskunft über die zu Deiner Person gespeicherten Daten (Art. 15 DSGVO)</li>
+    <li>Berichtigung unrichtiger Daten (Art. 16 DSGVO)</li>
+    <li>Löschung Deiner Daten (Art. 17 DSGVO)</li>
+    <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+    <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+    <li>Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)</li>
+    <li>Widerruf einer erteilten Einwilligung (Art. 7 Abs. 3 DSGVO)</li>
+  </ul>
+  <p>
+    Eine formlose Nachricht an <a href={`mailto:${site.email}`}>{site.email}</a>
+    genügt.
+  </p>
+  <p>
+    <strong>Widerspruchsrecht nach Art. 21 DSGVO:</strong> Soweit wir Daten auf Grundlage
+    von Art. 6 Abs. 1 lit. f DSGVO verarbeiten, hast Du das Recht, aus Gründen, die sich aus
+    Deiner besonderen Situation ergeben, jederzeit Widerspruch gegen diese Verarbeitung einzulegen.
+  </p>
+
+  <h2>7. Beschwerderecht bei der Aufsichtsbehörde</h2>
+  <p>
+    Unbeschadet anderweitiger Rechtsbehelfe steht Dir ein Beschwerderecht bei einer
+    Datenschutz-Aufsichtsbehörde zu, insbesondere in dem Mitgliedstaat Deines
+    Aufenthaltsorts, Deines Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes
+    (Art. 77 DSGVO). Für uns zuständig ist:
+  </p>
+  <p>
+    {authority.name}<br />
+    {authority.address}
+  </p>
+
+  <h2>8. Änderungen dieser Datenschutzerklärung</h2>
+  <p>
+    Wir passen diese Datenschutzerklärung an, sobald die Rechtslage oder Änderungen an
+    dieser Website dies erforderlich machen. Für Deinen erneuten Besuch gilt jeweils die
+    dann aktuelle Fassung.
+  </p>
+</Legal>

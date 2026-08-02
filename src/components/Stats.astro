@@ -1,0 +1,28 @@
+---
+import { stats } from "../data/site";
+---
+
+<section class="relative py-16" aria-label="Auf einen Blick">
+  <div class="container-x">
+    <ul
+      class="glass grid gap-px overflow-hidden rounded-3xl sm:grid-cols-2 lg:grid-cols-4"
+    >
+      {
+        stats.map((stat, i) => (
+          <li
+            class="hover:bg-brand-400/4 px-7 py-9 text-center transition-colors duration-500"
+            data-reveal
+            style={`--reveal-delay:${i * 90}ms`}
+          >
+            <p class="text-brand-300 text-xs font-semibold tracking-[0.18em] uppercase">
+              {stat.title}
+            </p>
+            <p class="font-display text-ink-50 mt-3 text-lg leading-snug font-semibold">
+              {stat.label}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

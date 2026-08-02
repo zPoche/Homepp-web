@@ -1,0 +1,134 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { navLinks, site } from "../data/site";
+---
+
+<header
+  id="site-nav"
+  class="fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color] duration-500"
+  data-nav
+>
+  <div
+    class="data-[stuck]:bg-ink-950/80 border-b border-transparent transition-colors duration-500 data-[stuck]:border-white/8 data-[stuck]:backdrop-blur-xl"
+    data-nav-bar
+  >
+    <div class="container-x flex h-[var(--nav-h)] items-center justify-between gap-4">
+      <a href="/" class="group flex items-center gap-2">
+        <Logo class="h-7 md:h-8" />
+      </a>
+
+      <nav aria-label="Hauptnavigation" class="hidden lg:block">
+        <ul class="flex items-center gap-1">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-ink-400 hover:text-ink-50 after:bg-brand-400 relative rounded-full px-4 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-4 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a
+          href={`tel:${site.phoneHref}`}
+          class="text-ink-400 hover:text-brand-300 hidden items-center gap-2 rounded-full px-3 py-2 text-sm font-medium transition-colors md:inline-flex"
+        >
+          <Icon name="phone" class="size-4" />
+          <span class="hidden xl:inline">{site.phone}</span>
+        </a>
+
+        <a
+          href="/#kontakt"
+          class="group bg-brand-400 text-ink-950 shadow-brand-400/25 hover:shadow-brand-400/40 relative hidden overflow-hidden rounded-full px-5 py-2.5 text-sm font-semibold shadow-lg transition-all duration-300 hover:-translate-y-0.5 sm:inline-flex"
+          data-magnetic
+        >
+          <span class="relative z-10">Projekt starten</span>
+          <span
+            class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+          ></span>
+        </a>
+
+        <button
+          type="button"
+          class="text-ink-50 inline-flex size-11 items-center justify-center rounded-full border border-white/10 lg:hidden"
+          aria-label="Menü öffnen"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          data-menu-toggle
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="size-5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          >
+            <path d="M4 7h16M4 12h16M4 17h16" data-menu-icon-open></path>
+            <path d="M6 6l12 12M18 6 6 18" class="hidden" data-menu-icon-close></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="bg-brand-400 shadow-brand-400/50 h-0.5 origin-left scale-x-0 shadow-[0_0_8px] will-change-transform"
+      data-scroll-progress
+      aria-hidden="true"
+    >
+    </div>
+  </div>
+
+  <div
+    id="mobile-menu"
+    class="bg-ink-950/95 grid grid-rows-[0fr] overflow-hidden backdrop-blur-xl transition-[grid-template-rows] duration-500 lg:hidden"
+    data-mobile-menu
+  >
+    <div class="min-h-0">
+      <nav
+        aria-label="Mobile Navigation"
+        class="container-x border-t border-white/8 py-6"
+      >
+        <ul class="flex flex-col gap-1">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-ink-50/90 hover:text-brand-300 flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-medium transition-colors hover:bg-white/5"
+                  data-mobile-link
+                >
+                  {link.label}
+                  <Icon name="arrow" class="text-ink-500 size-4" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="mt-6 flex flex-col gap-3">
+          <a
+            href={`tel:${site.phoneHref}`}
+            class="glass text-ink-50 flex items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold"
+          >
+            <Icon name="phone" class="size-4" />
+            {site.phone}
+          </a>
+          <a
+            href="/#kontakt"
+            class="bg-brand-400 text-ink-950 flex items-center justify-center rounded-full px-5 py-3 font-semibold"
+            data-mobile-link
+          >
+            Projekt starten
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Impressum und Datenschutz bleiben crawlbar, tragen aber ein noindex-Meta-Tag.
+# Ein Disallow hier würde verhindern, dass Crawler dieses Tag überhaupt sehen.
+
+Sitemap: https://homepowerplus.de/sitemap-index.xml

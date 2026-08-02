@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+@theme {
+  /* Markenfarben aus dem Logo abgeleitet (#1EEFF2) */
+  --color-brand-50: #eafeff;
+  --color-brand-100: #cbfcfe;
+  --color-brand-200: #9df8fc;
+  --color-brand-300: #5cf1f7;
+  --color-brand-400: #1eeff2;
+  --color-brand-500: #06ced8;
+  --color-brand-600: #08a4b3;
+  --color-brand-700: #0e8290;
+  --color-brand-800: #156875;
+  --color-brand-900: #165663;
+  --color-brand-950: #073944;
+
+  /* Sekundäre Energie-Akzente */
+  --color-volt-400: #7c8cff;
+  --color-volt-500: #5566ff;
+  --color-signal-400: #ffb545;
+
+  /* Dunkle Basis */
+  --color-ink-50: #f3f6f8;
+  /* ink-400 und ink-500 sind so gewählt, dass sie auf ink-950 die 4.5:1 aus
+     WCAG 2.1 AA auch bei 12px erreichen (6.6:1 bzw. 5.2:1). */
+  --color-ink-400: #8a97a6;
+  --color-ink-500: #78859a;
+  --color-ink-700: #1b2430;
+  --color-ink-800: #111823;
+  --color-ink-900: #0a0f17;
+  --color-ink-950: #05080d;
+
+  --font-display: "Outfit Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --nav-h: 4.5rem;
+    scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-ink-950);
+    color: var(--color-ink-50);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-brand-400);
+    color: var(--color-ink-950);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  * {
+    scrollbar-color: var(--color-ink-700) transparent;
+    scrollbar-width: thin;
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Glas-Karte mit Leuchtkante */
+  .glass {
+    position: relative;
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.06) 0%,
+      rgb(255 255 255 / 0.02) 100%
+    );
+    border: 1px solid rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(12px);
+  }
+
+  .glass::before {
+    content: "";
+    position: absolute;
+    inset-inline: 15%;
+    top: -1px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-brand-400),
+      transparent
+    );
+    opacity: 0.5;
+  }
+
+  /* Verlaufstext für ganze Headline-Zeilen: startet im Fließtext-Weiß */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-ink-50) 10%,
+      var(--color-brand-300) 45%,
+      var(--color-volt-400) 90%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Verlaufstext für einzelne hervorgehobene Wörter: durchgehend farbig,
+     damit sich der Anfang nicht im umgebenden Weiß verliert */
+  .text-highlight {
+    background: linear-gradient(
+      100deg,
+      var(--color-brand-300) 0%,
+      var(--color-brand-400) 40%,
+      var(--color-volt-400) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Spotlight, folgt der Maus (Variablen kommen aus spotlight.ts) */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      22rem circle at var(--mx, 50%) var(--my, 0%),
+      rgb(30 239 242 / 0.16),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-expo);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .spotlight:hover::after,
+  .spotlight:focus-within::after {
+    opacity: 1;
+  }
+
+  /* Sektions-Label */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand-300);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.6;
+  }
+}
+
+@layer utilities {
+  /* Scroll-Reveal: Startzustand, wird von reveal.ts freigeschaltet */
+  [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+    transition:
+      opacity 0.9s var(--ease-out-expo),
+      transform 0.9s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .grid-lines {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+    background-size: 4rem 4rem;
+  }
+
+  .noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -1.25rem, 0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Barrierefreiheit: alles Bewegte beruhigen */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

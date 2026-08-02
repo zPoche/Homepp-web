@@ -1,0 +1,133 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+import { site, services, navLinks } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative mt-8 border-t border-white/8 pt-16 pb-10">
+  <div
+    class="via-brand-400/40 absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="container-x">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+      <div>
+        <Logo class="h-8" />
+        <p class="text-ink-400 mt-5 max-w-sm leading-relaxed">
+          Smart Home, Netzwerk und Sicherheitstechnik aus {site.city} – für Würzburg, Kitzingen
+          und Umgebung.
+        </p>
+        <a
+          href="/#kontakt"
+          class="text-brand-300 hover:text-brand-200 group mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+        >
+          Projekt starten
+          <Icon
+            name="arrow"
+            class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </a>
+      </div>
+
+      <nav aria-labelledby="footer-services">
+        <h2
+          id="footer-services"
+          class="text-ink-500 text-xs font-semibold tracking-widest uppercase"
+        >
+          Leistungen
+        </h2>
+        <ul class="mt-5 space-y-3">
+          {
+            services.map((service) => (
+              <li>
+                <a
+                  href="/#leistungen"
+                  class="text-ink-400 hover:text-brand-300 text-sm transition-colors"
+                >
+                  {service.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-nav">
+        <h2
+          id="footer-nav"
+          class="text-ink-500 text-xs font-semibold tracking-widest uppercase"
+        >
+          Navigation
+        </h2>
+        <ul class="mt-5 space-y-3">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="text-ink-400 hover:text-brand-300 text-sm transition-colors"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <a
+              href="/impressum"
+              class="text-ink-400 hover:text-brand-300 text-sm transition-colors"
+              >Impressum</a
+            >
+          </li>
+          <li>
+            <a
+              href="/datenschutz"
+              class="text-ink-400 hover:text-brand-300 text-sm transition-colors"
+              >Datenschutz</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="text-ink-500 text-xs font-semibold tracking-widest uppercase">
+          Kontakt
+        </h2>
+        <address class="mt-5 space-y-3 text-sm not-italic">
+          <p class="text-ink-400">
+            {site.street}<br />{`${site.postalCode} ${site.city}`}
+          </p>
+          <p>
+            <a
+              href={`tel:${site.phoneHref}`}
+              class="text-ink-400 hover:text-brand-300 inline-flex items-center gap-2 transition-colors"
+            >
+              <Icon name="phone" class="size-4" />
+              {site.phone}
+            </a>
+          </p>
+          <p>
+            <a
+              href={`mailto:${site.email}`}
+              class="text-ink-400 hover:text-brand-300 inline-flex items-center gap-2 transition-colors"
+            >
+              <Icon name="mail" class="size-4" />
+              {site.email}
+            </a>
+          </p>
+        </address>
+      </div>
+    </div>
+
+    <div
+      class="text-ink-500 mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-8 text-xs sm:flex-row"
+    >
+      <p>© {year} {site.legalName}. Alle Rechte vorbehalten.</p>
+      <p>{site.openingHours}</p>
+    </div>
+  </div>
+</footer>

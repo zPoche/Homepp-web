@@ -1,0 +1,115 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site, legal } from "../data/site";
+
+const { provider } = legal;
+
+const commercial = [
+  { label: "Zuständige Kammer", value: legal.chamber },
+  { label: "Gesetzliche Berufsbezeichnung", value: legal.jobTitle },
+  { label: "Verliehen in", value: legal.jobTitleState },
+  { label: "Berufsrechtliche Regelungen", value: legal.professionalRules },
+  { label: "Umsatzsteuer-Identifikationsnummer (§ 27a UStG)", value: legal.vatId },
+].filter((entry) => Boolean(entry.value));
+---
+
+<Legal
+  title="Impressum"
+  description={`Impressum und Anbieterkennzeichnung von ${site.name}.`}
+  intro="Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)."
+>
+  <h2>Anbieter</h2>
+  <p>
+    <strong>{provider.name}</strong><br />
+    {site.legalName}<br />
+    {site.street}<br />
+    {`${site.postalCode} ${site.city}`}<br />
+    Deutschland
+  </p>
+
+  <h2>Ladungsfähige Anschrift</h2>
+  <p>
+    {provider.name}<br />
+    {provider.careOf}<br />
+    {provider.street}<br />
+    {`${provider.postalCode} ${provider.city}`}<br />
+    {provider.country}
+  </p>
+
+  <h2>Kontakt</h2>
+  <p>
+    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
+    Telefon: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+  </p>
+
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>
+    {legal.contentResponsible}<br />
+    {site.street}<br />
+    {`${site.postalCode} ${site.city}`}
+  </p>
+
+  {
+    commercial.length > 0 && (
+      <>
+        <h2>Angaben zur handwerklichen Tätigkeit</h2>
+        <ul>
+          {commercial.map((entry) => (
+            <li>
+              {entry.label}: {entry.value}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  {
+    legal.smallBusinessNote && (
+      <>
+        <h2>Umsatzsteuer</h2>
+        <p>{legal.smallBusinessNote}</p>
+      </>
+    )
+  }
+
+  <h2>Verbraucherstreitbeilegung</h2>
+  <p>
+    Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+    Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG).
+  </p>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen
+    Seiten nach den allgemeinen Gesetzen verantwortlich. Nach den §§ 8 bis 10 DDG sind
+    wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte
+    fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine
+    rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der
+    Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+    Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
+    konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden
+    Rechtsverletzungen entfernen wir diese Inhalte umgehend.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir
+    keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine
+    Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige
+    Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum
+    Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft; rechtswidrige
+    Inhalte waren nicht erkennbar. Bei Bekanntwerden von Rechtsverletzungen entfernen
+    wir derartige Links umgehend.
+  </p>
+
+  <h2>Urheberrecht</h2>
+  <p>
+    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten
+    unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung,
+    Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts
+    bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+    Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen
+    Gebrauch gestattet.
+  </p>
+</Legal>

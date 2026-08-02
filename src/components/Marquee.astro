@@ -1,0 +1,45 @@
+---
+import { techStack } from "../data/site";
+
+const items = [...techStack, ...techStack];
+---
+
+<section
+  class="bg-ink-900/40 border-y border-white/6 py-7"
+  aria-label="Eingesetzte Systeme"
+>
+  <div class="mask-fade-x overflow-hidden">
+    <ul
+      class="flex w-max items-center gap-12 pr-12 will-change-transform"
+      style="animation: marquee 42s linear infinite"
+    >
+      {
+        items.map((item, i) => (
+          <li
+            class="text-ink-500 hover:text-brand-300 flex shrink-0 items-center gap-3 text-sm font-semibold tracking-wide whitespace-nowrap transition-colors duration-300"
+            aria-hidden={i >= techStack.length ? "true" : undefined}
+          >
+            <span class="bg-brand-400/50 size-1.5 rounded-full" />
+            {item}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  ul:hover {
+    animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    ul {
+      animation: none !important;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      gap: 1.5rem 2.5rem;
+    }
+  }
+</style>
