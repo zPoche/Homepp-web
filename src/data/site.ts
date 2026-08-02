@@ -43,7 +43,7 @@ export const legal = {
    * Berufsrechtliche Angaben (§ 5 Abs. 1 Nr. 5 DDG).
    * Das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig –
    * deshalb gehören Kammer, Berufsbezeichnung und Verleihungsstaat ins Impressum.
-   *
+   */
   chamber: "Handwerkskammer für Unterfranken, Rennweger Ring 3, 97070 Würzburg",
   jobTitle: "Elektrotechnikermeister",
   jobTitleState: "Deutschland",

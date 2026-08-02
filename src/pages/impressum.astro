@@ -10,7 +10,7 @@ const commercial = [
   { label: "Verliehen in", value: legal.jobTitleState },
   { label: "Berufsrechtliche Regelungen", value: legal.professionalRules },
   { label: "Umsatzsteuer-Identifikationsnummer (§ 27a UStG)", value: legal.vatId },
-].filter((entry) => entry.value.length > 0);
+].filter((entry) => Boolean(entry.value));
 ---
 
 <Legal
