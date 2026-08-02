@@ -3,7 +3,7 @@ export const site = {
   legalName: "HomePower+",
   tagline: "Das Plus für Dein Zuhause",
   description:
-    "Smart Home, Netzwerk, Sicherheitstechnik und Elektroinstallation aus Geiselwind – für Würzburg, Kitzingen, Schweinfurt und Umgebung.",
+    "Smart Home, Netzwerk, Sicherheitstechnik und Elektroinstallation aus Geiselwind – für Würzburg, Kitzingen und Umgebung.",
   url: "https://homepowerplus.de",
   email: "info@homepp.de",
   phone: "+49 9556 9217717",
@@ -13,15 +13,10 @@ export const site = {
   city: "Geiselwind",
   country: "DE",
   geo: { lat: 49.7717, lng: 10.4711 },
-  areaServed: [
-    "Geiselwind",
-    "Würzburg",
-    "Kitzingen",
-    "Schweinfurt",
-    "Bamberg",
-    "Neustadt a. d. Aisch",
-  ],
-  openingHours: "Mo–Fr 08:00–17:00 Uhr, Termine nach Vereinbarung",
+  // Nur Orte, die die alte Seite bereits öffentlich nannte – keine erweiterten
+  // Einsatzgebiete erfinden, die wettbewerbsrechtlich angreifbar wären.
+  areaServed: ["Geiselwind", "Würzburg", "Kitzingen"],
+  openingHours: "Termine nach Vereinbarung",
 } as const;
 
 /**
@@ -96,9 +91,9 @@ export const services: Service[] = [
     title: "Smart Home",
     teaser: "Ein System. Alles im Griff.",
     description:
-      "Wir planen und installieren Smart-Home-Systeme, die wirklich zusammenspielen – lokal, schnell und ohne Cloud-Zwang. Steuerung per App, Taster oder Sprache.",
+      "Wir planen und installieren Smart-Home-Systeme, die wirklich zusammenspielen – lokal, schnell und ohne Cloud-Zwang. Steuerung per Smartphone, Tablet, Taster oder Sprache.",
     bullets: [
-      "Home Assistant, KNX, Shelly & Zigbee",
+      "Home Assistant, KNX und Shelly",
       "Licht-, Heizungs- und Beschattungssteuerung",
       "Szenen & Automationen nach Deinem Alltag",
       "Lokal statt Cloud – läuft auch ohne Internet",
@@ -183,23 +178,28 @@ export const services: Service[] = [
   },
 ];
 
+/**
+ * Vertrauenspunkte ohne erfundene Kennzahlen. Zahlen wie „10+ Jahre“ oder
+ * „250+ Automationen“ standen auf der alten Seite nicht und wären nach § 5 UWG
+ * angreifbar, solange sie nicht belegt sind.
+ */
 export const stats = [
-  { value: 10, suffix: "+", label: "Jahre Erfahrung in der Elektrotechnik" },
-  { value: 250, suffix: "+", label: "Umgesetzte Automationen & Szenen" },
-  { value: 60, suffix: " km", label: "Einsatzradius rund um Geiselwind" },
-  { value: 1, suffix: " Werktag", label: "bis zur Rückmeldung auf Deine Anfrage" },
+  { title: "Region", label: "Geiselwind, Würzburg und Kitzingen" },
+  { title: "Rückmeldung", label: "innerhalb eines Werktages" },
+  { title: "Systeme", label: "lokal betreibbar, ohne Cloud-Zwang" },
+  { title: "Material", label: "über Sonepar und Yesss Elektro" },
 ];
 
 export const process = [
   {
     step: "01",
     title: "Kennenlernen",
-    text: "Wir sprechen über Dein Vorhaben – am Telefon, per Video oder direkt vor Ort. Kostenlos und unverbindlich.",
+    text: "Wir sprechen über Dein Vorhaben – am Telefon oder direkt vor Ort. Unverbindlich und ohne Fachchinesisch.",
   },
   {
     step: "02",
     title: "Planung",
-    text: "Du bekommst ein Konzept mit Komponenten, Aufwand und Festpreis. Ohne Fachchinesisch, dafür mit klaren Optionen.",
+    text: "Du bekommst ein Konzept mit Komponenten, Aufwand und einem klaren Angebot. Mit Optionen, die Du verstehen kannst.",
   },
   {
     step: "03",
@@ -213,49 +213,44 @@ export const process = [
   },
 ];
 
+/** Nur Systeme und Lieferanten, die die alte Seite bereits nannte. */
 export const techStack = [
   "Home Assistant",
   "KNX",
   "Shelly",
   "Ubiquiti UniFi",
-  "Zigbee",
-  "Matter",
-  "Reolink",
   "Sonepar",
   "Yesss Elektro",
-  "Proxmox",
-  "ESPHome",
-  "Grafana",
 ];
 
 export const faqs = [
   {
-    q: "Was macht HomePower+ anders als einen klassischen Elektriker?",
-    a: "Wir kommen aus der Elektrotechnik und aus der IT. Das heißt: Wir ziehen nicht nur die Leitung, sondern bringen das System danach auch zum Laufen – vom Netzwerk über die Automation bis zur Kamera.",
+    q: "Was macht HomePower+ besonders?",
+    a: "HomePower+ bietet maßgeschneiderte Lösungen im Bereich Elektroinstallation, Smart Home und Netzwerktechnik – und bringt das System danach auch zum Laufen, vom Netzwerk über die Automation bis zur Kamera.",
   },
   {
-    q: "In welchem Umkreis seid ihr unterwegs?",
-    a: "Unser Einsatzgebiet umfasst Geiselwind, Würzburg, Kitzingen, Schweinfurt und Bamberg – rund 60 km rund um unseren Standort. Bei größeren Projekten kommen wir auch weiter raus, sprich uns einfach an.",
+    q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",
+    a: "Unser mobiler Service umfasst die Region Geiselwind, Würzburg und Kitzingen. Wir kommen zu Dir, egal ob Neubau oder Sanierung.",
+  },
+  {
+    q: "Wie kann ich einen Termin für eine Beratung vereinbaren?",
+    a: "Am einfachsten über das Kontaktformular auf dieser Seite. Alternativ erreichst Du uns per Telefon oder E-Mail – wir melden uns innerhalb eines Werktages zurück.",
+  },
+  {
+    q: "Welche Smart-Home-Systeme werden unterstützt?",
+    a: "Wir arbeiten mit verschiedenen Smart-Home-Systemen, darunter Home Assistant, Shelly und KNX. Wir planen und installieren die Systeme, die am besten zu Deinem Zuhause passen.",
   },
   {
     q: "Funktioniert das Smart Home auch ohne Internet?",
     a: "Ja. Wir setzen bewusst auf lokale Systeme wie Home Assistant und KNX. Licht, Heizung und Rollläden laufen weiter, auch wenn die Leitung mal ausfällt oder ein Hersteller seinen Cloud-Dienst abschaltet.",
   },
   {
-    q: "Kann ich mein bestehendes System übernehmen?",
-    a: "In den meisten Fällen ja. Wir schauen uns an, was Du bereits hast, und binden vorhandene Komponenten ein, statt alles auszutauschen. Erst wenn etwas wirklich im Weg steht, empfehlen wir einen Wechsel.",
+    q: "Bietet ihr Garantie auf eure Arbeiten an?",
+    a: "Ja, wir stehen hinter unserer Arbeit. Auf alle durchgeführten Installationen und Dienstleistungen gewähren wir die gesetzliche Gewährleistung. Die Zufriedenheit unserer Kunden hat höchste Priorität.",
   },
   {
-    q: "Was kostet ein Smart Home?",
-    a: "Das hängt vom Umfang ab. Eine einzelne Lichtsteuerung startet im dreistelligen Bereich, ein durchgeplantes Neubauprojekt liegt deutlich darüber. Nach dem Erstgespräch bekommst Du ein Angebot mit Festpreis – ohne Überraschungen auf der Rechnung.",
-  },
-  {
-    q: "Gibt es Garantie auf die Arbeiten?",
-    a: "Ja. Auf alle durchgeführten Installationen und Dienstleistungen gewähren wir die gesetzliche Gewährleistung. Material beziehen wir über etablierte Großhändler wie Sonepar und Yesss Elektro.",
-  },
-  {
-    q: "Übernehmt ihr auch nur Teilbereiche?",
-    a: "Klar. Ob nur die WLAN-Ausleuchtung, eine VDE-Messung oder eine einzelne Automation – wir übernehmen auch kleine Aufträge und arbeiten mit Deinem bestehenden Handwerker zusammen.",
+    q: "Sind die Materialien von hoher Qualität?",
+    a: "Ja. Wir beziehen Materialien von etablierten Großhändlern wie Yesss Elektro und Sonepar. So können wir sicherstellen, dass unsere Kunden immer die besten Produkte erhalten.",
   },
 ];
 

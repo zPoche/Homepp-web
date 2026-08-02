@@ -21,9 +21,7 @@ const highlights = [
 const places = [
   { name: site.city, x: 50, y: 50, home: true },
   { name: "Würzburg", x: 24, y: 38 },
-  { name: "Kitzingen", x: 35, y: 62 },
-  { name: "Schweinfurt", x: 62, y: 24 },
-  { name: "Bamberg", x: 74, y: 60 },
+  { name: "Kitzingen", x: 68, y: 62 },
 ];
 ---
 
@@ -47,9 +45,9 @@ const places = [
         >
           HomePower+ ist Dein Partner für alles, was über die
           Standard-Elektroinstallation hinausgeht: Smart Home, KI-Lösungen,
-          Netzwerktechnik und Sicherheitstechnik. Wir arbeiten von {site.city} aus in ganz
-          Mainfranken – im Neubau genauso wie in der Sanierung, für Privathaushalte und für
-          Gewerbe.
+          Netzwerktechnik und Sicherheitstechnik. Wir arbeiten von {site.city} aus in der
+          Region Würzburg und Kitzingen – im Neubau genauso wie in der Sanierung, für Privathaushalte
+          und für Gewerbe.
         </p>
 
         <!-- dt und dd müssen direkte Kinder des div bleiben, sonst verliert
@@ -137,7 +135,7 @@ const places = [
                 Einsatzgebiet
               </p>
               <p class="mt-1 text-sm font-semibold">
-                ca. 60 km rund um {site.city}
+                {site.areaServed.join(" · ")}
               </p>
             </div>
           </div>

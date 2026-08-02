@@ -2,31 +2,27 @@
 import { stats } from "../data/site";
 ---
 
-<section class="relative py-16" aria-label="Zahlen und Fakten">
+<section class="relative py-16" aria-label="Auf einen Blick">
   <div class="container-x">
-    <dl
+    <ul
       class="glass grid gap-px overflow-hidden rounded-3xl sm:grid-cols-2 lg:grid-cols-4"
     >
       {
         stats.map((stat, i) => (
-          <div
+          <li
             class="hover:bg-brand-400/4 px-7 py-9 text-center transition-colors duration-500"
             data-reveal
             style={`--reveal-delay:${i * 90}ms`}
           >
-            <dt class="sr-only">{stat.label}</dt>
-            <dd>
-              <span class="font-display text-highlight block text-[clamp(2.5rem,5vw,3.5rem)] leading-none font-bold">
-                <span data-counter={stat.value}>0</span>
-                <span>{stat.suffix}</span>
-              </span>
-              <span class="text-ink-400 mt-3 block text-sm leading-snug">
-                {stat.label}
-              </span>
-            </dd>
-          </div>
+            <p class="text-brand-300 text-xs font-semibold tracking-[0.18em] uppercase">
+              {stat.title}
+            </p>
+            <p class="font-display text-ink-50 mt-3 text-lg leading-snug font-semibold">
+              {stat.label}
+            </p>
+          </li>
         ))
       }
-    </dl>
+    </ul>
   </div>
 </section>

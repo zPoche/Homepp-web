@@ -58,7 +58,7 @@ const ogSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630"
     </text>
 
     <text x="88" y="536" font-size="27" font-weight="500" fill="#5d6a79">
-      Geiselwind · Würzburg · Kitzingen · Schweinfurt
+      Geiselwind · Würzburg · Kitzingen
     </text>
     <text x="88" y="578" font-size="27" font-weight="600" fill="${BRAND}" fill-opacity="0.85">
       homepowerplus.de
