@@ -30,8 +30,8 @@ const contactEndpointHost = contactEndpoint ? new URL(contactEndpoint).host : ""
   </p>
   <p>
     <strong>{provider.name}</strong><br />
-    {provider.careOf}<br />
-    {`${provider.street}, ${provider.postalCode} ${provider.city}`}<br />
+    {site.legalName}<br />
+    {`${site.street}, ${site.postalCode} ${site.city}`}<br />
     E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
     Telefon: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
   </p>

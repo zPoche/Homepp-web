@@ -22,14 +22,13 @@ export const site = {
 /**
  * Anbieterkennzeichnung (§ 5 DDG) und Angaben für die Datenschutzerklärung.
  *
- * `provider` und `contentResponsible` sind die Pflichtangaben – ohne sie darf
- * die Seite nicht online gehen. Die Felder darunter sind optional und werden
- * nur gerendert, wenn sie gefüllt sind; sie werden erst dann zur Pflicht, wenn
- * die Seite gewerblich betrieben wird (dazu scripts/check-legal.mjs).
+ * Firmensitz ist Geiselwind. Die ladungsfähige Anschrift läuft über
+ * Online-Impressum.de (c/o) – analog zu avertax.de.
  */
 export const legal = {
   provider: {
     name: "Johannes Schäfer",
+    /** Ladungsfähige Anschrift über Online-Impressum.de */
     careOf: "c/o Online-Impressum.de #6287",
     street: "Europaring 90",
     postalCode: "53757",
@@ -41,32 +40,41 @@ export const legal = {
   contentResponsible: "Johannes Schäfer",
 
   /**
-   * Nur bei gewerblichem Betrieb erforderlich. Das Elektrotechnikerhandwerk
-   * ist nach Anlage A der Handwerksordnung zulassungspflichtig – dann sind
-   * Kammer, Berufsbezeichnung und Verleihungsstaat Pflicht (§ 5 Abs. 1 Nr. 5
-   * DDG), die USt-IdNr. zusätzlich nach § 5 Abs. 1 Nr. 6 DDG, sofern vorhanden.
+   * Berufsrechtliche Angaben (§ 5 Abs. 1 Nr. 5 DDG).
+   * Das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig –
+   * deshalb gehören Kammer, Berufsbezeichnung und Verleihungsstaat ins Impressum.
+   *
+   * `jobTitle` muss die tatsächlich verliehene Bezeichnung sein
+   * (z. B. „Elektrotechnikermeister"). Bitte korrigieren, falls abweichend.
+   */
+  chamber: "Handwerkskammer für Unterfranken, Rennweger Ring 3, 97070 Würzburg",
+  jobTitle: "Elektrotechniker",
+  jobTitleState: "Deutschland",
+  professionalRules: "Gesetz zur Ordnung des Handwerks (Handwerksordnung – HwO)",
+
+  /**
+   * § 5 Abs. 1 Nr. 6 DDG verlangt die USt-IdNr. nur, soweit vorhanden.
+   * Als Kleinunternehmer nach § 19 UStG wird keine USt-Id ausgewiesen –
+   * stattdessen steht der Hinweis im Impressum.
    */
   vatId: "",
-  chamber: "",
-  jobTitle: "",
-  jobTitleState: "",
-  professionalRules: "",
+  smallBusinessNote:
+    "Kleinunternehmer gemäß § 19 UStG. Es wird keine Umsatzsteuer berechnet; eine Umsatzsteuer-Identifikationsnummer wird nicht ausgewiesen.",
 
   /**
    * Hosting-Anbieter für die Datenschutzerklärung. Bleibt das Feld leer, nennt
    * die Erklärung die Kategorie statt des Namens – das genügt Art. 13 Abs. 1
-   * lit. e DSGVO ("Empfänger oder Kategorien von Empfängern"). Sobald das
-   * Hosting feststeht, gehört der Anbieter hier namentlich hinein.
+   * lit. e DSGVO ("Empfänger oder Kategorien von Empfängern").
    */
   hostingProvider: "",
 
   /**
-   * Datenschutz-Aufsichtsbehörde richtet sich nach dem Sitz des
-   * Verantwortlichen – hier Nordrhein-Westfalen.
+   * Datenschutz-Aufsichtsbehörde richtet sich nach dem Firmensitz
+   * (Geiselwind, Bayern) → Bayerisches Landesamt für Datenschutzaufsicht.
    */
   dataProtectionAuthority: {
-    name: "Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen",
-    address: "Kavalleriestraße 2–4, 40213 Düsseldorf",
+    name: "Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)",
+    address: "Promenade 18, 91522 Ansbach",
   },
 
   lastUpdated: "2026-08-02",
@@ -100,6 +108,21 @@ export const services: Service[] = [
     ],
     icon: "home",
     accent: "brand",
+  },
+  {
+    slug: "ki-loesungen",
+    title: "KI-Lösungen",
+    teaser: "Automationen, die mitdenken.",
+    description:
+      "KI dort einsetzen, wo sie im Haus echten Nutzen bringt: Sprache steuern, Muster erkennen, Routinen vorschlagen – lokal und angebunden an Dein Smart Home, nicht als Spielerei in der Cloud.",
+    bullets: [
+      "Sprachsteuerung und lokale Assistenten",
+      "Intelligente Szenen und Vorschläge aus Deinem Alltag",
+      "Anbindung an Home Assistant und vorhandene Geräte",
+      "Datenschutzfreundlich – Verarbeitung im Haus, soweit möglich",
+    ],
+    icon: "spark",
+    accent: "volt",
   },
   {
     slug: "netzwerk-wlan",

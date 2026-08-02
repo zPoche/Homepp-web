@@ -164,17 +164,27 @@ for (const page of pages) {
  * 8. Hinweise – kein Fehler, aber vor dem gewerblichen Betrieb zu klären
  * ------------------------------------------------------------------ */
 if (impressum) {
-  if (!/Umsatzsteuer-Identifikationsnummer/i.test(impressum.text)) {
+  const hasVatId = /Umsatzsteuer-Identifikationsnummer/i.test(impressum.text);
+  const hasSmallBusiness = /Kleinunternehmer/i.test(impressum.text);
+  if (!hasVatId && !hasSmallBusiness) {
     notes.push(
-      "Keine USt-IdNr. angegeben. Bei gewerblichem Betrieb ist sie nach " +
-        "§ 5 Abs. 1 Nr. 6 DDG anzugeben, sofern vorhanden.",
+      "Weder USt-IdNr. noch Kleinunternehmer-Hinweis gefunden. " +
+        "§ 5 Abs. 1 Nr. 6 DDG verlangt die USt-IdNr. nur, soweit vorhanden – " +
+        "als Kleinunternehmer gehört der Hinweis nach § 19 UStG ins Impressum.",
     );
   }
   if (!/Zuständige Kammer/i.test(impressum.text)) {
     notes.push(
-      "Keine Kammer und keine Berufsbezeichnung angegeben. Das " +
-        "Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig – " +
-        "bei gewerblichem Betrieb sind beide Angaben nach § 5 Abs. 1 Nr. 5 DDG Pflicht.",
+      "Keine Kammer angegeben. Das Elektrotechnikerhandwerk ist nach Anlage A " +
+        "HwO zulassungspflichtig – Kammer, Berufsbezeichnung und Verleihungsstaat " +
+        "sind nach § 5 Abs. 1 Nr. 5 DDG Pflicht.",
+    );
+  }
+  if (!/Gesetzliche Berufsbezeichnung/i.test(impressum.text)) {
+    notes.push(
+      "Keine Berufsbezeichnung angegeben (§ 5 Abs. 1 Nr. 5 DDG). " +
+        "Es muss die tatsächlich verliehene Bezeichnung stehen " +
+        "(z. B. Elektrotechnikermeister).",
     );
   }
 }

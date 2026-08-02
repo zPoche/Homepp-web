@@ -4,13 +4,12 @@ import { site, legal } from "../data/site";
 
 const { provider } = legal;
 
-/** Angaben, die nur bei gewerblichem Betrieb Pflicht sind und sonst entfallen */
 const commercial = [
-  { label: "Umsatzsteuer-Identifikationsnummer (§ 27a UStG)", value: legal.vatId },
   { label: "Zuständige Kammer", value: legal.chamber },
   { label: "Gesetzliche Berufsbezeichnung", value: legal.jobTitle },
   { label: "Verliehen in", value: legal.jobTitleState },
   { label: "Berufsrechtliche Regelungen", value: legal.professionalRules },
+  { label: "Umsatzsteuer-Identifikationsnummer (§ 27a UStG)", value: legal.vatId },
 ].filter((entry) => entry.value.length > 0);
 ---
 
@@ -22,6 +21,15 @@ const commercial = [
   <h2>Anbieter</h2>
   <p>
     <strong>{provider.name}</strong><br />
+    {site.legalName}<br />
+    {site.street}<br />
+    {`${site.postalCode} ${site.city}`}<br />
+    Deutschland
+  </p>
+
+  <h2>Ladungsfähige Anschrift</h2>
+  <p>
+    {provider.name}<br />
     {provider.careOf}<br />
     {provider.street}<br />
     {`${provider.postalCode} ${provider.city}`}<br />
@@ -37,15 +45,14 @@ const commercial = [
   <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
   <p>
     {legal.contentResponsible}<br />
-    {provider.careOf}<br />
-    {provider.street}<br />
-    {`${provider.postalCode} ${provider.city}`}
+    {site.street}<br />
+    {`${site.postalCode} ${site.city}`}
   </p>
 
   {
     commercial.length > 0 && (
       <>
-        <h2>Weitere Angaben</h2>
+        <h2>Angaben zur handwerklichen Tätigkeit</h2>
         <ul>
           {commercial.map((entry) => (
             <li>
@@ -53,6 +60,15 @@ const commercial = [
             </li>
           ))}
         </ul>
+      </>
+    )
+  }
+
+  {
+    legal.smallBusinessNote && (
+      <>
+        <h2>Umsatzsteuer</h2>
+        <p>{legal.smallBusinessNote}</p>
       </>
     )
   }

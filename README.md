@@ -52,33 +52,31 @@ und Kontaktdaten liegen dort als typisierte Arrays.
 
 ## Rechtstexte
 
-Impressum und Datenschutzerklärung werden aus dem Objekt `legal` in
-[`src/data/site.ts`](src/data/site.ts) gespeist. Pflichtangaben nach § 5 DDG –
-Anbieter, Anschrift, E-Mail und der Verantwortliche nach § 18 Abs. 2 MStV –
-sind gesetzt.
+Impressum und Datenschutzerklärung speisen sich aus dem Objekt `legal` in
+[`src/data/site.ts`](src/data/site.ts).
 
-Vier Felder sind bewusst leer und werden nur gerendert, wenn sie gefüllt sind:
+Aktuell hinterlegt:
 
-| Feld                              | Wann nötig                                                                                            |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `vatId`                           | bei gewerblichem Betrieb, sofern eine USt-IdNr. vorhanden ist (§ 5 Abs. 1 Nr. 6 DDG)                    |
-| `chamber`, `jobTitle`             | bei gewerblichem Betrieb Pflicht – das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig |
-| `hostingProvider`                 | optional; ohne Angabe nennt die Erklärung die Kategorie statt des Namens, was Art. 13 Abs. 1 lit. e DSGVO genügt |
+- Firmensitz: Langäcker 15, 96160 Geiselwind
+- Ladungsfähige Anschrift: c/o Online-Impressum.de (Sankt Augustin)
+- Kammer: Handwerkskammer für Unterfranken
+- Berufsbezeichnung: Elektrotechniker (Verleihungsstaat Deutschland) – bitte
+  auf die tatsächlich verliehene Bezeichnung prüfen
+- Umsatzsteuer: Kleinunternehmer nach § 19 UStG (keine USt-IdNr.)
+- Datenschutz-Aufsicht: BayLDA (Firmensitz Bayern)
 
-`npm run check:legal` meldet diese Punkte als Hinweis und prüft zusätzlich die
-harten Anforderungen: Erreichbarkeit beider Seiten von jeder Seite aus,
-E-Mail-Adresse im Impressum, § 18 MStV, Verweis auf das DDG statt auf das
-abgelöste TMG sowie die Kernangaben nach Art. 13 DSGVO.
+`hostingProvider` bleibt leer, bis der Host feststeht; die Datenschutzerklärung
+nennt dann die Kategorie statt des Namens (Art. 13 Abs. 1 lit. e DSGVO).
 
-Der Check schlägt außerdem fehl, sobald irgendwo wieder ein Hinweis auf die
-**OS-Plattform** auftaucht. Die EU hat sie am 20.07.2025 abgeschaltet; ein
-verbliebener Verweis gilt als irreführend und ist abmahnfähig.
+`npm run check:legal` prüft Pflichtinhalte, DDG statt TMG, den
+Kleinunternehmer-/USt-Hinweis, Kammer und Berufsbezeichnung sowie die
+Kernangaben nach Art. 13 DSGVO. Ein Verweis auf die **OS-Plattform** lässt den
+Check fehlschlagen – die EU hat sie am 20.07.2025 abgeschaltet.
 
 `npm run check:privacy` durchsucht den Build nach Subressourcen fremder
-Herkunft – Schriften-CDNs, eingebettete Karten, Analyse-Skripte. Solange nichts
-gefunden wird, stimmt die Zusage der Datenschutzerklärung, dass beim Aufruf
-keine Anfrage an einen fremden Server geht. Reine `<a href>`-Links werden nicht
-beanstandet, weil sie erst beim Klick eine Verbindung auslösen.
+Herkunft. Solange nichts gefunden wird, stimmt die Zusage der
+Datenschutzerklärung, dass beim Aufruf keine Anfrage an einen fremden Server
+geht.
 
 ## Kontaktformular
 
