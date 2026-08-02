@@ -44,11 +44,8 @@ export const legal = {
    * Das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig –
    * deshalb gehören Kammer, Berufsbezeichnung und Verleihungsstaat ins Impressum.
    *
-   * `jobTitle` muss die tatsächlich verliehene Bezeichnung sein
-   * (z. B. „Elektrotechnikermeister"). Bitte korrigieren, falls abweichend.
-   */
   chamber: "Handwerkskammer für Unterfranken, Rennweger Ring 3, 97070 Würzburg",
-  jobTitle: "Elektrotechniker",
+  jobTitle: "Elektrotechnikermeister",
   jobTitleState: "Deutschland",
   professionalRules: "Gesetz zur Ordnung des Handwerks (Handwerksordnung – HwO)",
 
