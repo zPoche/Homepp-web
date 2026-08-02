@@ -31,6 +31,9 @@ if (form) {
   const markInvalid = (field: HTMLElement, invalid: boolean) => {
     field.classList.toggle("border-red-400/60", invalid);
     field.classList.toggle("border-white/10", !invalid);
+    // Die Farbe allein reicht nicht – Screenreader brauchen aria-invalid
+    if (invalid) field.setAttribute("aria-invalid", "true");
+    else field.removeAttribute("aria-invalid");
   };
 
   form.addEventListener("submit", async (event) => {

@@ -51,21 +51,24 @@ const places = [
           Gewerbe.
         </p>
 
+        <!-- dt und dd müssen direkte Kinder des div bleiben, sonst verliert
+             die Definitionsliste ihre Semantik -->
         <dl class="mt-10 space-y-6">
           {
             highlights.map((item, i) => (
               <div
-                class="flex gap-4"
+                class="grid grid-cols-[auto_1fr] items-start gap-x-4"
                 data-reveal
                 style={`--reveal-delay:${200 + i * 90}ms`}
               >
-                <span class="bg-brand-400/10 text-brand-400 ring-brand-400/20 mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-xl ring-1">
+                <span
+                  class="bg-brand-400/10 text-brand-400 ring-brand-400/20 row-span-2 mt-0.5 inline-flex size-9 shrink-0 items-center justify-center rounded-xl ring-1"
+                  aria-hidden="true"
+                >
                   <Icon name="spark" class="size-4" />
                 </span>
-                <div>
-                  <dt class="font-display text-lg font-semibold">{item.title}</dt>
-                  <dd class="text-ink-400 mt-1.5 leading-relaxed">{item.text}</dd>
-                </div>
+                <dt class="font-display text-lg font-semibold">{item.title}</dt>
+                <dd class="text-ink-400 mt-1.5 leading-relaxed">{item.text}</dd>
               </div>
             ))
           }

@@ -21,8 +21,10 @@
 
   /* Dunkle Basis */
   --color-ink-50: #f3f6f8;
+  /* ink-400 und ink-500 sind so gewählt, dass sie auf ink-950 die 4.5:1 aus
+     WCAG 2.1 AA auch bei 12px erreichen (6.6:1 bzw. 5.2:1). */
   --color-ink-400: #8a97a6;
-  --color-ink-500: #5d6a79;
+  --color-ink-500: #78859a;
   --color-ink-700: #1b2430;
   --color-ink-800: #111823;
   --color-ink-900: #0a0f17;
