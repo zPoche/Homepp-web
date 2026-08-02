@@ -207,7 +207,7 @@ export const stats = [
   { title: "Region", label: "Geiselwind, Würzburg und Kitzingen" },
   { title: "Rückmeldung", label: "innerhalb eines Werktages" },
   { title: "Systeme", label: "lokal betreibbar, ohne Cloud-Zwang" },
-  { title: "Material", label: "über Sonepar und Yesss Elektro" },
+  { title: "Material", label: "Markenware aus dem Fachgroßhandel" },
 ];
 
 export const process = [
@@ -233,14 +233,12 @@ export const process = [
   },
 ];
 
-/** Nur Systeme und Lieferanten, die die alte Seite bereits nannte. */
+/** Systeme, mit denen HomePower+ arbeitet – keine Großhändler-Marken. */
 export const techStack = [
   "Home Assistant",
   "KNX",
   "Shelly",
   "Ubiquiti UniFi",
-  "Sonepar",
-  "Yesss Elektro",
 ];
 
 export const faqs = [
@@ -270,7 +268,7 @@ export const faqs = [
   },
   {
     q: "Sind die Materialien von hoher Qualität?",
-    a: "Ja. Wir beziehen Materialien von etablierten Großhändlern wie Yesss Elektro und Sonepar. So können wir sicherstellen, dass unsere Kunden immer die besten Produkte erhalten.",
+    a: "Ja. Wir setzen auf Markenware aus dem Fachgroßhandel und wählen Komponenten danach aus, was im Einsatz zuverlässig bleibt – nicht danach, was gerade im Angebot steht.",
   },
 ];
 
