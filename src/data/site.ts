@@ -1,7 +1,7 @@
 export const site = {
   name: "HomePower+",
   legalName: "HomePower+",
-  tagline: "Das Plus für Dein Zuhause",
+  tagline: "Das Plus für Ihr Zuhause",
   description:
     "Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik aus Geiselwind – für Würzburg, Kitzingen und Umgebung.",
   url: "https://homepowerplus.de",
