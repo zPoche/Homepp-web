@@ -88,7 +88,14 @@ export type Service = {
 };
 
 export type IconName =
-  "home" | "wifi" | "shield" | "server" | "gauge" | "cube" | "spark";
+  | "home"
+  | "wifi"
+  | "shield"
+  | "server"
+  | "gauge"
+  | "cube"
+  | "spark"
+  | "bolt";
 
 export const services: Service[] = [
   {
@@ -96,12 +103,12 @@ export const services: Service[] = [
     title: "Smart Home",
     teaser: "Ein System. Alles im Griff.",
     description:
-      "Wir planen und installieren Smart-Home-Systeme, die wirklich zusammenspielen – lokal, schnell und ohne Cloud-Zwang. Steuerung per Smartphone, Tablet, Taster oder Sprache.",
+      "Smart-Home-Systeme mit Home Assistant, KNX und Shelly – lokal, schnell und ohne Cloud-Zwang. Inklusive Energievisualisierung, Automationen und Lademanagement.",
     bullets: [
       "Home Assistant, KNX und Shelly",
-      "Licht-, Heizungs- und Beschattungssteuerung",
-      "Szenen & Automationen nach Deinem Alltag",
-      "Lokal statt Cloud – läuft auch ohne Internet",
+      "Licht, Heizung, Beschattung und Szenen",
+      "Energievisualisierung und Automationen",
+      "Lademanagement angebunden an PV und Wallbox",
     ],
     icon: "home",
     accent: "brand",
@@ -111,27 +118,27 @@ export const services: Service[] = [
     title: "KI-Lösungen",
     teaser: "Automationen, die mitdenken.",
     description:
-      "KI dort einsetzen, wo sie im Haus echten Nutzen bringt: Sprache steuern, Muster erkennen, Routinen vorschlagen – lokal und angebunden an Dein Smart Home, nicht als Spielerei in der Cloud.",
+      "Lokale KI-Heimserver – individuell gebaut, von NVIDIA DGX Spark bis Mac mini oder Mac Studio, je nach Leistung, Datenschutz und Budget. Angebunden an Dein Smart Home, nicht als Cloud-Spielerei.",
     bullets: [
-      "Sprachsteuerung und lokale Assistenten",
-      "Intelligente Szenen und Vorschläge aus Deinem Alltag",
+      "Individueller KI-Heimserver nach Anforderung",
+      "NVIDIA DGX Spark, Mac mini oder Mac Studio",
+      "Sprache, Muster und Routinen lokal im Haus",
       "Anbindung an Home Assistant und vorhandene Geräte",
-      "Datenschutzfreundlich – Verarbeitung im Haus, soweit möglich",
     ],
     icon: "spark",
     accent: "volt",
   },
   {
     slug: "netzwerk-wlan",
-    title: "Netzwerk & WLAN",
-    teaser: "WLAN, das überall funktioniert.",
+    title: "Netzwerk & UniFi",
+    teaser: "Das komplette UniFi-Portfolio.",
     description:
-      "Professionelle Netzwerke mit Ubiquiti UniFi – von der Ausleuchtungsplanung über die Verkabelung bis zum getrennten Gäste- und IoT-Netz.",
+      "Ubiquiti UniFi durchgängig: Netzwerk, WLAN, Switching, Routing, Protect-Kameras, Zutritt, Türsprechanlagen, USV, NAS/UNAS und bei Bedarf UniFi-Server – aus einer Hand geplant und betrieben.",
     bullets: [
-      "UniFi Access Points, Switches & Gateways",
-      "WLAN-Ausleuchtung für jeden Winkel",
-      "VLANs für Gäste, IoT und Büro",
-      "Monitoring & Fernwartung auf Wunsch",
+      "WLAN, Switching, Routing und VLANs",
+      "UniFi Protect, Access und Türsprechanlagen",
+      "USV, UNAS/NAS und UniFi-Server",
+      "Ausleuchtung, Monitoring und Fernwartung",
     ],
     icon: "wifi",
     accent: "volt",
@@ -141,26 +148,41 @@ export const services: Service[] = [
     title: "Sicherheitstechnik",
     teaser: "Sehen, was zuhause passiert.",
     description:
-      "Videoüberwachung, Einbruchmeldeanlagen und Zutrittskontrolle – datenschutzkonform geplant, mit EMA-Wartung und sauber ins Smart Home integriert.",
+      "Einbruchmeldeanlagen mit Telenot und Daitem, Video mit UniFi Protect oder Hikvision – datenschutzkonform, mit EMA-Wartung und sauber angebunden.",
     bullets: [
-      "Einbruchmeldeanlagen inkl. EMA-Wartung (u. a. Telenot)",
-      "Videoüberwachung mit lokaler Aufzeichnung",
-      "Zutrittskontrolle und Türsprechanlagen",
+      "EMA inkl. Wartung: Telenot und Daitem",
+      "Video: UniFi Protect oder Hikvision",
+      "Zutritt und Türsprechanlagen (UniFi Access)",
       "DSGVO-konforme Planung",
     ],
     icon: "shield",
     accent: "brand",
   },
   {
+    slug: "ladeinfrastruktur",
+    title: "Ladeinfrastruktur",
+    teaser: "Laden, das zum Haus passt.",
+    description:
+      "Wallboxen und PV-Überschussladen mit openWB, KEBA und MENNEKES – ergänzt um UniFi für Netzwerk, Zugang, Kameras und WLAN an den Ladepunkten.",
+    bullets: [
+      "openWB für PV-Überschussladen und offene Integration",
+      "KEBA für Privat und Gewerbe",
+      "MENNEKES für Premium, MFH und Firmen",
+      "UniFi an Ladepunkten: Netz, Zugang, Kamera, WLAN",
+    ],
+    icon: "bolt",
+    accent: "signal",
+  },
+  {
     slug: "edv-datentechnik",
     title: "EDV & IT",
     teaser: "Die Basis für alles Weitere.",
     description:
-      "Netzwerk- und IT-Infrastruktur, PC- und Serversysteme, Telefon-/TK-Anlagen sowie Domains, Hosting und laufende Betreuung – vom Schrank bis zur Website.",
+      "Synology für NAS, Backups, Monitoring und Surveillance Station, Telefonanlagen mit AGFEO (Mitel optional) sowie Domains, Hosting und laufende IT-Betreuung.",
     bullets: [
-      "Strukturierte Verkabelung Cat.6A / Glasfaser (LWL)",
-      "PC-, Server- und NAS-Systeme inkl. Zusammenbau",
-      "Telefon-/TK-Anlagen und Netzwerkinfrastruktur",
+      "Synology: NAS, Backup, Monitoring, Surveillance",
+      "AGFEO Telefonanlagen – Mitel optional",
+      "PC-, Server- und Kundensysteme",
       "Domains, Webspace, Hosting und Website-Betreuung",
     ],
     icon: "server",
@@ -234,8 +256,8 @@ export const process = [
 ];
 
 /**
- * Hersteller und Systeme aus dem Leistungsportfolio.
- * Keine Großhändler (Sonepar/Yesss) – die sind Einkauf, keine Leistung.
+ * Hersteller und Systeme aus dem realen Portfolio (Angabe des Betreibers).
+ * Keine Großhändler – die sind Einkauf, keine Leistung.
  */
 export const techStack = [
   "Home Assistant",
@@ -243,15 +265,19 @@ export const techStack = [
   "Shelly",
   "Ubiquiti UniFi",
   "Telenot",
+  "Daitem",
+  "Hikvision",
   "Synology",
-  "AVM FRITZ!",
-  "Auerswald",
+  "AGFEO",
+  "openWB",
+  "KEBA",
+  "MENNEKES",
 ];
 
 export const faqs = [
   {
     q: "Was macht HomePower+ besonders?",
-    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik – Planung, Installation und Wartung aus einer Hand, vom Smart Home über EMA und Video bis zu IT, Hosting und Messungen.",
+    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik – von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, IT und Messungen.",
   },
   {
     q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",
@@ -263,7 +289,7 @@ export const faqs = [
   },
   {
     q: "Welche Smart-Home-Systeme werden unterstützt?",
-    a: "Wir arbeiten mit verschiedenen Smart-Home-Systemen, darunter Home Assistant, Shelly und KNX. Wir planen und installieren die Systeme, die am besten zu Deinem Zuhause passen.",
+    a: "Schwerpunkt sind Home Assistant, Shelly und KNX – inklusive Energievisualisierung, Automationen und Lademanagement. Dazu kommen UniFi, Sicherheitstechnik und Wallboxen, die wir sauber anbinden.",
   },
   {
     q: "Funktioniert das Smart Home auch ohne Internet?",
