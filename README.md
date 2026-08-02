@@ -43,8 +43,13 @@ src/
   pages/         index, impressum, datenschutz, 404
   scripts/       Client-JS: Scroll-Reveals, Canvas-Hero, Kontaktformular
   styles/        Design-Tokens und Utilities für Tailwind
+public/brand/    Original-Logos (Wordmark, HP+-Marke, Variante auf Hell)
 scripts/         Build- und Prüfskripte (Node, laufen ohne Netzwerk)
 ```
+
+Favicon, Apple-Touch-Icon und Open-Graph-Bild werden aus `public/brand/`
+abgeleitet (`npm run assets`). Neue Logo-Dateien dort ablegen und Assets neu
+generieren.
 
 Inhalte werden nicht in den Komponenten gepflegt, sondern in
 [`src/data/site.ts`](src/data/site.ts). Leistungen, FAQ-Einträge, Prozessschritte

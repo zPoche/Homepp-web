@@ -1,21 +1,27 @@
 ---
 interface Props {
   class?: string;
+  /** Kompakte HP+-Marke statt Wordmark – für enge Flächen */
+  mark?: boolean;
 }
-const { class: className = "" } = Astro.props;
+const { class: className = "h-7 md:h-8", mark = false } = Astro.props;
+
+const src = mark ? "/brand/logo-mark.png" : "/brand/logo-wordmark.png";
+const width = mark ? 120 : 520;
+const height = mark ? 120 : 96;
 ---
 
 {
-  /* inline-flex verwirft den Zeilenumbruch zwischen den Spans, die Wortmarke
-    bleibt dadurch optisch zusammen. Kein aria-label und kein sr-only-Text:
-    der zugängliche Name soll exakt dem entsprechen, was zu sehen ist. */
+  /*
+  Original-Logos aus public/brand/. Der zugängliche Name steht im alt-Text –
+  der umgebende Link braucht kein zusätzliches aria-label.
+*/
 }
-<span
-  class={`font-display inline-flex items-start leading-none font-bold tracking-tight select-none ${className}`}
->
-  <span class="text-white">Home</span>
-  <span class="text-brand-400">Power</span>
-  <span class="text-brand-400 relative -top-[0.35em] text-[0.62em] leading-none">
-    +
-  </span>
-</span>
+<img
+  src={src}
+  width={width}
+  height={height}
+  alt="HomePower+"
+  class={`w-auto ${className}`}
+  decoding="async"
+/>
