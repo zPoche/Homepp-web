@@ -88,17 +88,19 @@ Ohne Konfiguration öffnet das Formular den Mailclient des Besuchers mit einer
 fertig ausgefüllten Nachricht. Das funktioniert überall, ist aber nicht
 besonders komfortabel.
 
-Für echten Formularversand einen Endpoint hinterlegen (Formspree, Basin, eine
-eigene Serverless Function – alles, was `multipart/form-data` per POST annimmt):
+Standardmäßig postet das Formular auf **`/api/contact.php`** (liegt in
+`public/api/` und wird mit nach `dist/` kopiert). Das Skript sendet die Anfrage
+per PHP `mail()` an `info@homepp.de`. Auf Plesk muss PHP aktiv sein und der
+Mailversand für die Domain funktionieren (oft schon der Fall).
 
 ```bash
-# .env
-PUBLIC_CONTACT_ENDPOINT="https://formspree.io/f/xxxxxxx"
+# Optional überschreiben oder mailto-Fallback erzwingen:
+# PUBLIC_CONTACT_ENDPOINT="https://formspree.io/f/xxxxxxx"
+# PUBLIC_CONTACT_ENDPOINT=""
 ```
 
-Der Wert landet im ausgelieferten HTML, gehört also nur an Stellen, die
-öffentlich sein dürfen. Das Formular hat ein Honeypot-Feld gegen Bots und
-verlangt eine ausdrückliche Einwilligung in die Datenschutzerklärung.
+Der Wert landet im ausgelieferten HTML. Das Formular hat ein Honeypot-Feld gegen
+Bots, ein einfaches Rate-Limit und verlangt die Datenschutz-Einwilligung.
 
 ## Deployment
 

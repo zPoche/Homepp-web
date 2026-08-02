@@ -1,9 +1,6 @@
 /**
- * Kontaktformular ohne Backend-Zwang.
- *
- * Ist PUBLIC_CONTACT_ENDPOINT gesetzt (z. B. Formspree, Basin, eigene
- * Function), wird dorthin per fetch gepostet. Ohne Endpoint öffnet sich der
- * Mailclient mit vorbefüllter Nachricht - die Anfrage geht also nie verloren.
+ * Kontaktformular: POST an Endpoint (Standard /api/contact.php auf Plesk).
+ * Ohne Endpoint öffnet sich der Mailclient als Fallback.
  */
 
 const form = document.querySelector<HTMLFormElement>("[data-contact-form]");

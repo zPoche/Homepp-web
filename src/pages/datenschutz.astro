@@ -5,12 +5,22 @@ import { site, legal } from "../data/site";
 const { provider, dataProtectionAuthority: authority } = legal;
 
 /**
- * Ist ein Formular-Dienstleister konfiguriert, verlassen die Formulardaten
- * unseren Server. Das ist offenlegungspflichtig (Art. 13 Abs. 1 lit. e DSGVO),
- * deshalb erscheint der Absatz automatisch mit.
+ * Nur externe Formular-Endpoints (https://…) sind offenlegungspflichtig.
+ * Relatives /api/contact.php bleibt auf dem eigenen Hosting.
  */
-const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
-const contactEndpointHost = contactEndpoint ? new URL(contactEndpoint).host : "";
+const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
+const contactEndpoint =
+  configured === "" ? "" : (configured ?? "/api/contact.php");
+let contactEndpointHost = "";
+try {
+  if (/^https?:\/\//i.test(contactEndpoint)) {
+    contactEndpointHost = new URL(contactEndpoint).host;
+  }
+} catch {
+  contactEndpointHost = "";
+}
+const usesOwnMailEndpoint =
+  Boolean(contactEndpoint) && !contactEndpointHost;
 ---
 
 <Legal
@@ -137,9 +147,16 @@ const contactEndpointHost = contactEndpoint ? new URL(contactEndpoint).host : ""
         verarbeitet. Mit dem Anbieter besteht ein Vertrag über Auftragsverarbeitung nach
         Art. 28 DSGVO.
       </p>
+    ) : usesOwnMailEndpoint ? (
+      <p>
+        Das Formular wird auf unserem eigenen Webspace verarbeitet und per E-Mail an uns
+        zugestellt. Es kommt kein externer Formulardienst zum Einsatz. Technisch fallen
+        dabei die üblichen Server-Logdaten (z.&nbsp;B. IP-Adresse, Zeitpunkt) beim Hosting
+        an.
+      </p>
     ) : (
       <p>
-        Ein externer Formulardienst ist derzeit nicht eingebunden: Beim Absenden öffnet
+        Ein serverseitiger Formularversand ist derzeit nicht aktiv: Beim Absenden öffnet
         sich Dein eigenes E-Mail-Programm mit der fertigen Nachricht. Deine Eingaben
         verlassen Deinen Rechner also erst, wenn Du die E-Mail selbst abschickst.
       </p>

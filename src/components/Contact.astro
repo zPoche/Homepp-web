@@ -3,10 +3,12 @@ import Icon from "./Icon.astro";
 import { site, services } from "../data/site";
 
 /**
- * Formular-Ziel. Ist nichts gesetzt, baut das Skript aus den Feldern eine
- * mailto-Nachricht - so funktioniert das Formular auch ohne Backend.
+ * Formular-Ziel. Standard ist das eigene PHP unter /api/contact.php (Plesk).
+ * Mit PUBLIC_CONTACT_ENDPOINT überschreibbar; leerer String erzwingt mailto-Fallback.
  */
-const endpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? "";
+const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
+const endpoint =
+  configured === "" ? "" : (configured ?? "/api/contact.php");
 
 const channels = [
   {
