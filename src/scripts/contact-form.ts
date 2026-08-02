@@ -3,7 +3,7 @@
  *
  * Ist PUBLIC_CONTACT_ENDPOINT gesetzt (z. B. Formspree, Basin, eigene
  * Function), wird dorthin per fetch gepostet. Ohne Endpoint öffnet sich der
- * Mailclient mit vorbefüllter Nachricht – die Anfrage geht also nie verloren.
+ * Mailclient mit vorbefüllter Nachricht - die Anfrage geht also nie verloren.
  */
 
 const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
@@ -31,7 +31,7 @@ if (form) {
   const markInvalid = (field: HTMLElement, invalid: boolean) => {
     field.classList.toggle("border-red-400/60", invalid);
     field.classList.toggle("border-white/10", !invalid);
-    // Die Farbe allein reicht nicht – Screenreader brauchen aria-invalid
+    // Die Farbe allein reicht nicht - Screenreader brauchen aria-invalid
     if (invalid) field.setAttribute("aria-invalid", "true");
     else field.removeAttribute("aria-invalid");
   };
@@ -63,12 +63,12 @@ if (form) {
     data.delete("company");
 
     if (!endpoint) {
-      const subject = `Anfrage über homepowerplus.de – ${data.get("topic") || "Allgemein"}`;
+      const subject = `Anfrage über homepowerplus.de: ${data.get("topic") || "Allgemein"}`;
       const body = [
         `Name: ${data.get("name")}`,
         `E-Mail: ${data.get("email")}`,
-        `Telefon: ${data.get("phone") || "–"}`,
-        `Thema: ${data.get("topic") || "–"}`,
+        `Telefon: ${data.get("phone") || "-"}`,
+        `Thema: ${data.get("topic") || "-"}`,
         "",
         String(data.get("message") ?? ""),
       ].join("\n");
@@ -100,7 +100,7 @@ if (form) {
 
       form.reset();
       setStatus(
-        "Danke! Deine Nachricht ist angekommen – wir melden uns innerhalb eines Werktages.",
+        "Danke! Deine Nachricht ist angekommen. Wir melden uns innerhalb eines Werktages.",
         "ok",
       );
       if (label) label.textContent = "Gesendet";

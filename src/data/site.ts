@@ -3,7 +3,7 @@ export const site = {
   legalName: "HomePower+",
   tagline: "Das Plus für Ihr Zuhause",
   description:
-    "Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik aus Geiselwind – für Würzburg, Kitzingen und Umgebung.",
+    "Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik aus Geiselwind, für Würzburg, Kitzingen und Umgebung.",
   url: "https://homepowerplus.de",
   email: "info@homepp.de",
   phone: "+49 9556 9217717",
@@ -13,7 +13,7 @@ export const site = {
   city: "Geiselwind",
   country: "DE",
   geo: { lat: 49.7717, lng: 10.4711 },
-  // Nur Orte, die die alte Seite bereits öffentlich nannte – keine erweiterten
+  // Nur Orte, die die alte Seite bereits öffentlich nannte - keine erweiterten
   // Einsatzgebiete erfinden, die wettbewerbsrechtlich angreifbar wären.
   areaServed: ["Geiselwind", "Würzburg", "Kitzingen"],
   openingHours: "Termine nach Vereinbarung",
@@ -23,7 +23,7 @@ export const site = {
  * Anbieterkennzeichnung (§ 5 DDG) und Angaben für die Datenschutzerklärung.
  *
  * Firmensitz ist Geiselwind. Die ladungsfähige Anschrift läuft über
- * Online-Impressum.de (c/o) – analog zu avertax.de.
+ * Online-Impressum.de (c/o) - analog zu avertax.de.
  */
 export const legal = {
   provider: {
@@ -41,17 +41,17 @@ export const legal = {
 
   /**
    * Berufsrechtliche Angaben (§ 5 Abs. 1 Nr. 5 DDG).
-   * Das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig –
+   * Das Elektrotechnikerhandwerk ist nach Anlage A HwO zulassungspflichtig -
    * deshalb gehören Kammer, Berufsbezeichnung und Verleihungsstaat ins Impressum.
    */
   chamber: "Handwerkskammer für Unterfranken, Rennweger Ring 3, 97070 Würzburg",
   jobTitle: "Elektrotechnikermeister",
   jobTitleState: "Deutschland",
-  professionalRules: "Gesetz zur Ordnung des Handwerks (Handwerksordnung – HwO)",
+  professionalRules: "Gesetz zur Ordnung des Handwerks (Handwerksordnung, HwO)",
 
   /**
    * § 5 Abs. 1 Nr. 6 DDG verlangt die USt-IdNr. nur, soweit vorhanden.
-   * Als Kleinunternehmer nach § 19 UStG wird keine USt-Id ausgewiesen –
+   * Als Kleinunternehmer nach § 19 UStG wird keine USt-Id ausgewiesen -
    * stattdessen steht der Hinweis im Impressum.
    */
   vatId: "",
@@ -60,7 +60,7 @@ export const legal = {
 
   /**
    * Hosting-Anbieter für die Datenschutzerklärung. Bleibt das Feld leer, nennt
-   * die Erklärung die Kategorie statt des Namens – das genügt Art. 13 Abs. 1
+   * die Erklärung die Kategorie statt des Namens - das genügt Art. 13 Abs. 1
    * lit. e DSGVO ("Empfänger oder Kategorien von Empfängern").
    */
   hostingProvider: "",
@@ -103,7 +103,7 @@ export const services: Service[] = [
     title: "Smart Home",
     teaser: "Ein System. Alles im Griff.",
     description:
-      "Smart-Home-Systeme mit Home Assistant, KNX und Shelly – lokal, schnell und ohne Cloud-Zwang. Inklusive Energievisualisierung, Automationen und Lademanagement.",
+      "Smart-Home-Systeme mit Home Assistant, KNX und Shelly: lokal, schnell und ohne Cloud-Zwang. Inklusive Energievisualisierung, Automationen und Lademanagement.",
     bullets: [
       "Home Assistant, KNX und Shelly",
       "Licht, Heizung, Beschattung und Szenen",
@@ -118,7 +118,7 @@ export const services: Service[] = [
     title: "KI-Lösungen",
     teaser: "Automationen, die mitdenken.",
     description:
-      "Lokale KI-Heimserver – individuell gebaut, von NVIDIA DGX Spark bis Mac mini oder Mac Studio, je nach Leistung, Datenschutz und Budget. Angebunden an Dein Smart Home, nicht als Cloud-Spielerei.",
+      "Lokale KI-Heimserver, individuell gebaut: von NVIDIA DGX Spark bis Mac mini oder Mac Studio, je nach Leistung, Datenschutz und Budget. Angebunden an Dein Smart Home, nicht als Cloud-Spielerei.",
     bullets: [
       "Individueller KI-Heimserver nach Anforderung",
       "NVIDIA DGX Spark, Mac mini oder Mac Studio",
@@ -133,7 +133,7 @@ export const services: Service[] = [
     title: "Netzwerk & UniFi",
     teaser: "Das komplette UniFi-Portfolio.",
     description:
-      "Ubiquiti UniFi durchgängig: Netzwerk, WLAN, Switching, Routing, Protect-Kameras, Zutritt, Türsprechanlagen, USV, NAS/UNAS und bei Bedarf UniFi-Server – aus einer Hand geplant und betrieben.",
+      "Ubiquiti UniFi durchgängig: Netzwerk, WLAN, Switching, Routing, Protect-Kameras, Zutritt, Türsprechanlagen, USV, NAS/UNAS und bei Bedarf UniFi-Server. Alles aus einer Hand geplant und betrieben.",
     bullets: [
       "WLAN, Switching, Routing und VLANs",
       "UniFi Protect, Access und Türsprechanlagen",
@@ -148,7 +148,7 @@ export const services: Service[] = [
     title: "Sicherheitstechnik",
     teaser: "Sehen, was zuhause passiert.",
     description:
-      "Einbruchmeldeanlagen mit Telenot und Daitem, Video mit UniFi Protect oder Hikvision – datenschutzkonform, mit EMA-Wartung und sauber angebunden.",
+      "Einbruchmeldeanlagen mit Telenot und Daitem, Video mit UniFi Protect oder Hikvision. Datenschutzkonform geplant, mit EMA-Wartung und sauber angebunden.",
     bullets: [
       "EMA inkl. Wartung: Telenot und Daitem",
       "Video: UniFi Protect oder Hikvision",
@@ -163,7 +163,7 @@ export const services: Service[] = [
     title: "Ladeinfrastruktur",
     teaser: "Laden, das zum Haus passt.",
     description:
-      "Wallboxen und PV-Überschussladen mit openWB, KEBA und MENNEKES – ergänzt um UniFi für Netzwerk, Zugang, Kameras und WLAN an den Ladepunkten.",
+      "Wallboxen und PV-Überschussladen mit openWB, KEBA und MENNEKES, ergänzt um UniFi für Netzwerk, Zugang, Kameras und WLAN an den Ladepunkten.",
     bullets: [
       "openWB für PV-Überschussladen und offene Integration",
       "KEBA für Privat und Gewerbe",
@@ -181,7 +181,7 @@ export const services: Service[] = [
       "Synology für NAS, Backups, Monitoring und Surveillance Station, Telefonanlagen mit AGFEO (Mitel optional) sowie Domains, Hosting und laufende IT-Betreuung.",
     bullets: [
       "Synology: NAS, Backup, Monitoring, Surveillance",
-      "AGFEO Telefonanlagen – Mitel optional",
+      "AGFEO Telefonanlagen, Mitel optional",
       "PC-, Server- und Kundensysteme",
       "Domains, Webspace, Hosting und Website-Betreuung",
     ],
@@ -193,7 +193,7 @@ export const services: Service[] = [
     title: "Messungen & Prüfung",
     teaser: "Sicherheit mit Protokoll.",
     description:
-      "VDE-, DGUV-, EDV- und LWL-Messungen – inklusive vollständiger Prüfprotokolle für Versicherung, Arbeitgeber und Vermieter.",
+      "VDE-, DGUV-, EDV- und LWL-Messungen, inklusive vollständiger Prüfprotokolle für Versicherung, Arbeitgeber und Vermieter.",
     bullets: [
       "E-Check & Prüfungen nach DIN VDE",
       "DGUV-Prüfungen ortsveränderlicher Geräte",
@@ -208,7 +208,7 @@ export const services: Service[] = [
     title: "3D-Druck & Sonderteile",
     teaser: "Wenn es das Teil nicht gibt.",
     description:
-      "Individuelle 3D-Druck-Lösungen für Halterungen und Gehäuse – konstruiert und gedruckt, passgenau für Deine Hardware.",
+      "Individuelle 3D-Druck-Lösungen für Halterungen und Gehäuse, konstruiert und gedruckt, passgenau für Deine Hardware.",
     bullets: [
       "Sensor- und Kamerahalterungen",
       "Gehäuse für Elektronik & Hutschiene",
@@ -236,7 +236,7 @@ export const process = [
   {
     step: "01",
     title: "Kennenlernen",
-    text: "Wir sprechen über Dein Vorhaben – am Telefon oder direkt vor Ort. Unverbindlich und ohne Fachchinesisch.",
+    text: "Wir sprechen über Dein Vorhaben, am Telefon oder direkt vor Ort. Unverbindlich und ohne Fachchinesisch.",
   },
   {
     step: "02",
@@ -246,7 +246,7 @@ export const process = [
   {
     step: "03",
     title: "Umsetzung",
-    text: "Installation, Konfiguration und Test – sauber, termintreu und mit Rücksicht auf Deine Wände und Nerven.",
+    text: "Installation, Konfiguration und Test: sauber, termintreu und mit Rücksicht auf Deine Wände und Nerven.",
   },
   {
     step: "04",
@@ -257,7 +257,7 @@ export const process = [
 
 /**
  * Hersteller und Systeme aus dem realen Portfolio (Angabe des Betreibers).
- * Keine Großhändler – die sind Einkauf, keine Leistung.
+ * Keine Großhändler - die sind Einkauf, keine Leistung.
  */
 export const techStack = [
   "Home Assistant",
@@ -277,7 +277,7 @@ export const techStack = [
 export const faqs = [
   {
     q: "Was macht HomePower+ besonders?",
-    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik – von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, IT und Messungen.",
+    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik. Von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, IT und Messungen.",
   },
   {
     q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",
@@ -285,11 +285,11 @@ export const faqs = [
   },
   {
     q: "Wie kann ich einen Termin für eine Beratung vereinbaren?",
-    a: "Am einfachsten über das Kontaktformular auf dieser Seite. Alternativ erreichst Du uns per Telefon oder E-Mail – wir melden uns innerhalb eines Werktages zurück.",
+    a: "Am einfachsten über das Kontaktformular auf dieser Seite. Alternativ erreichst Du uns per Telefon oder E-Mail. Wir melden uns innerhalb eines Werktages zurück.",
   },
   {
     q: "Welche Smart-Home-Systeme werden unterstützt?",
-    a: "Schwerpunkt sind Home Assistant, Shelly und KNX – inklusive Energievisualisierung, Automationen und Lademanagement. Dazu kommen UniFi, Sicherheitstechnik und Wallboxen, die wir sauber anbinden.",
+    a: "Schwerpunkt sind Home Assistant, Shelly und KNX, inklusive Energievisualisierung, Automationen und Lademanagement. Dazu kommen UniFi, Sicherheitstechnik und Wallboxen, die wir sauber anbinden.",
   },
   {
     q: "Funktioniert das Smart Home auch ohne Internet?",
@@ -301,7 +301,7 @@ export const faqs = [
   },
   {
     q: "Sind die Materialien von hoher Qualität?",
-    a: "Ja. Wir setzen auf Markenware aus dem Fachgroßhandel und wählen Komponenten danach aus, was im Einsatz zuverlässig bleibt – nicht danach, was gerade im Angebot steht.",
+    a: "Ja. Wir setzen auf Markenware aus dem Fachgroßhandel und wählen Komponenten danach aus, was im Einsatz zuverlässig bleibt, nicht danach, was gerade im Angebot steht.",
   },
 ];
 

@@ -1,7 +1,7 @@
 ---
 interface Props {
   class?: string;
-  /** Kompakte HP+-Marke statt Wordmark – für enge Flächen */
+  /** Kompakte HP+-Marke statt Wordmark - für enge Flächen */
   mark?: boolean;
 }
 const { class: className = "h-9 md:h-11", mark = false } = Astro.props;
@@ -13,7 +13,7 @@ const height = mark ? 120 : 96;
 
 {
   /*
-  Original-Logos aus public/brand/. Der zugängliche Name steht im alt-Text –
+  Original-Logos aus public/brand/. Der zugängliche Name steht im alt-Text -
   der umgebende Link braucht kein zusätzliches aria-label.
 */
 }
