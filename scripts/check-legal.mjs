@@ -64,7 +64,7 @@ if (!datenschutz) errors.push("Es gibt keine Datenschutz-Seite im Build.");
  * 2. Sind sie von jeder Seite aus erreichbar? (§ 5 DDG: "ständig verfügbar")
  * ------------------------------------------------------------------ */
 for (const page of pages) {
-  for (const target of ["/impressum", "/datenschutz"]) {
+  for (const target of ["/impressum/", "/datenschutz/"]) {
     if (!page.html.includes(`href="${target}"`)) {
       errors.push(`${page.file} verlinkt ${target} nicht.`);
     }

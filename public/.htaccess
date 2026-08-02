@@ -1,0 +1,12 @@
+# Plesk/Apache: Verzeichnisse ohne Slash (z. B. /impressum) werden sonst an
+# Passenger als App-Root übergeben → 500. Mit Slash greift DirectoryIndex.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Existierendes Verzeichnis ohne trailing slash → mit Slash (301)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+[^/])$ $1/ [R=301,L]
+</IfModule>
+
+DirectoryIndex index.html

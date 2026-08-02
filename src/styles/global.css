@@ -40,7 +40,7 @@
 @layer base {
   :root {
     color-scheme: dark;
-    --nav-h: 4.5rem;
+    --nav-h: 5.25rem;
     scroll-padding-top: calc(var(--nav-h) + 1.5rem);
   }
 
