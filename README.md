@@ -62,8 +62,7 @@ Impressum und Datenschutzerklärung speisen sich aus dem Objekt `legal` in
 
 Aktuell hinterlegt:
 
-- Firmensitz: Langäcker 15, 96160 Geiselwind
-- Ladungsfähige Anschrift: c/o Online-Impressum.de (Sankt Augustin)
+- Anschrift (Firmensitz und ladungsfähig): Langäcker 15, 96160 Geiselwind
 - Kammer: Handwerkskammer für Unterfranken
 - Berufsbezeichnung: Elektrotechnikermeister (Verleihungsstaat Deutschland)
 - Umsatzsteuer: Kleinunternehmer nach § 19 UStG (keine USt-IdNr.)
