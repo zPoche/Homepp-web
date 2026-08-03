@@ -21,18 +21,14 @@ export const site = {
 
 /**
  * Anbieterkennzeichnung (§ 5 DDG) und Angaben für die Datenschutzerklärung.
- *
- * Firmensitz ist Geiselwind. Die ladungsfähige Anschrift läuft über
- * Online-Impressum.de (c/o) - analog zu avertax.de.
+ * Firmensitz und ladungsfähige Anschrift sind Langäcker 15, Geiselwind.
  */
 export const legal = {
   provider: {
     name: "Johannes Schäfer",
-    /** Ladungsfähige Anschrift über Online-Impressum.de */
-    careOf: "c/o Online-Impressum.de #6287",
-    street: "Europaring 90",
-    postalCode: "53757",
-    city: "Sankt Augustin",
+    street: "Langäcker 15",
+    postalCode: "96160",
+    city: "Geiselwind",
     country: "Deutschland",
   },
 
@@ -74,7 +70,7 @@ export const legal = {
     address: "Promenade 18, 91522 Ansbach",
   },
 
-  lastUpdated: "2026-08-02",
+  lastUpdated: "2026-08-03",
 } as const;
 
 export type Service = {
