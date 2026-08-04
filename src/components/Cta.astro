@@ -1,6 +1,8 @@
 ---
 import Icon from "./Icon.astro";
 import { site } from "../data/site";
+
+const { cta } = site;
 ---
 
 <section class="relative py-12 md:py-20">
@@ -17,14 +19,19 @@ import { site } from "../data/site";
       </div>
 
       <div class="relative mx-auto max-w-3xl">
-        <p class="eyebrow justify-center">Loslegen</p>
+        <p class="eyebrow justify-center">{cta.eyebrow}</p>
         <h2 class="mt-5 text-[clamp(2rem,5vw,3.75rem)] leading-[1.03] font-bold">
-          Hol Dir die <span class="text-highlight">Zukunft</span> ins Haus.
+          {cta.titleBefore}{" "}
+          <span class="text-highlight">{cta.titleHighlight}</span>
+          {cta.titleAfter}
         </h2>
-        <p class="text-ink-400 mx-auto mt-6 max-w-xl text-lg leading-relaxed">
-          Erzähl uns in fünf Minuten, was Du vorhast. Wir sagen Dir ehrlich, was
-          sinnvoll ist und was Du Dir sparen kannst.
-        </p>
+        {
+          cta.lead && (
+            <p class="text-ink-400 mx-auto mt-6 max-w-xl text-lg leading-relaxed">
+              {cta.lead}
+            </p>
+          )
+        }
 
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
@@ -33,7 +40,7 @@ import { site } from "../data/site";
             data-magnetic
             data-magnetic-strength="0.2"
           >
-            <span class="relative z-10">Projekt anfragen</span>
+            <span class="relative z-10">{cta.button}</span>
             <Icon
               name="arrow"
               class="relative z-10 size-4 transition-transform duration-300 group-hover:translate-x-1"
@@ -43,13 +50,17 @@ import { site } from "../data/site";
             ></span>
           </a>
 
-          <a
-            href={`tel:${site.phoneHref}`}
-            class="glass text-ink-50 hover:border-brand-400/40 inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold transition-colors duration-300"
-          >
-            <Icon name="phone" class="size-4" />
-            {site.phone}
-          </a>
+          {
+            site.phone && (
+              <a
+                href={`tel:${site.phoneHref}`}
+                class="glass text-ink-50 hover:border-brand-400/40 inline-flex items-center gap-2 rounded-full px-8 py-4 font-semibold transition-colors duration-300"
+              >
+                <Icon name="phone" class="size-4" />
+                {site.phone}
+              </a>
+            )
+          }
         </div>
       </div>
     </div>

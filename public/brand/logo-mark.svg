@@ -1,15 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HomePower+">
-  <!--
-    Kompakte Marke HP+ für Favicon, App-Icon und enge Flächen.
-    H weiß, P und + in Markencyan #1EEFF2  wie im Original-Logo.
-  -->
-  <path
-    fill="#ffffff"
-    d="M8 14h8.2v14.2h13.6V14H38v36h-8.2V35.6H16.2V50H8V14z"
-  />
-  <path
-    fill="#1EEFF2"
-    d="M42 14h12.4c7.1 0 11.6 4.2 11.6 10.6 0 5.3-3.2 9.1-8.3 10.2L63.5 50h-9.2l-5.4-13.8H50.2V50H42V14zm8.2 15.4h3.8c2.9 0 4.7-1.5 4.7-3.9s-1.8-3.9-4.7-3.9h-3.8v7.8z"
-  />
-  <path fill="#1EEFF2" d="M54.5 8h3.2v3.2H61v3.2h-3.3V17.6h-3.2v-3.2H51.2v-3.2h3.3V8z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#05080d"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="#1eeff2" stroke-width="2"/>
+  <text x="32" y="42" text-anchor="middle" font-family="Outfit, Inter, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#1eeff2">B</text>
 </svg>

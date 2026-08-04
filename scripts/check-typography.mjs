@@ -19,10 +19,7 @@ const distDir = resolve(root, "dist");
 
 /** Schreibweisen, die absichtlich Binnenmajuskeln tragen */
 const ALLOWED = [
-  "HomePower",
-  "HomeAssistant",
-  "ESPHome",
-  "UniFi",
+  "Bootlabs",
   "OpenStreetMap",
   "JavaScript",
   "TypeScript",
@@ -33,7 +30,6 @@ const ALLOWED = [
   "eBay",
   "macOS",
   "iOS",
-  "SmartHome",
   "BayLDA",
   "USt",
   "IdNr",

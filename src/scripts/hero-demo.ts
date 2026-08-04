@@ -7,9 +7,7 @@ const root = document.querySelector<HTMLElement>("[data-home-demo]");
 if (!root) {
   // Seite ohne Demo
 } else {
-  const toggles = [
-    ...root.querySelectorAll<HTMLButtonElement>("[data-demo-toggle]"),
-  ];
+  const toggles = [...root.querySelectorAll<HTMLButtonElement>("[data-demo-toggle]")];
   const wattEl = root.querySelector<HTMLElement>("[data-demo-watts]");
   const devicesEl = root.querySelector<HTMLElement>("[data-demo-devices]");
   const statusEl = root.querySelector<HTMLElement>("[data-demo-status]");

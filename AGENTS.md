@@ -1,13 +1,13 @@
 # Hinweise für Agents
 
-Statische Astro-Website für HomePowerPlus.de. Deutschsprachig, Duz-Form,
+Statische Astro-Website für Bootlabs. Deutschsprachig, Duz-Form,
 Dark-Theme mit dem Marken-Cyan `#1EEFF2`.
 
 ## Entwicklung
 
 ```
-npm run dev      # Dev-Server auf Port 4321
-npm run check    # alles, was auch die CI prüft
+npm run dev   # Dev-Server auf Port 4321
+npm run check # alles, was auch die CI prüft
 ```
 
 Nach inhaltlichen oder strukturellen Änderungen immer `npm run check` laufen

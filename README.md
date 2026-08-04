@@ -1,11 +1,14 @@
-# Homepp-web
+# Bootlabs Web
 
-Website für [HomePowerPlus.de](https://homepowerplus.de) – Smart Home, Netzwerk,
-Sicherheitstechnik und Elektroinstallation aus Geiselwind.
-
-Statisch generiert mit [Astro](https://astro.build) und
+Website für Bootlabs. Statisch generiert mit [Astro](https://astro.build) und
 [Tailwind CSS](https://tailwindcss.com). Kein Tracking, keine Cookies, keine
 externen CDNs – die Seite liefert alles vom eigenen Server aus.
+
+## Status
+
+Das Repo ist als Gerüst eingerichtet. Firmendaten, Leistungen, FAQ und Brand-
+Assets werden in `src/data/site.ts` bzw. `public/brand/` nachgeliefert.
+Leere Pflichtangaben werden bewusst nicht erfunden.
 
 ## Schnellstart
 
@@ -27,7 +30,7 @@ Node 22.12 oder neuer wird vorausgesetzt.
 | `npm run typecheck`        | `astro check` über alle Komponenten                                 |
 | `npm run format`           | Prettier über das Projekt                                           |
 | `npm run check:links`      | interne Links und Sprungmarken im Build prüfen                      |
-| `npm run check:typography` | zusammengeklebte Wörter im gerenderten Text finden                  |
+| `npm run check:typography` | zusammengeklebte Wörter im gerenderten HTML finden                  |
 | `npm run check:privacy`    | Build auf Ressourcen von Drittanbietern durchsuchen                 |
 | `npm run check:legal`      | Impressum und Datenschutzerklärung auf Pflichtinhalte prüfen        |
 | `npm run check`            | alles der Reihe nach – das, was auch die CI ausführt                |
@@ -43,7 +46,7 @@ src/
   pages/         index, impressum, datenschutz, 404
   scripts/       Client-JS: Scroll-Reveals, Canvas-Hero, Kontaktformular
   styles/        Design-Tokens und Utilities für Tailwind
-public/brand/    Original-Logos (Wordmark, HP+-Marke, Variante auf Hell)
+public/brand/    Logos (Wordmark, Marke)
 scripts/         Build- und Prüfskripte (Node, laufen ohne Netzwerk)
 ```
 
@@ -52,45 +55,26 @@ abgeleitet (`npm run assets`). Neue Logo-Dateien dort ablegen und Assets neu
 generieren.
 
 Inhalte werden nicht in den Komponenten gepflegt, sondern in
-[`src/data/site.ts`](src/data/site.ts). Leistungen, FAQ-Einträge, Prozessschritte
-und Kontaktdaten liegen dort als typisierte Arrays.
+[`src/data/site.ts`](src/data/site.ts).
 
 ## Rechtstexte
 
 Impressum und Datenschutzerklärung speisen sich aus dem Objekt `legal` in
-[`src/data/site.ts`](src/data/site.ts).
+[`src/data/site.ts`](src/data/site.ts). Fehlende Werte bleiben leer und werden
+nicht gerendert.
 
-Aktuell hinterlegt:
-
-- Anschrift (Firmensitz und ladungsfähig): Langäcker 15, 96160 Geiselwind
-- Kammer: Handwerkskammer für Unterfranken
-- Berufsbezeichnung: Elektrotechnikermeister (Verleihungsstaat Deutschland)
-- Umsatzsteuer: Kleinunternehmer nach § 19 UStG (keine USt-IdNr.)
-- Datenschutz-Aufsicht: BayLDA (Firmensitz Bayern)
-
-`hostingProvider` bleibt leer, bis der Host feststeht; die Datenschutzerklärung
-nennt dann die Kategorie statt des Namens (Art. 13 Abs. 1 lit. e DSGVO).
-
-`npm run check:legal` prüft Pflichtinhalte, DDG statt TMG, den
-Kleinunternehmer-/USt-Hinweis, Kammer und Berufsbezeichnung sowie die
+`npm run check:legal` prüft Pflichtinhalte, DDG statt TMG sowie die
 Kernangaben nach Art. 13 DSGVO. Ein Verweis auf die **OS-Plattform** lässt den
 Check fehlschlagen – die EU hat sie am 20.07.2025 abgeschaltet.
 
 `npm run check:privacy` durchsucht den Build nach Subressourcen fremder
-Herkunft. Solange nichts gefunden wird, stimmt die Zusage der
-Datenschutzerklärung, dass beim Aufruf keine Anfrage an einen fremden Server
-geht.
+Herkunft.
 
 ## Kontaktformular
 
-Ohne Konfiguration öffnet das Formular den Mailclient des Besuchers mit einer
-fertig ausgefüllten Nachricht. Das funktioniert überall, ist aber nicht
-besonders komfortabel.
-
-Standardmäßig postet das Formular auf **`/api/contact.php`** (liegt in
-`public/api/` und wird mit nach `dist/` kopiert). Das Skript sendet die Anfrage
-per PHP `mail()` an `info@homepp.de`. Auf Plesk muss PHP aktiv sein und der
-Mailversand für die Domain funktionieren (oft schon der Fall).
+Ohne Konfiguration öffnet das Formular den Mailclient des Besuchers. Standard
+ist **`/api/contact.php`** – Empfängeradresse dort setzen, sobald die
+Betriebs-E-Mail feststeht.
 
 ```bash
 # Optional überschreiben oder mailto-Fallback erzwingen:
@@ -98,23 +82,13 @@ Mailversand für die Domain funktionieren (oft schon der Fall).
 # PUBLIC_CONTACT_ENDPOINT=""
 ```
 
-Der Wert landet im ausgelieferten HTML. Das Formular hat ein Honeypot-Feld gegen
-Bots, ein einfaches Rate-Limit und verlangt die Datenschutz-Einwilligung.
-
 ## Deployment
 
-Der Build ist rein statisch. `npm run build` erzeugt `dist/`, das jeder
-Static-Host ausliefern kann (Netlify, Vercel, Cloudflare Pages, oder klassisch
-per FTP auf einen Webspace).
+`npm run build` erzeugt `dist/`.
 
-Zwei Punkte sind wichtig:
-
-- **`trailingSlash: "always"`** – Links lauten `/impressum/` und
-  `/datenschutz/`. Auf Plesk/Passenger liefert der Pfad ohne Slash einen 500;
-  `public/.htaccess` leitet Verzeichnisse zusätzlich auf die Slash-Variante um.
-- **`site` in `astro.config.mjs`** – steht auf `https://homepowerplus.de` und
-  bestimmt Canonical-URLs, Sitemap und Open-Graph-Bild. Bei einer anderen Domain
-  anpassen.
+- **`trailingSlash: "always"`** – Links lauten `/impressum/` und `/datenschutz/`.
+- **`site` in `astro.config.mjs`** – aktuell `https://bootlabs.de`; bei anderer
+  Domain anpassen (Canonical, Sitemap, Open Graph).
 
 ## Automationen
 
@@ -123,12 +97,6 @@ Zwei Punkte sind wichtig:
 | [`ci.yml`](.github/workflows/ci.yml)                       | Push, Pull Request | Format, Typen, Build, Link-, Typografie-, Datenschutz- und Rechtstext-Check, Lighthouse |
 | [`release-check.yml`](.github/workflows/release-check.yml) | manuell, Tag `v*`  | wie oben, schlägt aber zusätzlich bei offenen Platzhaltern fehl                      |
 
-Die Prüfskripte in `scripts/` laufen ohne Netzwerk gegen `dist/` und lassen sich
-jederzeit lokal ausführen.
-
 ## Barrierefreiheit und Motion
 
-Alle Animationen respektieren `prefers-reduced-motion`. Das Partikelnetz im Hero
-zeichnet dann ein Standbild statt zu animieren, Scroll-Reveals sind sofort
-sichtbar, das Logo-Laufband steht still. Der Hero-Canvas pausiert außerdem,
-sobald er aus dem Viewport scrollt oder der Tab in den Hintergrund wechselt.
+Alle Animationen respektieren `prefers-reduced-motion`.

@@ -6,7 +6,7 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://homepowerplus.de",
+  site: "https://bootlabs.de",
   // "always": Links enden auf /impressum/ – auf Plesk/Passenger liefert
   // /impressum ohne Slash einen 500, mit Slash die statische index.html.
   trailingSlash: "always",

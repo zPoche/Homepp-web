@@ -1,13 +1,15 @@
 /**
- * Erzeugt abgeleitete Bild-Assets aus den Original-Logos in public/brand/:
- *   public/og.png               – Social-Preview 1200x630 mit Wordmark
- *   public/apple-touch-icon.png – 180x180 aus der HP+-Marke
- *   public/favicon.ico          – 32x32 aus der HP+-Marke
- *   public/favicon.svg          – Kopie der Marken-SVG
+ * Erzeugt Brand- und abgeleitete Bild-Assets:
+ *   public/brand/logo-mark.png
+ *   public/brand/logo-wordmark.png
+ *   public/og.png
+ *   public/apple-touch-icon.png
+ *   public/favicon.ico
+ *   public/favicon.svg
  *
  * Läuft automatisch vor jedem Build (npm run assets / prebuild).
  */
-import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
@@ -18,6 +20,16 @@ const brandDir = resolve(publicDir, "brand");
 
 const BRAND = "#1eeff2";
 const INK = "#05080d";
+
+const markSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="${INK}"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="none" stroke="${BRAND}" stroke-width="2"/>
+  <text x="32" y="42" text-anchor="middle" font-family="Outfit, Inter, Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="${BRAND}">B</text>
+</svg>`;
+
+const wordmarkSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="192" viewBox="0 0 520 96">
+  <text x="0" y="68" font-family="Outfit, Inter, Helvetica, Arial, sans-serif" font-size="64" font-weight="700" letter-spacing="-1.5" fill="#f3f6f8">Bootlabs</text>
+</svg>`;
 
 const ogBaseSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
@@ -44,17 +56,11 @@ const ogBaseSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <rect x="0" y="0" width="1200" height="3" fill="url(#line)"/>
   <g font-family="Outfit, Inter, Helvetica, Arial, sans-serif">
-    <text x="88" y="196" font-size="26" font-weight="600" letter-spacing="6" fill="${BRAND}" fill-opacity="0.9">
-      ELEKTROTECHNIK · SMART HOME · NETZWERK
-    </text>
     <text x="88" y="404" font-size="42" font-weight="500" fill="#8a97a6" letter-spacing="-1">
-      Dein Zuhause, intelligent verkabelt.
+      Website · Bootlabs
     </text>
-    <text x="88" y="536" font-size="27" font-weight="500" fill="#5d6a79">
-      Geiselwind · Würzburg · Kitzingen
-    </text>
-    <text x="88" y="578" font-size="27" font-weight="600" fill="${BRAND}" fill-opacity="0.85">
-      homepowerplus.de
+    <text x="88" y="536" font-size="27" font-weight="600" fill="${BRAND}" fill-opacity="0.85">
+      bootlabs.de
     </text>
   </g>
   <g opacity="0.9">
@@ -93,10 +99,13 @@ async function renderIco(pngBuffer, file, size) {
 await mkdir(publicDir, { recursive: true });
 await mkdir(brandDir, { recursive: true });
 
-const markPng = await readFile(resolve(brandDir, "logo-mark.png"));
-const wordmarkPng = await readFile(resolve(brandDir, "logo-wordmark.png"));
+const markPng = await sharp(Buffer.from(markSvg)).png().toBuffer();
+const wordmarkPng = await sharp(Buffer.from(wordmarkSvg)).png().toBuffer();
 
-// OG: Basis + Original-Wordmark + Marke rechts
+await writeFile(resolve(brandDir, "logo-mark.png"), markPng);
+await writeFile(resolve(brandDir, "logo-wordmark.png"), wordmarkPng);
+await writeFile(resolve(brandDir, "logo-mark.svg"), markSvg);
+
 const wordmark = await sharp(wordmarkPng)
   .resize({ width: 560, withoutEnlargement: true })
   .png()
@@ -115,7 +124,6 @@ const og = await sharp(Buffer.from(ogBaseSvg))
   .toBuffer();
 await writeFile(resolve(publicDir, "og.png"), og);
 
-// Apple Touch: Marke auf dunklem Grund
 const apple = await sharp({
   create: {
     width: 180,
@@ -138,6 +146,8 @@ const icoSize = await renderIco(markPng, "favicon.ico", 32);
 await copyFile(resolve(brandDir, "logo-mark.svg"), resolve(publicDir, "favicon.svg"));
 
 for (const [name, size] of [
+  ["brand/logo-mark.png", markPng.length],
+  ["brand/logo-wordmark.png", wordmarkPng.length],
   ["og.png", og.length],
   ["apple-touch-icon.png", apple.length],
   ["favicon.ico", icoSize],

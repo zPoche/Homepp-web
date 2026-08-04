@@ -21,42 +21,58 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} | ${site.name}` : `${site.name} · ${site.tagline}`;
+const pageTitle = title
+  ? `${title} | ${site.name}`
+  : site.tagline
+    ? `${site.name} · ${site.tagline}`
+    : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
 const ogImage = new URL("/og.png", Astro.site ?? site.url).href;
 
-const localBusiness = {
+const organization: Record<string, unknown> = {
   "@context": "https://schema.org",
-  "@type": "Electrician",
+  "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.name,
-  description: site.description,
   url: site.url,
-  telephone: site.phone,
-  email: site.email,
   image: ogImage,
-  address: {
+};
+
+if (site.description) organization.description = site.description;
+if (site.phone) organization.telephone = site.phone;
+if (site.email) organization.email = site.email;
+if (site.street && site.city) {
+  organization.address = {
     "@type": "PostalAddress",
     streetAddress: site.street,
     postalCode: site.postalCode,
     addressLocality: site.city,
     addressCountry: site.country,
-  },
-  geo: {
+  };
+}
+if (site.geo.lat && site.geo.lng) {
+  organization.geo = {
     "@type": "GeoCoordinates",
     latitude: site.geo.lat,
     longitude: site.geo.lng,
-  },
-  areaServed: site.areaServed.map((n) => ({ "@type": "City", name: n })),
-  hasOfferCatalog: {
+  };
+}
+if (site.areaServed.length) {
+  organization.areaServed = site.areaServed.map((n) => ({
+    "@type": "City",
+    name: n,
+  }));
+}
+if (services.length) {
+  organization.hasOfferCatalog = {
     "@type": "OfferCatalog",
     name: "Leistungen",
     itemListElement: services.map((s) => ({
       "@type": "Offer",
       itemOffered: { "@type": "Service", name: s.title, description: s.teaser },
     })),
-  },
-};
+  };
+}
 ---
 
 <!doctype html>
@@ -85,15 +101,20 @@ const localBusiness = {
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <meta name="geo.region" content="DE-BY" />
-    <meta name="geo.placename" content={site.city} />
+    {
+      site.city && (
+        <>
+          <meta name="geo.placename" content={site.city} />
+        </>
+      )
+    }
 
     {
       structuredData && (
         <script
           is:inline
           type="application/ld+json"
-          set:html={JSON.stringify(localBusiness)}
+          set:html={JSON.stringify(organization)}
         />
       )
     }

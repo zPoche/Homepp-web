@@ -9,8 +9,7 @@ const { provider, dataProtectionAuthority: authority } = legal;
  * Relatives /api/contact.php bleibt auf dem eigenen Hosting.
  */
 const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const contactEndpoint =
-  configured === "" ? "" : (configured ?? "/api/contact.php");
+const contactEndpoint = configured === "" ? "" : (configured ?? "/api/contact.php");
 let contactEndpointHost = "";
 try {
   if (/^https?:\/\//i.test(contactEndpoint)) {
@@ -19,8 +18,7 @@ try {
 } catch {
   contactEndpointHost = "";
 }
-const usesOwnMailEndpoint =
-  Boolean(contactEndpoint) && !contactEndpointHost;
+const usesOwnMailEndpoint = Boolean(contactEndpoint) && !contactEndpointHost;
 ---
 
 <Legal
@@ -39,11 +37,31 @@ const usesOwnMailEndpoint =
     7 DSGVO ist:
   </p>
   <p>
-    <strong>{provider.name}</strong><br />
+    <strong>{provider.name || "TODO_IMPRESSUM: Name"}</strong><br />
     {site.legalName}<br />
-    {`${site.street}, ${site.postalCode} ${site.city}`}<br />
-    E-Mail: <a href={`mailto:${site.email}`}>{site.email}</a><br />
-    Telefon: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+    {
+      site.street || site.city
+        ? `${site.street}, ${site.postalCode} ${site.city}`
+            .replace(/^,\s*|,\s*$/g, "")
+            .trim()
+        : "TODO_IMPRESSUM: Anschrift"
+    }<br />
+    E-Mail:{" "}
+    {
+      site.email ? (
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      ) : (
+        <a href="mailto:">TODO_IMPRESSUM: E-Mail</a>
+      )
+    }
+    {
+      site.phone ? (
+        <>
+          <br />
+          Telefon: <a href={`tel:${site.phoneHref}`}>{site.phone}</a>
+        </>
+      ) : null
+    }
   </p>
   <p>
     Ein Datenschutzbeauftragter ist nicht bestellt, da die Voraussetzungen des § 38 BDSG
@@ -151,8 +169,8 @@ const usesOwnMailEndpoint =
       <p>
         Das Formular wird auf unserem eigenen Webspace verarbeitet und per E-Mail an uns
         zugestellt. Es kommt kein externer Formulardienst zum Einsatz. Technisch fallen
-        dabei die üblichen Server-Logdaten (z.&nbsp;B. IP-Adresse, Zeitpunkt) beim Hosting
-        an.
+        dabei die üblichen Server-Logdaten (z.&nbsp;B. IP-Adresse, Zeitpunkt) beim
+        Hosting an.
       </p>
     ) : (
       <p>
@@ -200,8 +218,8 @@ const usesOwnMailEndpoint =
     (Art. 77 DSGVO). Für uns zuständig ist:
   </p>
   <p>
-    {authority.name}<br />
-    {authority.address}
+    {authority.name || "TODO_IMPRESSUM: Datenschutz-Aufsichtsbehörde"}<br />
+    {authority.address || "TODO_IMPRESSUM: Anschrift der Aufsichtsbehörde"}
   </p>
 
   <h2>8. Änderungen dieser Datenschutzerklärung</h2>

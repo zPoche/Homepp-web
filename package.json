@@ -1,9 +1,9 @@
 {
-  "name": "homepp-web",
-  "description": "Website für HomePowerPlus.de – Smart Home, Netzwerk und Elektrotechnik aus Geiselwind",
+  "name": "bootlabs-web",
+  "description": "Website für Bootlabs – statisch generiert mit Astro",
   "type": "module",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "engines": {
     "node": ">=22.12.0"
   },

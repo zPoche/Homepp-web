@@ -60,7 +60,7 @@ if (form) {
     data.delete("company");
 
     if (!endpoint) {
-      const subject = `Anfrage über homepowerplus.de: ${data.get("topic") || "Allgemein"}`;
+      const subject = `Anfrage über bootlabs.de: ${data.get("topic") || "Allgemein"}`;
       const body = [
         `Name: ${data.get("name")}`,
         `E-Mail: ${data.get("email")}`,

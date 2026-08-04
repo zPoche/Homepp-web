@@ -7,31 +7,36 @@ import { site, services } from "../data/site";
  * Mit PUBLIC_CONTACT_ENDPOINT überschreibbar; leerer String erzwingt mailto-Fallback.
  */
 const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const endpoint =
-  configured === "" ? "" : (configured ?? "/api/contact.php");
+const endpoint = configured === "" ? "" : (configured ?? "/api/contact.php");
 
 const channels = [
-  {
-    icon: "phone" as const,
-    label: "Telefon",
-    value: site.phone,
-    href: `tel:${site.phoneHref}`,
-  },
-  {
-    icon: "mail" as const,
-    label: "E-Mail",
-    value: site.email,
-    href: `mailto:${site.email}`,
-  },
-  {
-    icon: "pin" as const,
-    label: "Adresse",
-    value: `${site.street}, ${site.postalCode} ${site.city}`,
-    href: `https://www.openstreetmap.org/search?query=${encodeURIComponent(
-      `${site.street}, ${site.postalCode} ${site.city}`,
-    )}`,
-  },
-];
+  site.phone
+    ? {
+        icon: "phone" as const,
+        label: "Telefon",
+        value: site.phone,
+        href: `tel:${site.phoneHref}`,
+      }
+    : null,
+  site.email
+    ? {
+        icon: "mail" as const,
+        label: "E-Mail",
+        value: site.email,
+        href: `mailto:${site.email}`,
+      }
+    : null,
+  site.street && site.city
+    ? {
+        icon: "pin" as const,
+        label: "Adresse",
+        value: `${site.street}, ${site.postalCode} ${site.city}`.trim(),
+        href: `https://www.openstreetmap.org/search?query=${encodeURIComponent(
+          `${site.street}, ${site.postalCode} ${site.city}`,
+        )}`,
+      }
+    : null,
+].filter((channel): channel is NonNullable<typeof channel> => Boolean(channel));
 ---
 
 <section id="kontakt" class="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
@@ -42,8 +47,6 @@ const channels = [
   </div>
 
   <div class="container-x relative">
-    <!-- min-w-0: ohne das zwingt die Mindestbreite des Formulars die
-         Grid-Spalte über die Viewport-Breite hinaus -->
     <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
       <div class="min-w-0">
         <p class="eyebrow" data-reveal>Kontakt</p>
@@ -59,47 +62,54 @@ const channels = [
           data-reveal
           style="--reveal-delay:140ms"
         >
-          Ob konkrete Planung oder erste Idee: Das Erstgespräch ist kostenlos und
-          unverbindlich. Wir melden uns innerhalb eines Werktages zurück.
+          Ob konkrete Planung oder erste Idee: Schreib uns. Wir melden uns zurück.
         </p>
 
-        <ul class="mt-10 space-y-3">
-          {
-            channels.map((channel, i) => (
-              <li data-reveal style={`--reveal-delay:${180 + i * 80}ms`}>
-                <a
-                  href={channel.href}
-                  class="glass spotlight group hover:border-brand-400/30 flex items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5"
-                  rel={
-                    channel.href.startsWith("http") ? "noopener noreferrer" : undefined
-                  }
-                  target={channel.href.startsWith("http") ? "_blank" : undefined}
-                >
-                  <span class="bg-brand-400/10 text-brand-400 ring-brand-400/20 inline-flex size-11 shrink-0 items-center justify-center rounded-xl ring-1">
-                    <Icon name={channel.icon} class="size-5" />
-                  </span>
-                  <span class="min-w-0">
-                    <span class="text-ink-500 block text-xs tracking-widest uppercase">
-                      {channel.label}
+        {
+          channels.length > 0 && (
+            <ul class="mt-10 space-y-3">
+              {channels.map((channel, i) => (
+                <li data-reveal style={`--reveal-delay:${180 + i * 80}ms`}>
+                  <a
+                    href={channel.href}
+                    class="glass spotlight group hover:border-brand-400/30 flex items-center gap-4 rounded-2xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5"
+                    rel={
+                      channel.href.startsWith("http")
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    target={channel.href.startsWith("http") ? "_blank" : undefined}
+                  >
+                    <span class="bg-brand-400/10 text-brand-400 ring-brand-400/20 inline-flex size-11 shrink-0 items-center justify-center rounded-xl ring-1">
+                      <Icon name={channel.icon} class="size-5" />
                     </span>
-                    <span class="group-hover:text-brand-300 block font-semibold break-words transition-colors">
-                      {channel.value}
+                    <span class="min-w-0">
+                      <span class="text-ink-500 block text-xs tracking-widest uppercase">
+                        {channel.label}
+                      </span>
+                      <span class="group-hover:text-brand-300 block font-semibold break-words transition-colors">
+                        {channel.value}
+                      </span>
                     </span>
-                  </span>
-                  <Icon
-                    name="arrow"
-                    class="text-ink-500 group-hover:text-brand-400 ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1"
-                  />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+                    <Icon
+                      name="arrow"
+                      class="text-ink-500 group-hover:text-brand-400 ml-auto size-4 shrink-0 transition-all duration-300 group-hover:translate-x-1"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
 
-        <p class="text-ink-500 mt-8 flex items-center gap-2 text-sm" data-reveal>
-          <Icon name="clock" class="size-4" />
-          {site.openingHours}
-        </p>
+        {
+          site.openingHours && (
+            <p class="text-ink-500 mt-8 flex items-center gap-2 text-sm" data-reveal>
+              <Icon name="clock" class="size-4" />
+              {site.openingHours}
+            </p>
+          )
+        }
       </div>
 
       <div class="min-w-0" data-reveal style="--reveal-delay:160ms">
@@ -112,7 +122,6 @@ const channels = [
           method="post"
           novalidate
         >
-          <!-- Honeypot gegen Bots -->
           <div class="absolute -left-[9999px]" aria-hidden="true">
             <label for="company">Firma nicht ausfüllen</label>
             <input
@@ -194,8 +203,7 @@ const channels = [
                 rows="5"
                 required
                 class="focus:border-brand-400/50 focus:bg-brand-400/5 placeholder:text-ink-500 w-full resize-y rounded-xl border border-white/10 bg-white/4 px-4 py-3 text-base transition-colors outline-none"
-                placeholder="Worum geht es? Neubau, Sanierung, konkrete Frage …"
-              ></textarea>
+                placeholder="Worum geht es?"></textarea>
             </div>
 
             <div class="sm:col-span-2">
@@ -257,14 +265,12 @@ const channels = [
 </section>
 
 <style>
-  /* appearance-none entfernt auch den Pfeil - hier kommt er als Hintergrund zurück */
   .select-chevron {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%238a97a6' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 1rem center;
   }
 
-  /* Ohne das rendern Chrome und Firefox die Optionen hell auf hell */
   .select-chevron option {
     background-color: #111823;
     color: #f3f6f8;

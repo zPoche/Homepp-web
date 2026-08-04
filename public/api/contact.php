@@ -11,8 +11,10 @@ header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: no-store');
 
-const MAIL_TO = 'info@homepp.de';
-const MAIL_FROM = 'noreply@homepowerplus.de';
+/* Empfänger setzen, sobald die Betriebs-E-Mail feststeht. */
+const MAIL_TO = '';
+const MAIL_FROM = 'noreply@bootlabs.de';
+const MAIL_FROM_NAME = 'Bootlabs Website';
 const MAX_LEN = [
     'name' => 120,
     'email' => 190,
@@ -73,9 +75,13 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 // Einfaches Rate-Limit: max. 5 Anfragen / IP / Stunde
 $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+if (MAIL_TO === '') {
+    respond(503, ['ok' => false, 'error' => 'mail_not_configured']);
+}
+
 $rateFile = rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR)
     . DIRECTORY_SEPARATOR
-    . 'hpp-contact-'
+    . 'bootlabs-contact-'
     . hash('sha256', $ip)
     . '.json';
 $now = time();
@@ -101,7 +107,7 @@ $hits[] = $now;
 @file_put_contents($rateFile, json_encode($hits), LOCK_EX);
 
 $subjectTopic = $topic !== '' ? $topic : 'Allgemein';
-$subject = clean_header('Anfrage über homepowerplus.de: ' . $subjectTopic);
+$subject = clean_header('Anfrage über bootlabs.de: ' . $subjectTopic);
 
 $body = implode("\n", [
     'Neue Anfrage über das Kontaktformular',
@@ -123,9 +129,9 @@ $headers = [
     'MIME-Version: 1.0',
     'Content-Type: text/plain; charset=UTF-8',
     'Content-Transfer-Encoding: 8bit',
-    'From: HomePower+ Website <' . MAIL_FROM . '>',
+    'From: ' . MAIL_FROM_NAME . ' <' . MAIL_FROM . '>',
     'Reply-To: ' . $replyTo,
-    'X-Mailer: HomePowerPlus-Contact/1.0',
+    'X-Mailer: Bootlabs-Contact/1.0',
 ];
 
 $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
