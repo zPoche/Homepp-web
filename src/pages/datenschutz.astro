@@ -9,8 +9,7 @@ const { provider, dataProtectionAuthority: authority } = legal;
  * Relatives /api/contact.php bleibt auf dem eigenen Hosting.
  */
 const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const contactEndpoint =
-  configured === "" ? "" : (configured ?? "/api/contact.php");
+const contactEndpoint = configured === "" ? "" : (configured ?? "/api/contact.php");
 let contactEndpointHost = "";
 try {
   if (/^https?:\/\//i.test(contactEndpoint)) {
@@ -19,8 +18,7 @@ try {
 } catch {
   contactEndpointHost = "";
 }
-const usesOwnMailEndpoint =
-  Boolean(contactEndpoint) && !contactEndpointHost;
+const usesOwnMailEndpoint = Boolean(contactEndpoint) && !contactEndpointHost;
 ---
 
 <Legal
@@ -151,8 +149,8 @@ const usesOwnMailEndpoint =
       <p>
         Das Formular wird auf unserem eigenen Webspace verarbeitet und per E-Mail an uns
         zugestellt. Es kommt kein externer Formulardienst zum Einsatz. Technisch fallen
-        dabei die üblichen Server-Logdaten (z.&nbsp;B. IP-Adresse, Zeitpunkt) beim Hosting
-        an.
+        dabei die üblichen Server-Logdaten (z.&nbsp;B. IP-Adresse, Zeitpunkt) beim
+        Hosting an.
       </p>
     ) : (
       <p>

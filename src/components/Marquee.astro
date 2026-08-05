@@ -1,26 +1,29 @@
 ---
 import { techStack } from "../data/site";
 
-const items = [...techStack, ...techStack];
+const labels = techStack;
+const items = [...labels, ...labels];
 ---
 
 <section
-  class="bg-ink-900/40 border-y border-white/6 py-7"
+  class="hero-marquee border-t-brand-400/25 border-b-white/7 bg-ink-950/70 relative z-10 border-t border-b py-4 backdrop-blur-md"
   aria-label="Hersteller und Systeme"
 >
-  <div class="mask-fade-x overflow-hidden">
+  <div class="overflow-hidden">
     <ul
-      class="flex w-max items-center gap-12 pr-12 will-change-transform"
-      style="animation: marquee 56s linear infinite"
+      class="hero-marquee-track flex w-max items-center will-change-transform"
+      style="animation: marquee 48s linear infinite"
     >
       {
         items.map((item, i) => (
           <li
-            class="text-ink-500 hover:text-brand-300 flex shrink-0 items-center gap-3 text-sm font-semibold tracking-wide whitespace-nowrap transition-colors duration-300"
-            aria-hidden={i >= techStack.length ? "true" : undefined}
+            class="text-ink-50/85 flex shrink-0 items-center text-[0.8rem] font-medium tracking-[0.14em] whitespace-nowrap uppercase"
+            aria-hidden={i >= labels.length ? "true" : undefined}
           >
-            <span class="bg-brand-400/50 size-1.5 rounded-full" />
-            {item}
+            <span class="px-4 sm:px-5">{item}</span>
+            <span class="text-brand-400/55 select-none" aria-hidden="true">
+              /
+            </span>
           </li>
         ))
       }
@@ -29,17 +32,24 @@ const items = [...techStack, ...techStack];
 </section>
 
 <style>
-  ul:hover {
+  .hero-marquee-track:hover {
     animation-play-state: paused;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    ul {
+    .hero-marquee-track {
       animation: none !important;
       flex-wrap: wrap;
       width: 100%;
+      max-width: 80rem;
+      margin-inline: auto;
       justify-content: center;
-      gap: 1.5rem 2.5rem;
+      row-gap: 0.5rem;
+      padding-inline: 1.25rem;
+    }
+
+    .hero-marquee-track li[aria-hidden="true"] {
+      display: none;
     }
   }
 </style>

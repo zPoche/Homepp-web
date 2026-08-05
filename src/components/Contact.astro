@@ -7,8 +7,7 @@ import { site, services } from "../data/site";
  * Mit PUBLIC_CONTACT_ENDPOINT überschreibbar; leerer String erzwingt mailto-Fallback.
  */
 const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
-const endpoint =
-  configured === "" ? "" : (configured ?? "/api/contact.php");
+const endpoint = configured === "" ? "" : (configured ?? "/api/contact.php");
 
 const channels = [
   {
