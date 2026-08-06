@@ -84,14 +84,7 @@ export type Service = {
 };
 
 export type IconName =
-  | "home"
-  | "wifi"
-  | "shield"
-  | "server"
-  | "gauge"
-  | "cube"
-  | "spark"
-  | "bolt";
+  "home" | "wifi" | "shield" | "server" | "gauge" | "cube" | "spark" | "bolt";
 
 export const services: Service[] = [
   {
