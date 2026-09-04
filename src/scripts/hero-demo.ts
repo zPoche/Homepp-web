@@ -34,8 +34,8 @@ if (!root) {
       toggle.classList.toggle("bg-brand-400/80", on);
       toggle.classList.toggle("bg-white/12", !on);
       const knob = toggle.querySelector<HTMLElement>("[data-demo-knob]");
-      knob?.classList.toggle("translate-x-[1.4rem]", on);
-      knob?.classList.toggle("translate-x-[0.15rem]", !on);
+      knob?.classList.toggle("translate-x-[1.7rem]", on);
+      knob?.classList.toggle("translate-x-[0.2rem]", !on);
     }
 
     if (wattEl) wattEl.textContent = `${watts} W`;
