@@ -41,7 +41,7 @@
   :root {
     color-scheme: dark;
     --nav-h: 5.25rem;
-    scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+    scroll-padding-top: calc(var(--nav-h) + 1.5rem + env(safe-area-inset-top, 0px));
   }
 
   html {
