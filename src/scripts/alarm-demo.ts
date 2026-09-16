@@ -55,9 +55,13 @@ if (!root) {
   const statusEl = root.querySelector<HTMLElement>("[data-demo-status]");
   const armBtn = root.querySelector<HTMLButtonElement>("[data-demo-arm]");
   const ackBtn = root.querySelector<HTMLButtonElement>("[data-demo-ack]");
-  const doorBtn = root.querySelector<HTMLButtonElement>("[data-demo-door]");
-  const windowBtn = root.querySelector<HTMLButtonElement>("[data-demo-window]");
-  const cameraBtn = root.querySelector<HTMLButtonElement>("[data-demo-camera]");
+  const doorBtns = [...root.querySelectorAll<HTMLButtonElement>("[data-demo-door]")];
+  const windowBtns = [
+    ...root.querySelectorAll<HTMLButtonElement>("[data-demo-window]"),
+  ];
+  const cameraBtns = [
+    ...root.querySelectorAll<HTMLButtonElement>("[data-demo-camera]"),
+  ];
   const logEl = root.querySelector<HTMLElement>("[data-demo-log]");
   const sirenLabel = root.querySelector<HTMLElement>("[data-demo-siren-label]");
   const txLabel = root.querySelector<HTMLElement>("[data-demo-tx-label]");
@@ -114,15 +118,25 @@ if (!root) {
     root.toggleAttribute("data-alarm", alarm);
     root.toggleAttribute("data-sending", alarm);
 
-    if (doorBtn) {
-      doorBtn.setAttribute("aria-pressed", doorOpen ? "true" : "false");
-      doorBtn.textContent = doorOpen ? copy.house.doorOpen : copy.house.doorClosed;
+    for (const btn of doorBtns) {
+      btn.setAttribute("aria-pressed", doorOpen ? "true" : "false");
+      btn.setAttribute(
+        "aria-label",
+        doorOpen ? copy.house.doorOpen : copy.house.doorClosed,
+      );
+      if (!btn.classList.contains("demo-door")) {
+        btn.textContent = doorOpen ? copy.house.doorOpen : copy.house.doorClosed;
+      }
     }
-    if (windowBtn) {
-      windowBtn.setAttribute("aria-pressed", windowOpen ? "true" : "false");
-      windowBtn.textContent = windowOpen
-        ? copy.house.windowOpen
-        : copy.house.windowClosed;
+    for (const btn of windowBtns) {
+      btn.setAttribute("aria-pressed", windowOpen ? "true" : "false");
+      btn.setAttribute(
+        "aria-label",
+        windowOpen ? copy.house.windowOpen : copy.house.windowClosed,
+      );
+      if (!btn.classList.contains("demo-window")) {
+        btn.textContent = windowOpen ? copy.house.windowOpen : copy.house.windowClosed;
+      }
     }
     if (armBtn) {
       armBtn.setAttribute("aria-pressed", armed ? "true" : "false");
@@ -227,11 +241,20 @@ if (!root) {
     });
   }
 
-  doorBtn?.addEventListener("click", () => setDoor(!doorOpen));
-  windowBtn?.addEventListener("click", () => setWindow(!windowOpen));
+  for (const btn of doorBtns) {
+    btn.addEventListener("click", () => setDoor(!doorOpen));
+  }
+  for (const btn of windowBtns) {
+    btn.addEventListener("click", () => setWindow(!windowOpen));
+  }
   armBtn?.addEventListener("click", () => setArmed(!armed));
   ackBtn?.addEventListener("click", ack);
-  cameraBtn?.addEventListener("click", () => detect("person"));
+  for (const btn of cameraBtns) {
+    btn.addEventListener("click", () => {
+      setTab("video");
+      detect("person");
+    });
+  }
 
   for (const btn of root.querySelectorAll<HTMLButtonElement>("[data-demo-detect]")) {
     btn.addEventListener("click", () => {
