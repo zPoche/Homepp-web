@@ -347,6 +347,7 @@ import { demo } from "../data/site";
 
   .demo-front {
     inset: 0;
+    overflow: visible;
     background: linear-gradient(180deg, #6b7d94 0%, #3d4b5e 58%, #2a3546 100%);
     border: 1px solid rgb(92 241 247 / 0.28);
     box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
@@ -400,20 +401,21 @@ import { demo } from "../data/site";
   .demo-window {
     position: absolute;
     transform-style: preserve-3d;
+    perspective: 420px;
   }
 
   .demo-door {
-    left: 0.85rem;
+    left: 0.7rem;
     bottom: 0;
-    width: 2.15rem;
-    height: 3.85rem;
+    width: 2.35rem;
+    height: 4.15rem;
   }
 
   .demo-window {
-    right: 0.85rem;
-    top: 1.35rem;
-    width: 2.55rem;
-    height: 2.15rem;
+    right: 0.7rem;
+    top: 1.2rem;
+    width: 2.75rem;
+    height: 2.3rem;
   }
 
   .demo-opening {
@@ -428,8 +430,21 @@ import { demo } from "../data/site";
     position: absolute;
     inset: 0;
     transform-origin: left center;
-    transition: transform 0.5s var(--ease-out-expo);
-    box-shadow: 0 8px 16px rgb(0 0 0 / 0.35);
+    transform-style: preserve-3d;
+    transition: transform 0.55s var(--ease-out-expo);
+    box-shadow: 0 10px 18px rgb(0 0 0 / 0.4);
+  }
+
+  .demo-leaf::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 0.42rem;
+    height: 100%;
+    background: #0a0f17;
+    transform: rotateY(90deg);
+    transform-origin: left center;
   }
 
   .demo-door-leaf {
@@ -450,33 +465,21 @@ import { demo } from "../data/site";
   }
 
   .demo-window-leaf {
-    background: linear-gradient(180deg, rgb(30 239 242 / 0.28), #0e3a42);
+    background:
+      linear-gradient(rgb(92 241 247 / 0.55), rgb(92 241 247 / 0.55)) center / 1px 100%
+        no-repeat,
+      linear-gradient(rgb(92 241 247 / 0.55), rgb(92 241 247 / 0.55)) center / 100% 1px
+        no-repeat,
+      linear-gradient(180deg, rgb(30 239 242 / 0.28), #0e3a42);
     border: 2px solid #5cf1f7;
   }
 
-  .demo-window-leaf::before,
-  .demo-window-leaf::after {
-    content: "";
-    position: absolute;
-    background: rgb(92 241 247 / 0.55);
-  }
-
-  .demo-window-leaf::before {
-    inset: 0 auto 0 50%;
-    width: 1px;
-  }
-
-  .demo-window-leaf::after {
-    inset: 50% 0 auto;
-    height: 1px;
-  }
-
   [data-alarm-demo][data-door-open] .demo-door-leaf {
-    transform: rotateY(-78deg);
+    transform: rotateY(76deg);
   }
 
   [data-alarm-demo][data-window-open] .demo-window-leaf {
-    transform: rotateY(-70deg);
+    transform: rotateY(68deg);
   }
 
   .demo-siren {
