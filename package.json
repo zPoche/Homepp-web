@@ -1,6 +1,6 @@
 {
   "name": "homepp-web",
-  "description": "Website für HomePowerPlus.de – Smart Home, Netzwerk und Elektrotechnik aus Geiselwind",
+  "description": "Website für HomePowerPlus.de – Alarmanlagen und IT aus Geiselwind",
   "type": "module",
   "private": true,
   "version": "1.0.0",

@@ -1,7 +1,11 @@
 # Homepp-web
 
-Website für [HomePowerPlus.de](https://homepowerplus.de) – Smart Home, Netzwerk,
-Sicherheitstechnik und Elektroinstallation aus Geiselwind.
+Website für [HomePowerPlus.de](https://homepowerplus.de) – Alarmanlagen und IT
+aus Geiselwind.
+
+Der öffentliche Scope ist bewusst schmal: Einbruchmeldeanlagen, Video/Zutritt
+und IT. Kein Smart Home, keine KI, keine allgemeine Elektrotechnik. Der Stand
+vor dieser Verengung liegt unter [`backups/`](backups/).
 
 Statisch generiert mit [Astro](https://astro.build) und
 [Tailwind CSS](https://tailwindcss.com). Kein Tracking, keine Cookies, keine

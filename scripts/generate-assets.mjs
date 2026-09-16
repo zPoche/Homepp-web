@@ -45,10 +45,10 @@ const ogBaseSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="
   <rect x="0" y="0" width="1200" height="3" fill="url(#line)"/>
   <g font-family="Outfit, Inter, Helvetica, Arial, sans-serif">
     <text x="88" y="196" font-size="26" font-weight="600" letter-spacing="6" fill="${BRAND}" fill-opacity="0.9">
-      ELEKTROTECHNIK · SMART HOME · NETZWERK
+      ALARMANLAGEN · VIDEO · IT
     </text>
     <text x="88" y="404" font-size="42" font-weight="500" fill="#8a97a6" letter-spacing="-1">
-      Dein Zuhause, intelligent verkabelt.
+      Dein Zuhause, gesichert und vernetzt.
     </text>
     <text x="88" y="536" font-size="27" font-weight="500" fill="#5d6a79">
       Geiselwind · Würzburg · Kitzingen
