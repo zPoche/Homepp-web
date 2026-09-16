@@ -67,54 +67,218 @@ import { demo } from "../data/site";
         class="demo-stage relative rounded-2xl border border-white/10 bg-[#0c121c]"
         data-demo-house
       >
-        <div
-          class="demo-scene"
-          role="img"
-          aria-label="Dreidimensionales Giebelhaus. Tür und Fenster sind anklickbar."
-        >
-          <div class="demo-ground" aria-hidden="true"></div>
-          <div class="demo-house">
-            <div class="demo-roof-l" aria-hidden="true"></div>
-            <div class="demo-roof-r" aria-hidden="true"></div>
-            <div class="demo-chimney" aria-hidden="true"></div>
-            <div class="demo-back" aria-hidden="true"></div>
-            <div class="demo-side" data-demo-tx>
-              <span class="demo-side-window" aria-hidden="true"></span>
-              <span class="demo-tx"></span>
-            </div>
-            <div class="demo-front">
-              <span class="demo-gable" aria-hidden="true"></span>
-              <span class="demo-eave" aria-hidden="true"></span>
-              <button
-                type="button"
-                class="demo-door"
-                data-demo-door
-                aria-pressed="false"
-                aria-label={demo.house.doorClosed}
-              >
-                <span class="demo-opening" aria-hidden="true"></span>
-                <span class="demo-leaf demo-door-leaf" data-door-leaf></span>
-              </button>
-              <span class="demo-step" aria-hidden="true"></span>
-              <button
-                type="button"
-                class="demo-window"
-                data-demo-window
-                aria-pressed="false"
-                aria-label={demo.house.windowClosed}
-              >
-                <span class="demo-opening" aria-hidden="true"></span>
-                <span class="demo-leaf demo-window-leaf" data-window-leaf></span>
-              </button>
-              <span class="demo-siren" data-demo-siren aria-hidden="true"></span>
-              <button
-                type="button"
-                class="demo-camera"
-                data-demo-camera
-                aria-label={demo.house.camera}
-              >
-              </button>
-            </div>
+        <div class="demo-scene">
+          <div class="demo-model">
+            <svg
+              class="demo-house-svg"
+              viewBox="0 0 270 226"
+              role="img"
+              aria-label="Einfamilienhaus mit Satteldach. Tür und Fenster sind anklickbar."
+            >
+              <defs>
+                <linearGradient id="demo-wall-front" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#c5d0dc"></stop>
+                  <stop offset="1" stop-color="#8b97a8"></stop>
+                </linearGradient>
+                <linearGradient id="demo-wall-side" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#6d7b8d"></stop>
+                  <stop offset="1" stop-color="#3d4a5c"></stop>
+                </linearGradient>
+                <linearGradient id="demo-roof-r" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#4a5d73"></stop>
+                  <stop offset="0.45" stop-color="#243044"></stop>
+                  <stop offset="1" stop-color="#141b26"></stop>
+                </linearGradient>
+                <linearGradient id="demo-roof-l" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#5a6e84"></stop>
+                  <stop offset="1" stop-color="#1b2430"></stop>
+                </linearGradient>
+                <pattern
+                  id="demo-tiles"
+                  width="10"
+                  height="7"
+                  patternUnits="userSpaceOnUse"
+                  patternTransform="rotate(-32 0 0)"
+                >
+                  <path
+                    d="M0 6.2 H10"
+                    fill="none"
+                    stroke="#1eeff2"
+                    stroke-opacity="0.09"
+                    stroke-width="0.7"></path>
+                  <path
+                    d="M0 2.2 H10"
+                    fill="none"
+                    stroke="#05080d"
+                    stroke-opacity="0.35"
+                    stroke-width="0.6"></path>
+                </pattern>
+                <linearGradient id="demo-open-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1eeff2"></stop>
+                  <stop offset="1" stop-color="#0a3a40"></stop>
+                </linearGradient>
+              </defs>
+
+              <ellipse
+                class="demo-ground"
+                cx="138"
+                cy="210"
+                rx="118"
+                ry="16"
+                fill="rgb(0 0 0 / 0.55)"></ellipse>
+              <path
+                d="M58 201 C72 216 118 222 148 218 C120 224 64 218 52 204 Z"
+                fill="#1b2430"></path>
+              <ellipse cx="32" cy="200" rx="16" ry="9" fill="#1a2c28"></ellipse>
+              <ellipse cx="22" cy="204" rx="10" ry="6" fill="#152420"></ellipse>
+              <ellipse cx="236" cy="176" rx="18" ry="9" fill="#1a2c28"></ellipse>
+
+              <polygon points="103,162 235,166 235,84 103,80" fill="#243044"></polygon>
+              <polygon
+                points="176,202 235,166 235,84 176,120"
+                fill="url(#demo-wall-side)"
+                stroke="#1eeff2"
+                stroke-opacity="0.16"
+                stroke-width="1"></polygon>
+              <polygon
+                points="44,198 176,202 176,120 110,58 44,116"
+                fill="url(#demo-wall-front)"
+                stroke="#1eeff2"
+                stroke-opacity="0.22"
+                stroke-width="1.1"></polygon>
+              <polygon
+                points="44,198 176,202 176,190 44,186"
+                fill="#5c6b7d"
+                opacity="0.45"></polygon>
+
+              <polygon
+                points="110,58 169,22 103,80 44,116"
+                fill="url(#demo-roof-l)"
+                stroke="#8aa0b6"
+                stroke-opacity="0.28"
+                stroke-width="1"></polygon>
+              <polygon
+                points="110,58 176,120 235,84 169,22"
+                fill="url(#demo-roof-r)"
+                stroke="#1eeff2"
+                stroke-opacity="0.2"
+                stroke-width="1.1"></polygon>
+              <polygon points="110,58 176,120 235,84 169,22" fill="url(#demo-tiles)"
+              ></polygon>
+              <path
+                d="M110 58 L169 22"
+                fill="none"
+                stroke="#0a0f17"
+                stroke-width="3"
+                stroke-linecap="round"></path>
+              <path
+                d="M44 116 L110 58 L176 120"
+                fill="none"
+                stroke="#0f1724"
+                stroke-width="3.2"
+                stroke-linecap="round"></path>
+
+              <polygon points="168,70 185,73 185,18 168,16" fill="#6b7d90"></polygon>
+              <polygon points="185,73 198,64 198,12 185,18" fill="#3d4a5c"></polygon>
+              <polygon
+                points="166,16 183,18 196,10 179,8"
+                fill="#121820"
+                stroke="#1eeff2"
+                stroke-opacity="0.2"
+                stroke-width="0.8"></polygon>
+
+              <circle
+                cx="110"
+                cy="86"
+                r="8"
+                fill="#0e3a42"
+                stroke="#5cf1f7"
+                stroke-width="1.6"></circle>
+              <path
+                d="M110 78 V94 M102 86 H118"
+                fill="none"
+                stroke="#5cf1f7"
+                stroke-opacity="0.7"
+                stroke-width="1"></path>
+
+              <polygon
+                points="195,133 214,121 214,149 195,161"
+                fill="#0e3a42"
+                stroke="#5cf1f7"
+                stroke-width="1.5"></polygon>
+              <path
+                d="M204.5 127 V155 M195 147 L214 135"
+                fill="none"
+                stroke="#5cf1f7"
+                stroke-opacity="0.65"
+                stroke-width="1"></path>
+
+              <polygon points="58,200 97,202 102,208 53,206" fill="#121820"></polygon>
+              <polygon points="63,143 91,145 91,201 63,199" fill="url(#demo-open-fill)"
+              ></polygon>
+              <polygon
+                points="127,141 161,142 161,170 127,169"
+                fill="url(#demo-open-fill)"></polygon>
+
+              <g class="demo-siren" data-demo-siren>
+                <rect
+                  x="46"
+                  y="104"
+                  width="11"
+                  height="9"
+                  rx="1.5"
+                  fill="#111823"
+                  stroke="#1eeff2"
+                  stroke-width="1.2"></rect>
+                <ellipse
+                  class="demo-siren-glow"
+                  cx="51.5"
+                  cy="104"
+                  rx="5"
+                  ry="3"
+                  fill="rgb(30 239 242 / 0.55)"></ellipse>
+              </g>
+              <g class="demo-tx">
+                <rect
+                  x="218"
+                  y="148"
+                  width="10"
+                  height="14"
+                  rx="1.2"
+                  fill="#111823"
+                  stroke="#8a97a6"
+                  stroke-width="1.1"></rect>
+                <path d="M223 148 V140" stroke="#8a97a6" stroke-width="1.2"></path>
+              </g>
+            </svg>
+
+            <button
+              type="button"
+              class="demo-door"
+              data-demo-door
+              aria-pressed="false"
+              aria-label={demo.house.doorClosed}
+            >
+              <span class="demo-opening" aria-hidden="true"></span>
+              <span class="demo-leaf demo-door-leaf" data-door-leaf></span>
+            </button>
+            <button
+              type="button"
+              class="demo-window"
+              data-demo-window
+              aria-pressed="false"
+              aria-label={demo.house.windowClosed}
+            >
+              <span class="demo-opening" aria-hidden="true"></span>
+              <span class="demo-leaf demo-window-leaf" data-window-leaf></span>
+            </button>
+            <button
+              type="button"
+              class="demo-camera"
+              data-demo-camera
+              aria-label={demo.house.camera}
+            >
+            </button>
           </div>
         </div>
       </div>
@@ -309,167 +473,30 @@ import { demo } from "../data/site";
 
 <style>
   .demo-stage {
-    --hw: 10.5rem;
-    --hd: 7.25rem;
-    --hh: 6.4rem;
-    --gh: 3.35rem;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .demo-scene {
     position: relative;
-    height: 18.5rem;
-    perspective: 920px;
-    perspective-origin: 48% 38%;
+    padding: 0.4rem 0.2rem 0.2rem;
   }
 
-  .demo-ground {
-    position: absolute;
-    inset-inline: 8%;
-    bottom: 0.85rem;
-    height: 2.6rem;
-    border-radius: 50%;
-    background: radial-gradient(ellipse, rgb(0 0 0 / 0.6), transparent 72%);
-    transform: rotateX(68deg);
+  .demo-model {
+    position: relative;
+    width: min(100%, 22rem);
+    margin-inline: auto;
   }
 
-  .demo-house {
-    position: absolute;
-    top: 5.1rem;
-    left: 50%;
-    width: var(--hw);
-    height: var(--hh);
-    margin-left: calc(var(--hw) / -2);
-    transform: rotateX(8deg) rotateY(-28deg);
-    transform-style: preserve-3d;
-  }
-
-  .demo-front,
-  .demo-side,
-  .demo-back,
-  .demo-roof-l,
-  .demo-roof-r,
-  .demo-chimney {
-    position: absolute;
-    transform-style: preserve-3d;
-  }
-
-  .demo-front {
-    inset: 0;
-    overflow: visible;
-    background: linear-gradient(180deg, #7b8ca3 0%, #4a5a70 55%, #334155 100%);
-    border: 1px solid rgb(92 241 247 / 0.22);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14);
-    transform: translateZ(calc(var(--hd) / 2));
-  }
-
-  .demo-gable {
-    position: absolute;
-    left: -1px;
-    bottom: 100%;
-    width: calc(100% + 2px);
-    height: var(--gh);
-    background: linear-gradient(180deg, #8ea0b8 0%, #7b8ca3 100%);
-    clip-path: polygon(0 100%, 50% 0, 100% 100%);
-    filter: drop-shadow(0 -1px 0 rgb(92 241 247 / 0.25));
-  }
-
-  .demo-eave {
-    position: absolute;
-    left: -0.35rem;
-    bottom: 100%;
-    width: calc(100% + 0.7rem);
-    height: 0.28rem;
-    background: #243044;
-    transform: translateZ(0.08rem);
-  }
-
-  .demo-back {
-    inset: 0;
-    background: #243044;
-    transform: rotateY(180deg) translateZ(calc(var(--hd) / 2));
-  }
-
-  .demo-side {
-    top: 0;
-    left: 50%;
-    width: var(--hd);
-    height: var(--hh);
-    margin-left: calc(var(--hd) / -2);
-    background: linear-gradient(180deg, #455468 0%, #1e2836 100%);
-    border: 1px solid rgb(255 255 255 / 0.07);
-    transform: rotateY(90deg) translateZ(calc(var(--hw) / 2));
-  }
-
-  .demo-side-window {
-    position: absolute;
-    top: 1.35rem;
-    left: 50%;
-    width: 1.7rem;
-    height: 1.55rem;
-    margin-left: -0.85rem;
-    background:
-      linear-gradient(#5cf1f7, #5cf1f7) center / 1px 100% no-repeat,
-      linear-gradient(180deg, rgb(30 239 242 / 0.22), #0e3a42);
-    border: 2px solid #5cf1f7;
-    opacity: 0.85;
-  }
-
-  /* Satteldach: zwei Flächen vom First nach links und rechts */
-  .demo-roof-l,
-  .demo-roof-r {
-    top: calc(var(--gh) * -1);
-    left: 50%;
-    width: calc(var(--hd) + 1.15rem);
-    height: 6.55rem;
-    margin-left: calc((var(--hd) + 1.15rem) / -2);
-    background: linear-gradient(180deg, #9aabbf 0%, #4b5d73 48%, #243140 100%);
-    border: 1px solid rgb(92 241 247 / 0.18);
-    transform-origin: top center;
-  }
-
-  .demo-roof-l {
-    transform: rotateY(-90deg) rotateX(51deg);
-  }
-
-  .demo-roof-r {
-    transform: rotateY(90deg) rotateX(51deg);
-  }
-
-  .demo-chimney {
-    top: calc(var(--gh) * -1 - 1.15rem);
-    left: 62%;
-    width: 0.95rem;
-    height: 2.1rem;
-    background: linear-gradient(180deg, #6b7d94, #2a3546);
-    border: 1px solid rgb(255 255 255 / 0.12);
-    transform: translateZ(0.55rem);
-  }
-
-  .demo-chimney::after {
-    content: "";
-    position: absolute;
-    left: -0.12rem;
-    top: -0.18rem;
-    width: 1.2rem;
-    height: 0.28rem;
-    background: #1b2430;
-  }
-
-  .demo-step {
-    position: absolute;
-    left: 0.55rem;
-    bottom: -0.28rem;
-    width: 2.7rem;
-    height: 0.28rem;
-    background: #1b2430;
-    border: 1px solid rgb(92 241 247 / 0.2);
-    transform: translateZ(0.2rem);
+  .demo-house-svg {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .demo-door,
   .demo-window,
   .demo-camera {
+    position: absolute;
     padding: 0;
     border: 0;
     background: transparent;
@@ -478,30 +505,51 @@ import { demo } from "../data/site";
 
   .demo-door,
   .demo-window {
-    position: absolute;
     transform-style: preserve-3d;
     perspective: 420px;
   }
 
   .demo-door {
-    left: 0.7rem;
-    bottom: 0;
-    width: 2.25rem;
-    height: 3.55rem;
+    left: 22.8%;
+    top: 62.4%;
+    width: 11%;
+    height: 26%;
   }
 
   .demo-window {
-    right: 0.65rem;
-    top: 1.15rem;
-    width: 2.45rem;
-    height: 2.05rem;
+    left: 46.6%;
+    top: 61.7%;
+    width: 13.2%;
+    height: 13.6%;
+  }
+
+  .demo-camera {
+    left: 57.6%;
+    top: 49.2%;
+    width: 6.4%;
+    height: 4.2%;
+    border-radius: 0.2rem;
+    background: #111823;
+    border: 1px solid #1eeff2;
+  }
+
+  .demo-camera::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.12rem;
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 999px;
+    background: #1eeff2;
+    transform: translateY(-50%);
   }
 
   .demo-opening {
     position: absolute;
     inset: 0;
     background: linear-gradient(180deg, #1eeff2 0%, #0a3a40 100%);
-    opacity: 0.7;
+    opacity: 0.75;
     box-shadow: inset 0 0 12px rgb(30 239 242 / 0.45);
   }
 
@@ -561,90 +609,17 @@ import { demo } from "../data/site";
     transform: rotateY(68deg);
   }
 
-  .demo-siren {
-    position: absolute;
-    top: 0.85rem;
-    left: -0.5rem;
-    width: 0.85rem;
-    height: 0.7rem;
-    border-radius: 0.2rem;
-    background: #111823;
-    border: 1px solid #1eeff2;
-    box-shadow: 0 0 10px rgb(30 239 242 / 0.25);
-    transform: translateZ(0.35rem);
+  [data-alarm-demo][data-alarm] .demo-siren rect {
+    stroke: #ffb545;
   }
 
-  .demo-siren::after {
-    content: "";
-    position: absolute;
-    inset: -0.35rem 0.1rem auto;
-    height: 0.35rem;
-    border-radius: 50% 50% 0 0;
-    background: rgb(30 239 242 / 0.55);
+  [data-alarm-demo][data-alarm] .demo-siren-glow {
+    fill: #ffb545;
   }
 
-  .demo-tx {
-    position: absolute;
-    right: 0.7rem;
-    bottom: 1.2rem;
-    width: 0.85rem;
-    height: 1.15rem;
-    border-radius: 0.15rem;
-    background: #111823;
-    border: 1px solid #8a97a6;
-    transform: translateZ(0.2rem);
-  }
-
-  .demo-tx::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 100%;
-    width: 1px;
-    height: 0.55rem;
-    background: #8a97a6;
-  }
-
-  .demo-camera {
-    position: absolute;
-    top: -0.55rem;
-    right: 1.4rem;
-    width: 1.15rem;
-    height: 0.7rem;
-    border-radius: 0.2rem;
-    background: #111823;
-    border: 1px solid #1eeff2;
-    transform: translateZ(0.4rem);
-  }
-
-  .demo-camera::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.12rem;
-    width: 0.32rem;
-    height: 0.32rem;
-    border-radius: 999px;
-    background: #1eeff2;
-    transform: translateY(-50%);
-  }
-
-  [data-alarm-demo][data-alarm] .demo-siren {
-    border-color: #ffb545;
-    box-shadow: 0 0 16px rgb(255 181 69 / 0.7);
-  }
-
-  [data-alarm-demo][data-alarm] .demo-siren::after {
-    background: #ffb545;
-  }
-
-  [data-alarm-demo][data-sending] .demo-tx {
-    border-color: #1eeff2;
-    box-shadow: 0 0 12px rgb(30 239 242 / 0.55);
-  }
-
-  [data-alarm-demo][data-sending] .demo-tx::before {
-    background: #1eeff2;
+  [data-alarm-demo][data-sending] .demo-tx rect,
+  [data-alarm-demo][data-sending] .demo-tx path {
+    stroke: #1eeff2;
   }
 
   [data-alarm-demo][data-alarm] [data-demo-status-wrap] {
