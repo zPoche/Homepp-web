@@ -70,16 +70,21 @@ import { demo } from "../data/site";
         <div
           class="demo-scene"
           role="img"
-          aria-label="Dreidimensionales Haus. Tür und Fenster sind anklickbar."
+          aria-label="Dreidimensionales Giebelhaus. Tür und Fenster sind anklickbar."
         >
           <div class="demo-ground" aria-hidden="true"></div>
           <div class="demo-house">
-            <div class="demo-roof" aria-hidden="true"></div>
-            <div class="demo-roof-side" aria-hidden="true"></div>
+            <div class="demo-roof-l" aria-hidden="true"></div>
+            <div class="demo-roof-r" aria-hidden="true"></div>
+            <div class="demo-chimney" aria-hidden="true"></div>
+            <div class="demo-back" aria-hidden="true"></div>
             <div class="demo-side" data-demo-tx>
+              <span class="demo-side-window" aria-hidden="true"></span>
               <span class="demo-tx"></span>
             </div>
             <div class="demo-front">
+              <span class="demo-gable" aria-hidden="true"></span>
+              <span class="demo-eave" aria-hidden="true"></span>
               <button
                 type="button"
                 class="demo-door"
@@ -90,6 +95,7 @@ import { demo } from "../data/site";
                 <span class="demo-opening" aria-hidden="true"></span>
                 <span class="demo-leaf demo-door-leaf" data-door-leaf></span>
               </button>
+              <span class="demo-step" aria-hidden="true"></span>
               <button
                 type="button"
                 class="demo-window"
@@ -303,44 +309,47 @@ import { demo } from "../data/site";
 
 <style>
   .demo-stage {
-    --hw: 11.5rem;
-    --hd: 6.75rem;
-    --hh: 8.35rem;
+    --hw: 10.5rem;
+    --hd: 7.25rem;
+    --hh: 6.4rem;
+    --gh: 3.35rem;
     overflow: visible;
   }
 
   .demo-scene {
     position: relative;
-    height: 17.5rem;
-    perspective: 880px;
-    perspective-origin: 46% 42%;
+    height: 18.5rem;
+    perspective: 920px;
+    perspective-origin: 48% 38%;
   }
 
   .demo-ground {
     position: absolute;
-    inset-inline: 12%;
-    bottom: 1.15rem;
-    height: 2.4rem;
+    inset-inline: 8%;
+    bottom: 0.85rem;
+    height: 2.6rem;
     border-radius: 50%;
-    background: radial-gradient(ellipse, rgb(0 0 0 / 0.55), transparent 72%);
+    background: radial-gradient(ellipse, rgb(0 0 0 / 0.6), transparent 72%);
     transform: rotateX(68deg);
   }
 
   .demo-house {
     position: absolute;
-    top: 3.1rem;
+    top: 5.1rem;
     left: 50%;
     width: var(--hw);
     height: var(--hh);
     margin-left: calc(var(--hw) / -2);
-    transform: rotateX(16deg) rotateY(-32deg);
+    transform: rotateX(8deg) rotateY(-28deg);
     transform-style: preserve-3d;
   }
 
   .demo-front,
   .demo-side,
-  .demo-roof,
-  .demo-roof-side {
+  .demo-back,
+  .demo-roof-l,
+  .demo-roof-r,
+  .demo-chimney {
     position: absolute;
     transform-style: preserve-3d;
   }
@@ -348,10 +357,37 @@ import { demo } from "../data/site";
   .demo-front {
     inset: 0;
     overflow: visible;
-    background: linear-gradient(180deg, #6b7d94 0%, #3d4b5e 58%, #2a3546 100%);
-    border: 1px solid rgb(92 241 247 / 0.28);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+    background: linear-gradient(180deg, #7b8ca3 0%, #4a5a70 55%, #334155 100%);
+    border: 1px solid rgb(92 241 247 / 0.22);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.14);
     transform: translateZ(calc(var(--hd) / 2));
+  }
+
+  .demo-gable {
+    position: absolute;
+    left: -1px;
+    bottom: 100%;
+    width: calc(100% + 2px);
+    height: var(--gh);
+    background: linear-gradient(180deg, #8ea0b8 0%, #7b8ca3 100%);
+    clip-path: polygon(0 100%, 50% 0, 100% 100%);
+    filter: drop-shadow(0 -1px 0 rgb(92 241 247 / 0.25));
+  }
+
+  .demo-eave {
+    position: absolute;
+    left: -0.35rem;
+    bottom: 100%;
+    width: calc(100% + 0.7rem);
+    height: 0.28rem;
+    background: #243044;
+    transform: translateZ(0.08rem);
+  }
+
+  .demo-back {
+    inset: 0;
+    background: #243044;
+    transform: rotateY(180deg) translateZ(calc(var(--hd) / 2));
   }
 
   .demo-side {
@@ -360,32 +396,75 @@ import { demo } from "../data/site";
     width: var(--hd);
     height: var(--hh);
     margin-left: calc(var(--hd) / -2);
-    background: linear-gradient(180deg, #3f4d61 0%, #1c2532 100%);
-    border: 1px solid rgb(255 255 255 / 0.08);
+    background: linear-gradient(180deg, #455468 0%, #1e2836 100%);
+    border: 1px solid rgb(255 255 255 / 0.07);
     transform: rotateY(90deg) translateZ(calc(var(--hw) / 2));
   }
 
-  .demo-roof {
-    left: -0.45rem;
-    top: -2.55rem;
-    width: calc(var(--hw) + 0.9rem);
-    height: 5.1rem;
-    background: linear-gradient(180deg, #8ea0b8 0%, #4c5d73 55%, #2b384a 100%);
-    border: 1px solid rgb(92 241 247 / 0.22);
-    transform-origin: bottom center;
-    transform: translateZ(calc(var(--hd) / 2)) rotateX(64deg);
+  .demo-side-window {
+    position: absolute;
+    top: 1.35rem;
+    left: 50%;
+    width: 1.7rem;
+    height: 1.55rem;
+    margin-left: -0.85rem;
+    background:
+      linear-gradient(#5cf1f7, #5cf1f7) center / 1px 100% no-repeat,
+      linear-gradient(180deg, rgb(30 239 242 / 0.22), #0e3a42);
+    border: 2px solid #5cf1f7;
+    opacity: 0.85;
   }
 
-  .demo-roof-side {
-    left: calc(50% - 0.15rem);
-    top: -2.55rem;
-    width: calc(var(--hd) + 0.5rem);
-    height: 5.1rem;
-    margin-left: calc((var(--hd) + 0.5rem) / -2);
-    background: linear-gradient(180deg, #5a6b82 0%, #243140 100%);
-    border: 1px solid rgb(255 255 255 / 0.06);
-    transform-origin: bottom center;
-    transform: rotateY(90deg) translateZ(calc(var(--hw) / 2)) rotateX(64deg);
+  /* Satteldach: zwei Flächen vom First nach links und rechts */
+  .demo-roof-l,
+  .demo-roof-r {
+    top: calc(var(--gh) * -1);
+    left: 50%;
+    width: calc(var(--hd) + 1.15rem);
+    height: 6.55rem;
+    margin-left: calc((var(--hd) + 1.15rem) / -2);
+    background: linear-gradient(180deg, #9aabbf 0%, #4b5d73 48%, #243140 100%);
+    border: 1px solid rgb(92 241 247 / 0.18);
+    transform-origin: top center;
+  }
+
+  .demo-roof-l {
+    transform: rotateY(-90deg) rotateX(51deg);
+  }
+
+  .demo-roof-r {
+    transform: rotateY(90deg) rotateX(51deg);
+  }
+
+  .demo-chimney {
+    top: calc(var(--gh) * -1 - 1.15rem);
+    left: 62%;
+    width: 0.95rem;
+    height: 2.1rem;
+    background: linear-gradient(180deg, #6b7d94, #2a3546);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    transform: translateZ(0.55rem);
+  }
+
+  .demo-chimney::after {
+    content: "";
+    position: absolute;
+    left: -0.12rem;
+    top: -0.18rem;
+    width: 1.2rem;
+    height: 0.28rem;
+    background: #1b2430;
+  }
+
+  .demo-step {
+    position: absolute;
+    left: 0.55rem;
+    bottom: -0.28rem;
+    width: 2.7rem;
+    height: 0.28rem;
+    background: #1b2430;
+    border: 1px solid rgb(92 241 247 / 0.2);
+    transform: translateZ(0.2rem);
   }
 
   .demo-door,
@@ -407,15 +486,15 @@ import { demo } from "../data/site";
   .demo-door {
     left: 0.7rem;
     bottom: 0;
-    width: 2.35rem;
-    height: 4.15rem;
+    width: 2.25rem;
+    height: 3.55rem;
   }
 
   .demo-window {
-    right: 0.7rem;
-    top: 1.2rem;
-    width: 2.75rem;
-    height: 2.3rem;
+    right: 0.65rem;
+    top: 1.15rem;
+    width: 2.45rem;
+    height: 2.05rem;
   }
 
   .demo-opening {
@@ -484,8 +563,8 @@ import { demo } from "../data/site";
 
   .demo-siren {
     position: absolute;
-    top: 1.05rem;
-    left: -0.55rem;
+    top: 0.85rem;
+    left: -0.5rem;
     width: 0.85rem;
     height: 0.7rem;
     border-radius: 0.2rem;
@@ -528,8 +607,8 @@ import { demo } from "../data/site";
 
   .demo-camera {
     position: absolute;
-    top: -0.15rem;
-    right: 0.7rem;
+    top: -0.55rem;
+    right: 1.4rem;
     width: 1.15rem;
     height: 0.7rem;
     border-radius: 0.2rem;
