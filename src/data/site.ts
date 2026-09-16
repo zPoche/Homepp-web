@@ -107,12 +107,12 @@ export const services: Service[] = [
     title: "Video & Zutritt",
     teaser: "Sehen, wer vor der Tür steht.",
     description:
-      "Video mit UniFi Protect oder Hikvision, dazu Zutritt und Türsprechanlagen. Datenschutzkonform geplant und an Deine Alarmzentrale angebunden.",
+      "Video mit UniFi Protect oder Hikvision, dazu Zutritt und Türsprechanlagen. Personenerkennung gehört dazu; Kennzeichen- und Gesichtserkennung je nach Kamera und nur, wo das bei Euch zulässig ist. Ansicht und Meldung per App, an die Alarmzentrale angebunden.",
     bullets: [
       "Video: UniFi Protect oder Hikvision",
-      "Zutritt und Türsprechanlagen (UniFi Access)",
-      "Anbindung an die Einbruchmeldeanlage",
-      "DSGVO-konforme Planung",
+      "Personenerkennung; Kennzeichen und Gesicht je nach Kamera",
+      "Ansicht und Meldung per App",
+      "Zutritt und Türsprechanlagen, DSGVO-konform geplant",
     ],
     icon: "home",
     accent: "volt",
@@ -235,3 +235,65 @@ export const navLinks = [
   { href: "/#faq", label: "FAQ" },
   { href: "/#kontakt", label: "Kontakt" },
 ];
+
+/**
+ * Texte der interaktiven Hero-Demo. Die Demo zeigt, wie eine Anlage
+ * reagieren kann – sie ist keine echte Leitstelle und kein Live-Video.
+ */
+export const demo = {
+  label: "Live-Demo",
+  title: "So kann eine Anlage reagieren",
+  hint: "Tür und Fenster antippen. Die Demo läuft lokal im Browser.",
+  tabs: {
+    alarm: "Alarmanlage",
+    video: "Video",
+  },
+  status: {
+    disarmed: "Unscharf",
+    armed: "Scharf",
+    alarm: "Alarm",
+  },
+  arm: "Scharfschalten",
+  disarm: "Unscharfschalten",
+  ack: "Alarm quittieren",
+  logEmpty: "Keine Meldungen. Öffne Tür oder Fenster.",
+  events: {
+    armed: "Anlage scharf",
+    disarmed: "Anlage unscharf",
+    notReady: "Anlage nicht bereit · Tür oder Fenster noch offen",
+    doorOpen: "Haustür geöffnet · Anlage unscharf",
+    doorClosed: "Haustür geschlossen",
+    windowOpen: "Fenster geöffnet · Anlage unscharf",
+    windowClosed: "Fenster geschlossen",
+    doorAlarm: "Alarm · Öffnungsmelder Haustür",
+    windowAlarm: "Alarm · Öffnungsmelder Fenster",
+    notify: "Meldung an Dich / an die Leitstelle – so kann eine Anlage reagieren",
+    ack: "Alarm quittiert · Sirene aus",
+    person: "Person erkannt · Einfahrt",
+    face: "Gesicht erkannt · je nach Kamera, nur wo zulässig",
+    plate: "Kennzeichen erkannt · je nach Kamera",
+  },
+  house: {
+    doorOpen: "Tür schließen",
+    doorClosed: "Tür öffnen",
+    windowOpen: "Fenster schließen",
+    windowClosed: "Fenster öffnen",
+    sirenIdle: "Sirene bereit",
+    sirenAlarm: "Außensirene",
+    txIdle: "Übertragung bereit",
+    txSending: "Übertragung sendet",
+    camera: "Kamera auslösen",
+  },
+  video: {
+    live: "Livebild",
+    idle: "Keine Erkennung. Kamera oder Taste antippen.",
+    appTitle: "Meldung in der App",
+    appIdle: "Keine neue Meldung",
+    person: "Person",
+    face: "Gesicht",
+    plate: "Kennzeichen",
+    personOverlay: "Person",
+    faceOverlay: "Gesicht",
+    plateOverlay: "H-PP 2026",
+  },
+} as const;

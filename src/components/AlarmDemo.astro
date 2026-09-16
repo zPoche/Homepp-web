@@ -1,0 +1,430 @@
+---
+import { demo } from "../data/site";
+---
+
+<div
+  class="glass relative rounded-[1.75rem] p-5 shadow-2xl shadow-black/40 sm:p-6"
+  data-parallax="0.05"
+  data-alarm-demo
+  data-copy={JSON.stringify(demo)}
+>
+  <div class="flex items-start justify-between gap-3">
+    <div class="min-w-0">
+      <p class="text-ink-500 text-xs font-medium tracking-widest uppercase">
+        {demo.label}
+      </p>
+      <p class="font-display mt-1 text-xl font-semibold">{demo.title}</p>
+    </div>
+    <span
+      class="text-brand-300 border-brand-400/25 bg-brand-400/10 relative inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold"
+      data-demo-status-wrap
+    >
+      <span class="relative flex size-2">
+        <span
+          class="bg-brand-400 absolute inline-flex size-full rounded-full"
+          data-demo-status-ring
+          style="animation: pulse-ring 2s ease-out infinite"></span>
+        <span class="bg-brand-400 relative inline-flex size-2 rounded-full"></span>
+      </span>
+      <span data-demo-status>{demo.status.disarmed}</span>
+    </span>
+  </div>
+
+  <p class="text-ink-500 mt-3 text-xs">{demo.hint}</p>
+
+  <div
+    class="mt-4 grid grid-cols-2 gap-1 rounded-full border border-white/8 bg-white/3 p-1"
+    role="tablist"
+    aria-label="Demo-Ansicht"
+  >
+    <button
+      type="button"
+      role="tab"
+      id="demo-tab-alarm"
+      aria-controls="demo-panel-alarm"
+      aria-selected="true"
+      class="min-h-11 rounded-full px-3 text-sm font-semibold"
+      data-demo-tab="alarm"
+    >
+      {demo.tabs.alarm}
+    </button>
+    <button
+      type="button"
+      role="tab"
+      id="demo-tab-video"
+      aria-controls="demo-panel-video"
+      aria-selected="false"
+      class="text-ink-400 min-h-11 rounded-full px-3 text-sm font-semibold"
+      data-demo-tab="video"
+    >
+      {demo.tabs.video}
+    </button>
+  </div>
+
+  <div class="mt-5 grid items-start gap-5 sm:grid-cols-2 sm:gap-4">
+    <div>
+      <div
+        class="relative overflow-hidden rounded-2xl border border-white/6 bg-white/3 px-2 pt-3 pb-2"
+        data-demo-house
+      >
+        <svg
+          class="mx-auto block h-auto w-full max-w-[16.5rem]"
+          viewBox="0 0 240 200"
+          role="img"
+          aria-label="Stilisiertes Haus mit Tür, Fenster, Sirene, Übertragung und Kamera"
+        >
+          <defs>
+            <linearGradient id="demo-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1eeff2" stop-opacity="0.12"></stop>
+              <stop offset="100%" stop-color="#05080d" stop-opacity="0"></stop>
+            </linearGradient>
+            <linearGradient id="demo-wall" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1b2430"></stop>
+              <stop offset="100%" stop-color="#111823"></stop>
+            </linearGradient>
+            <linearGradient id="demo-roof" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a3544"></stop>
+              <stop offset="100%" stop-color="#0a0f17"></stop>
+            </linearGradient>
+          </defs>
+
+          <rect width="240" height="200" rx="14" fill="url(#demo-sky)"></rect>
+          <ellipse cx="120" cy="186" rx="92" ry="8" fill="#0a0f17" opacity="0.7"
+          ></ellipse>
+
+          <!-- Kamera -->
+          <g data-demo-camera-mark>
+            <rect
+              x="168"
+              y="34"
+              width="18"
+              height="10"
+              rx="2"
+              fill="#111823"
+              stroke="#1eeff2"
+              stroke-opacity="0.7"></rect>
+            <circle cx="184" cy="39" r="3.2" fill="#1eeff2"></circle>
+            <path
+              d="M176 34 V28"
+              stroke="#1eeff2"
+              stroke-opacity="0.5"
+              stroke-width="1.4"></path>
+          </g>
+
+          <!-- Dach -->
+          <path d="M28 86 L120 28 L212 86 Z" fill="url(#demo-roof)"></path>
+          <path
+            d="M28 86 L120 28 L212 86"
+            fill="none"
+            stroke="#1eeff2"
+            stroke-opacity="0.28"
+            stroke-width="1.4"></path>
+
+          <!-- Korpus -->
+          <rect x="48" y="86" width="144" height="88" fill="url(#demo-wall)"></rect>
+          <rect
+            x="48"
+            y="86"
+            width="144"
+            height="88"
+            fill="none"
+            stroke="#ffffff"
+            stroke-opacity="0.08"></rect>
+
+          <!-- Außensirene -->
+          <g data-demo-siren>
+            <rect x="28" y="104" width="16" height="14" rx="3" fill="#111823"></rect>
+            <path
+              d="M32 104 C36 96 36 96 40 104"
+              fill="#1eeff2"
+              fill-opacity="0.35"
+              data-siren-glow></path>
+            <circle cx="36" cy="111" r="3" fill="#1eeff2" data-siren-core></circle>
+          </g>
+
+          <!-- Übertragung -->
+          <g data-demo-tx>
+            <rect x="196" y="128" width="16" height="20" rx="2" fill="#111823"></rect>
+            <path
+              d="M204 128 V118 M199 122 H209"
+              stroke="#8a97a6"
+              stroke-width="1.4"
+              data-tx-antenna></path>
+            <circle cx="204" cy="138" r="2.2" fill="#8a97a6" data-tx-core></circle>
+          </g>
+
+          <!-- Fenster -->
+          <g data-window-leaf>
+            <rect
+              x="142"
+              y="102"
+              width="38"
+              height="32"
+              rx="2"
+              fill="#073944"
+              stroke="#1eeff2"
+              stroke-opacity="0.45"></rect>
+            <path d="M161 102 V134 M142 118 H180" stroke="#1eeff2" stroke-opacity="0.3"
+            ></path>
+          </g>
+
+          <!-- Tür -->
+          <g data-door-leaf>
+            <rect
+              x="70"
+              y="124"
+              width="32"
+              height="50"
+              rx="2"
+              fill="#0a0f17"
+              stroke="#1eeff2"
+              stroke-opacity="0.35"></rect>
+            <circle cx="96" cy="150" r="2" fill="#1eeff2"></circle>
+          </g>
+        </svg>
+      </div>
+
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+          data-demo-door
+          aria-pressed="false"
+        >
+          {demo.house.doorClosed}
+        </button>
+        <button
+          type="button"
+          class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+          data-demo-window
+          aria-pressed="false"
+        >
+          {demo.house.windowClosed}
+        </button>
+      </div>
+
+      <p class="text-ink-500 mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[0.7rem]">
+        <span data-demo-siren-label>{demo.house.sirenIdle}</span>
+        <span data-demo-tx-label>{demo.house.txIdle}</span>
+      </p>
+    </div>
+
+    <div>
+      <div id="demo-panel-alarm" role="tabpanel" aria-labelledby="demo-tab-alarm">
+        <button
+          type="button"
+          class="bg-brand-400 text-ink-950 min-h-11 w-full rounded-full px-4 text-sm font-semibold"
+          data-demo-arm
+          aria-pressed="false"
+        >
+          {demo.arm}
+        </button>
+
+        <p
+          class="text-ink-500 mt-4 text-[0.7rem] font-semibold tracking-widest uppercase"
+        >
+          Meldungen
+        </p>
+        <ul
+          class="mt-2 max-h-40 space-y-1.5 overflow-y-auto pr-1"
+          data-demo-log
+          aria-live="polite"
+        >
+          <li class="text-ink-500 text-xs leading-relaxed">{demo.logEmpty}</li>
+        </ul>
+
+        <button
+          type="button"
+          class="glass mt-3 hidden min-h-11 w-full rounded-full px-4 text-sm font-semibold"
+          data-demo-ack
+        >
+          {demo.ack}
+        </button>
+      </div>
+
+      <div
+        id="demo-panel-video"
+        class="hidden"
+        role="tabpanel"
+        aria-labelledby="demo-tab-video"
+        hidden
+      >
+        <div class="grid grid-cols-[1fr_auto] items-start gap-3">
+          <div
+            class="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/8 bg-[#0a0f17]"
+            data-demo-live
+          >
+            <div
+              class="from-brand-400/15 absolute inset-0 bg-linear-to-b to-transparent"
+            >
+            </div>
+            <p
+              class="text-ink-500 absolute top-2 left-2 text-[0.65rem] tracking-widest uppercase"
+            >
+              {demo.video.live}
+            </p>
+            <p
+              class="text-ink-400 absolute inset-x-3 bottom-3 text-center text-[0.7rem] leading-relaxed"
+              data-demo-live-caption
+            >
+              {demo.video.idle}
+            </p>
+            <div
+              class="absolute inset-0 hidden"
+              data-demo-overlay="person"
+              aria-hidden="true"
+            >
+              <div
+                class="border-brand-400/70 bg-brand-400/20 absolute bottom-5 left-1/2 h-16 w-10 -translate-x-1/2 rounded-t-full border"
+              >
+              </div>
+              <span
+                class="border-brand-400/50 text-brand-300 absolute top-8 left-3 rounded border px-1.5 py-0.5 text-[0.6rem]"
+                >{demo.video.personOverlay}</span
+              >
+            </div>
+            <div
+              class="absolute inset-0 hidden"
+              data-demo-overlay="face"
+              aria-hidden="true"
+            >
+              <div
+                class="border-brand-400/80 absolute top-8 left-1/2 size-12 -translate-x-1/2 rounded-full border-2"
+              >
+              </div>
+              <span
+                class="border-brand-400/50 text-brand-300 absolute top-6 right-3 rounded border px-1.5 py-0.5 text-[0.6rem]"
+                >{demo.video.faceOverlay}</span
+              >
+            </div>
+            <div
+              class="absolute inset-0 hidden"
+              data-demo-overlay="plate"
+              aria-hidden="true"
+            >
+              <div
+                class="border-signal-400/70 bg-signal-400/15 absolute bottom-4 left-1/2 h-8 w-16 -translate-x-1/2 rounded-sm border"
+              >
+              </div>
+              <span
+                class="bg-signal-400 text-ink-950 absolute bottom-5 left-1/2 -translate-x-1/2 rounded px-1 text-[0.55rem] font-semibold"
+                >{demo.video.plateOverlay}</span
+              >
+            </div>
+          </div>
+
+          <div
+            class="w-[4.6rem] shrink-0 rounded-[1.1rem] border border-white/10 bg-[#05080d] px-1.5 pt-2 pb-1.5"
+            aria-hidden="true"
+          >
+            <div class="mx-auto mb-1 h-1 w-6 rounded-full bg-white/15"></div>
+            <div
+              class="min-h-24 rounded-lg border border-white/8 bg-[#111823] px-1.5 py-2"
+            >
+              <p
+                class="text-brand-300 text-[0.55rem] leading-tight font-semibold"
+                data-demo-app-title
+              >
+                {demo.video.appTitle}
+              </p>
+              <p
+                class="text-ink-400 mt-1 text-[0.55rem] leading-snug"
+                data-demo-app-body
+              >
+                {demo.video.appIdle}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex flex-wrap gap-2">
+          <button
+            type="button"
+            class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+            data-demo-detect="person"
+          >
+            {demo.video.person}
+          </button>
+          <button
+            type="button"
+            class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+            data-demo-detect="face"
+          >
+            {demo.video.face}
+          </button>
+          <button
+            type="button"
+            class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+            data-demo-detect="plate"
+          >
+            {demo.video.plate}
+          </button>
+          <button
+            type="button"
+            class="glass hover:border-brand-400/40 min-h-11 rounded-full px-3.5 text-xs font-semibold"
+            data-demo-camera
+          >
+            {demo.house.camera}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  [data-alarm-demo][data-door-open] [data-door-leaf] {
+    transform: rotate(-58deg);
+  }
+
+  [data-alarm-demo][data-window-open] [data-window-leaf] {
+    transform: rotate(-48deg);
+  }
+
+  [data-door-leaf],
+  [data-window-leaf] {
+    transform-box: fill-box;
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+
+  [data-door-leaf] {
+    transform-origin: left bottom;
+  }
+
+  [data-window-leaf] {
+    transform-origin: left center;
+  }
+
+  [data-alarm-demo][data-alarm] [data-siren-glow] {
+    fill: #1eeff2;
+    fill-opacity: 0.85;
+  }
+
+  [data-alarm-demo][data-alarm] [data-siren-core] {
+    fill: #ffb545;
+  }
+
+  [data-alarm-demo][data-sending] [data-tx-core],
+  [data-alarm-demo][data-sending] [data-tx-antenna] {
+    stroke: #1eeff2;
+    fill: #1eeff2;
+  }
+
+  [data-alarm-demo][data-alarm] [data-demo-status-wrap] {
+    color: var(--color-signal-400);
+    border-color: rgb(255 181 69 / 0.4);
+    background: rgb(255 181 69 / 0.12);
+  }
+
+  [data-demo-tab][aria-selected="true"] {
+    background: var(--color-brand-400);
+    color: var(--color-ink-950);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-door-leaf],
+    [data-window-leaf] {
+      transition: none;
+    }
+  }
+</style>
