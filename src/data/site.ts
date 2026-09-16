@@ -1,9 +1,9 @@
 export const site = {
   name: "HomePower+",
   legalName: "HomePower+",
-  tagline: "Das Plus für Ihr Zuhause",
+  tagline: "Alarmanlagen und IT aus einer Hand",
   description:
-    "Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik aus Geiselwind, für Würzburg, Kitzingen und Umgebung.",
+    "Alarmanlagen, Videoüberwachung und IT aus Geiselwind, für Würzburg, Kitzingen und Umgebung.",
   url: "https://homepowerplus.de",
   email: "info@homepp.de",
   phone: "+49 9556 9217717",
@@ -88,79 +88,49 @@ export type IconName =
 
 export const services: Service[] = [
   {
-    slug: "smart-home",
-    title: "Smart Home",
-    teaser: "Ein System. Alles im Griff.",
+    slug: "alarmanlagen",
+    title: "Alarmanlagen",
+    teaser: "Scharf, wenn Du es brauchst.",
     description:
-      "Smart-Home-Systeme mit Home Assistant, KNX und Shelly: lokal, schnell und ohne Cloud-Zwang. Inklusive Energievisualisierung, Automationen und Lademanagement.",
-    bullets: [
-      "Home Assistant, KNX und Shelly",
-      "Licht, Heizung, Beschattung und Szenen",
-      "Energievisualisierung und Automationen",
-      "Lademanagement angebunden an PV und Wallbox",
-    ],
-    icon: "home",
-    accent: "brand",
-  },
-  {
-    slug: "ki-loesungen",
-    title: "KI-Lösungen",
-    teaser: "Automationen, die mitdenken.",
-    description:
-      "Lokale KI-Heimserver, individuell gebaut: von NVIDIA DGX Spark bis Mac mini oder Mac Studio, je nach Leistung, Datenschutz und Budget. Angebunden an Dein Smart Home, nicht als Cloud-Spielerei.",
-    bullets: [
-      "Individueller KI-Heimserver nach Anforderung",
-      "NVIDIA DGX Spark, Mac mini oder Mac Studio",
-      "Sprache, Muster und Routinen lokal im Haus",
-      "Anbindung an Home Assistant und vorhandene Geräte",
-    ],
-    icon: "spark",
-    accent: "volt",
-  },
-  {
-    slug: "netzwerk-wlan",
-    title: "Netzwerk & UniFi",
-    teaser: "Das komplette UniFi-Portfolio.",
-    description:
-      "Ubiquiti UniFi durchgängig: Netzwerk, WLAN, Switching, Routing, Protect-Kameras, Zutritt, Türsprechanlagen, USV, NAS/UNAS und bei Bedarf UniFi-Server. Alles aus einer Hand geplant und betrieben.",
-    bullets: [
-      "WLAN, Switching, Routing und VLANs",
-      "UniFi Protect, Access und Türsprechanlagen",
-      "USV, UNAS/NAS und UniFi-Server",
-      "Ausleuchtung, Monitoring und Fernwartung",
-    ],
-    icon: "wifi",
-    accent: "volt",
-  },
-  {
-    slug: "sicherheitstechnik",
-    title: "Sicherheitstechnik",
-    teaser: "Sehen, was zuhause passiert.",
-    description:
-      "Einbruchmeldeanlagen mit Telenot und Daitem, Video mit UniFi Protect oder Hikvision. Datenschutzkonform geplant, mit EMA-Wartung und sauber angebunden.",
+      "Einbruchmeldeanlagen mit Telenot und Daitem: geplant, eingerichtet und gewartet. Melder, Zentrale und Einweisung, ohne unnötige Spielerei.",
     bullets: [
       "EMA inkl. Wartung: Telenot und Daitem",
-      "Video: UniFi Protect oder Hikvision",
-      "Zutritt und Türsprechanlagen (UniFi Access)",
-      "DSGVO-konforme Planung",
+      "Planung, Einbau und Einweisung",
+      "Melder, Zentrale und Bedienung",
+      "Markenware aus dem Fachgroßhandel",
     ],
     icon: "shield",
     accent: "brand",
   },
   {
-    slug: "ladeinfrastruktur",
-    title: "Ladeinfrastruktur",
-    teaser: "Laden, das zum Haus passt.",
+    slug: "video-zutritt",
+    title: "Video & Zutritt",
+    teaser: "Sehen, wer vor der Tür steht.",
     description:
-      "Wallboxen und PV-Überschussladen mit openWB, KEBA und MENNEKES, ergänzt um UniFi für Netzwerk, Zugang, Kameras und WLAN an den Ladepunkten.",
+      "Video mit UniFi Protect oder Hikvision, dazu Zutritt und Türsprechanlagen. Datenschutzkonform geplant und an Deine Alarmzentrale angebunden.",
     bullets: [
-      "openWB für PV-Überschussladen und offene Integration",
-      "KEBA für Privat und Gewerbe",
-      "MENNEKES für Premium, MFH und Firmen",
-      "UniFi an Ladepunkten: Netz, Zugang, Kamera, WLAN",
+      "Video: UniFi Protect oder Hikvision",
+      "Zutritt und Türsprechanlagen (UniFi Access)",
+      "Anbindung an die Einbruchmeldeanlage",
+      "DSGVO-konforme Planung",
     ],
-    icon: "bolt",
-    accent: "signal",
+    icon: "home",
+    accent: "volt",
+  },
+  {
+    slug: "netzwerk-it",
+    title: "Netzwerk & UniFi",
+    teaser: "Ein Netz, das trägt.",
+    description:
+      "Ubiquiti UniFi durchgängig: WLAN, Switching, Routing und VLANs. Ausleuchtung, Monitoring und Fernwartung für Haus und Betrieb.",
+    bullets: [
+      "WLAN, Switching, Routing und VLANs",
+      "Ausleuchtung, Monitoring und Fernwartung",
+      "USV, UNAS/NAS und UniFi-Server",
+      "Saubere Trennung von Büro, Gästen und Technik",
+    ],
+    icon: "wifi",
+    accent: "volt",
   },
   {
     slug: "edv-datentechnik",
@@ -175,43 +145,13 @@ export const services: Service[] = [
       "AGFEO Telefonanlagen, Mitel optional",
     ],
     icon: "server",
-    accent: "volt",
-  },
-  {
-    slug: "vde-messungen",
-    title: "Messungen & Prüfung",
-    teaser: "Sicherheit mit Protokoll.",
-    description:
-      "VDE-, DGUV-, EDV- und LWL-Messungen, inklusive vollständiger Prüfprotokolle für Versicherung, Arbeitgeber und Vermieter.",
-    bullets: [
-      "E-Check & Prüfungen nach DIN VDE",
-      "DGUV-Prüfungen ortsveränderlicher Geräte",
-      "EDV- und LWL-/Glasfasermessungen",
-      "Digitale Protokolle als PDF",
-    ],
-    icon: "gauge",
-    accent: "signal",
-  },
-  {
-    slug: "3d-druck",
-    title: "3D-Druck & Sonderteile",
-    teaser: "Wenn es das Teil nicht gibt.",
-    description:
-      "Individuelle 3D-Druck-Lösungen für Halterungen und Gehäuse, konstruiert und gedruckt, passgenau für Deine Hardware.",
-    bullets: [
-      "Sensor- und Kamerahalterungen",
-      "Gehäuse für Elektronik & Hutschiene",
-      "Konstruktion nach Maß",
-      "Prototyp bis Kleinserie",
-    ],
-    icon: "cube",
     accent: "signal",
   },
 ];
 
 /**
  * Vertrauenspunkte ohne erfundene Kennzahlen. Zahlen wie „10+ Jahre“ oder
- * „250+ Automationen“ standen auf der alten Seite nicht und wären nach § 5 UWG
+ * „250+ Anlagen“ standen auf der alten Seite nicht und wären nach § 5 UWG
  * angreifbar, solange sie nicht belegt sind.
  */
 export const stats = [
@@ -235,7 +175,7 @@ export const process = [
   {
     step: "03",
     title: "Umsetzung",
-    text: "Installation, Konfiguration und Test: sauber, termintreu und mit Rücksicht auf Deine Wände und Nerven.",
+    text: "Einrichtung, Konfiguration und Test: sauber, termintreu und mit Rücksicht auf Deine Räume und Nerven.",
   },
   {
     step: "04",
@@ -246,47 +186,41 @@ export const process = [
 
 /**
  * Hersteller und Systeme aus dem realen Portfolio (Angabe des Betreibers).
- * Keine Großhändler - die sind Einkauf, keine Leistung.
+ * Nur noch Alarmanlagen, Video und IT - keine Großhändler, kein Smart Home.
  */
 export const techStack = [
-  "Home Assistant",
-  "KNX",
-  "Shelly",
-  "Ubiquiti UniFi",
   "Telenot",
   "Daitem",
+  "Ubiquiti UniFi",
   "Hikvision",
   "Synology",
   "AGFEO",
-  "openWB",
-  "KEBA",
-  "MENNEKES",
 ];
 
 export const faqs = [
   {
-    q: "Was macht HomePower+ besonders?",
-    a: "HomePower+ ist Elektroinstallation mit Schwerpunkt Smart Home, Netzwerktechnik und Sicherheitstechnik. Von UniFi und EMA über Wallboxen und PV-Überschussladen bis zu lokalem KI-Server, kleiner IT- und Website-Betreuung und Messungen.",
+    q: "Was macht HomePower+?",
+    a: "HomePower+ plant, richtet ein und betreut Alarmanlagen und IT. Einbruchmeldeanlagen mit Telenot oder Daitem, Video und Zutritt, UniFi-Netzwerke sowie im kleinen Maßstab Websites, NAS und Telefonanlagen.",
   },
   {
     q: "Werden die Dienstleistungen nur in Geiselwind angeboten?",
-    a: "Unser mobiler Service umfasst die Region Geiselwind, Würzburg und Kitzingen. Wir kommen zu Dir, egal ob Neubau oder Sanierung.",
+    a: "Unser mobiler Service umfasst die Region Geiselwind, Würzburg und Kitzingen. Wir kommen zu Dir, egal ob Neubau oder bestehendes Gebäude.",
   },
   {
     q: "Wie kann ich einen Termin für eine Beratung vereinbaren?",
     a: "Am einfachsten über das Kontaktformular auf dieser Seite. Alternativ erreichst Du uns per Telefon oder E-Mail. Wir melden uns innerhalb eines Werktages zurück.",
   },
   {
-    q: "Welche Smart-Home-Systeme werden unterstützt?",
-    a: "Schwerpunkt sind Home Assistant, Shelly und KNX, inklusive Energievisualisierung, Automationen und Lademanagement. Dazu kommen UniFi, Sicherheitstechnik und Wallboxen, die wir sauber anbinden.",
+    q: "Welche Alarmanlagen setzt ihr ein?",
+    a: "Schwerpunkt sind Einbruchmeldeanlagen von Telenot und Daitem, inklusive Wartung. Video kommt von UniFi Protect oder Hikvision, Zutritt über UniFi Access.",
   },
   {
-    q: "Funktioniert das Smart Home auch ohne Internet?",
-    a: "Ja. Wir setzen bewusst auf lokale Systeme wie Home Assistant und KNX. Licht, Heizung und Rollläden laufen weiter, auch wenn die Leitung mal ausfällt oder ein Hersteller seinen Cloud-Dienst abschaltet.",
+    q: "Läuft die Anlage auch, wenn das Internet weg ist?",
+    a: "Ja. Melder, Zentrale und das lokale Netz arbeiten weiter. Was eine Internetverbindung braucht – zum Beispiel eine Push-Nachricht aufs Handy – wartet, bis die Leitung wieder da ist.",
   },
   {
     q: "Bietet ihr Garantie auf eure Arbeiten an?",
-    a: "Ja, wir stehen hinter unserer Arbeit. Auf alle durchgeführten Installationen und Dienstleistungen gewähren wir die gesetzliche Gewährleistung. Die Zufriedenheit unserer Kunden hat höchste Priorität.",
+    a: "Ja, wir stehen hinter unserer Arbeit. Auf alle durchgeführten Einrichtungen und Dienstleistungen gewähren wir die gesetzliche Gewährleistung. Die Zufriedenheit unserer Kunden hat höchste Priorität.",
   },
   {
     q: "Sind die Materialien von hoher Qualität?",

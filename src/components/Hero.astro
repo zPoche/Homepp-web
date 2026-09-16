@@ -11,32 +11,28 @@ const trust = [
 
 const dashboardRows = [
   {
-    room: "Wohnzimmer",
-    detailOn: "Licht · Szene „Abend“",
-    detailOff: "Licht aus · Szene bereit",
+    room: "Eingang",
+    detailOn: "Scharf · Melder aktiv",
+    detailOff: "Unscharf · Melder bereit",
     on: true,
-    watts: 48,
   },
   {
-    room: "Heizung EG",
-    detailOn: "21,5 °C · Eco ab 22:00",
-    detailOff: "Absenkung aktiv · 18 °C",
+    room: "Garten",
+    detailOn: "Kamera aktiv · Bewegung",
+    detailOff: "Kamera bereit · keine Bewegung",
     on: true,
-    watts: 210,
   },
   {
-    room: "Rollläden",
-    detailOn: "Automatik · Sonnenstand",
-    detailOff: "Manuell · geschlossen",
+    room: "Büro",
+    detailOn: "VLAN intern · Firewall an",
+    detailOff: "Netz bereit · Wartung",
     on: true,
-    watts: 12,
   },
   {
     room: "Garage",
-    detailOn: "Offen · Kamera aktiv",
-    detailOff: "Verriegelt · Kamera aktiv",
+    detailOn: "Melder aktiv · Tor zu",
+    detailOff: "Unscharf · Tor offen",
     on: false,
-    watts: 35,
   },
 ];
 ---
@@ -87,14 +83,14 @@ const dashboardRows = [
           id="hero-title"
           class="mt-6 text-[clamp(2.75rem,7.5vw,5.25rem)] leading-[0.95] font-bold"
         >
-          <span class="block" data-reveal style="--reveal-delay:80ms">Ihr Zuhause,</span
+          <span class="block" data-reveal style="--reveal-delay:80ms">Dein Zuhause,</span
           >
           <span
             class="text-gradient block bg-[length:200%_auto]"
             data-reveal
             style="--reveal-delay:200ms"
           >
-            intelligent verkabelt.
+            gesichert und vernetzt.
           </span>
         </h1>
 
@@ -103,9 +99,8 @@ const dashboardRows = [
           data-reveal
           style="--reveal-delay:320ms"
         >
-          Smart Home, Netzwerk und Sicherheitstechnik aus einer Hand: geplant,
-          installiert und betreut. Von Elektrotechnik und IT in Personalunion, zwischen
-          Geiselwind, Würzburg und Kitzingen.
+          Alarmanlagen und IT aus einer Hand: geplant, eingerichtet und betreut. Von
+          Geiselwind aus für Würzburg, Kitzingen und Umgebung.
         </p>
 
         <div
@@ -165,7 +160,6 @@ const dashboardRows = [
           class="glass relative rounded-[1.75rem] p-5 shadow-2xl shadow-black/40 sm:p-6"
           data-parallax="0.05"
           data-home-demo
-          data-base-devices="34"
         >
           <div class="flex items-center justify-between gap-3">
             <div>
@@ -184,7 +178,7 @@ const dashboardRows = [
                 <span class="bg-brand-400 relative inline-flex size-2 rounded-full"
                 ></span>
               </span>
-              <span data-demo-status>Online</span>
+              <span data-demo-status>Scharf</span>
             </span>
           </div>
 
@@ -213,7 +207,6 @@ const dashboardRows = [
                     data-demo-toggle
                     data-detail-on={row.detailOn}
                     data-detail-off={row.detailOff}
-                    data-watts={String(row.watts)}
                     aria-pressed={row.on ? "true" : "false"}
                     aria-label={`${row.room} umschalten`}
                   >
@@ -235,33 +228,28 @@ const dashboardRows = [
             >
               <p
                 class="text-brand-300 font-display text-lg font-semibold"
-                data-demo-watts
+                data-demo-armed
               >
-                270 W
+                3
               </p>
               <p class="text-ink-500 mt-0.5 text-[0.7rem] tracking-wide uppercase">
-                Verbrauch
+                Scharf
               </p>
             </div>
             <div
               class="rounded-2xl border border-white/6 bg-white/3 px-3 py-3 text-center"
             >
-              <p
-                class="text-brand-300 font-display text-lg font-semibold"
-                data-demo-devices
-              >
-                37
-              </p>
+              <p class="text-brand-300 font-display text-lg font-semibold">6</p>
               <p class="text-ink-500 mt-0.5 text-[0.7rem] tracking-wide uppercase">
-                Geräte
+                Kameras
               </p>
             </div>
             <div
               class="rounded-2xl border border-white/6 bg-white/3 px-3 py-3 text-center"
             >
-              <p class="text-brand-300 font-display text-lg font-semibold">912 Mbit</p>
+              <p class="text-brand-300 font-display text-lg font-semibold">1 Gbit</p>
               <p class="text-ink-500 mt-0.5 text-[0.7rem] tracking-wide uppercase">
-                WLAN
+                Uplink
               </p>
             </div>
           </div>
