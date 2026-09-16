@@ -243,7 +243,7 @@ export const navLinks = [
 export const demo = {
   label: "Live-Demo",
   title: "So kann eine Anlage reagieren",
-  hint: "Tür und Fenster antippen. Die Demo läuft lokal im Browser.",
+  hint: "Tür oder Fenster am Haus antippen. Die Demo läuft lokal im Browser.",
   tabs: {
     alarm: "Alarmanlage",
     video: "Video",

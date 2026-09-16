@@ -2,53 +2,93 @@
 import { techStack } from "../data/site";
 
 const labels = techStack;
-const items = [...labels, ...labels];
 ---
 
 <section
   class="hero-marquee border-t-brand-400/25 bg-ink-950/70 relative z-10 border-t border-b border-b-white/7 py-4 backdrop-blur-md"
   aria-label="Hersteller und Systeme"
 >
-  <div class="overflow-hidden">
-    <ul
-      class="hero-marquee-track flex w-max items-center will-change-transform"
-      style="animation: marquee 48s linear infinite"
-    >
-      {
-        items.map((item, i) => (
-          <li
-            class="text-ink-50/85 flex shrink-0 items-center text-[0.8rem] font-medium tracking-[0.14em] whitespace-nowrap uppercase"
-            aria-hidden={i >= labels.length ? "true" : undefined}
-          >
-            <span class="px-4 sm:px-5">{item}</span>
-            <span class="text-brand-400/55 select-none" aria-hidden="true">
-              /
-            </span>
-          </li>
-        ))
-      }
-    </ul>
+  <div class="hero-marquee-viewport overflow-hidden">
+    <div class="hero-marquee-track">
+      <ul class="hero-marquee-group">
+        {
+          labels.map((item) => (
+            <li class="text-ink-50/85 flex shrink-0 items-center text-[0.8rem] font-medium tracking-[0.14em] whitespace-nowrap uppercase">
+              <span class="px-4 sm:px-5">{item}</span>
+              <span class="text-brand-400/55 select-none" aria-hidden="true">
+                /
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <ul class="hero-marquee-group" aria-hidden="true">
+        {
+          labels.map((item) => (
+            <li class="text-ink-50/85 flex shrink-0 items-center text-[0.8rem] font-medium tracking-[0.14em] whitespace-nowrap uppercase">
+              <span class="px-4 sm:px-5">{item}</span>
+              <span class="text-brand-400/55 select-none" aria-hidden="true">
+                /
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
   </div>
 </section>
 
 <style>
+  .hero-marquee-viewport {
+    container-type: inline-size;
+    width: 100%;
+  }
+
+  .hero-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: marquee-loop 36s linear infinite;
+  }
+
+  /* Jede Hälfte füllt mindestens die Leiste – so schließt die Schleife ohne Lücke. */
+  .hero-marquee-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    min-width: 100vw;
+    min-width: 100cqi;
+    flex-shrink: 0;
+  }
+
   .hero-marquee-track:hover {
     animation-play-state: paused;
+  }
+
+  @keyframes marquee-loop {
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-marquee-track {
       animation: none !important;
-      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .hero-marquee-group {
+      min-width: 0;
       width: 100%;
       max-width: 80rem;
       margin-inline: auto;
+      flex-wrap: wrap;
       justify-content: center;
       row-gap: 0.5rem;
       padding-inline: 1.25rem;
     }
 
-    .hero-marquee-track li[aria-hidden="true"] {
+    .hero-marquee-group[aria-hidden="true"] {
       display: none;
     }
   }

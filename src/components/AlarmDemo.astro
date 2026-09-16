@@ -64,164 +64,53 @@ import { demo } from "../data/site";
   <div class="mt-5 grid items-start gap-5 sm:grid-cols-2 sm:gap-4">
     <div>
       <div
-        class="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0c121c] px-2 pt-3 pb-2"
+        class="demo-stage relative rounded-2xl border border-white/10 bg-[#0c121c]"
         data-demo-house
       >
-        <svg
-          class="mx-auto block h-auto w-full max-w-[16.5rem]"
-          viewBox="0 0 240 200"
+        <div
+          class="demo-scene"
           role="img"
-          aria-label="Stilisiertes Haus mit Tür, Fenster, Sirene, Übertragung und Kamera"
+          aria-label="Dreidimensionales Haus. Tür und Fenster sind anklickbar."
         >
-          <defs>
-            <linearGradient id="demo-sky" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#1eeff2" stop-opacity="0.2"></stop>
-              <stop offset="100%" stop-color="#0c121c" stop-opacity="0"></stop>
-            </linearGradient>
-            <linearGradient id="demo-wall" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#4a5a70"></stop>
-              <stop offset="100%" stop-color="#2a3548"></stop>
-            </linearGradient>
-            <linearGradient id="demo-roof" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#6a7c94"></stop>
-              <stop offset="100%" stop-color="#243044"></stop>
-            </linearGradient>
-          </defs>
-
-          <rect width="240" height="200" rx="14" fill="url(#demo-sky)"></rect>
-          <ellipse cx="120" cy="188" rx="96" ry="9" fill="#05080d" opacity="0.55"
-          ></ellipse>
-
-          <!-- Kamera -->
-          <g data-demo-camera-mark>
-            <rect
-              x="166"
-              y="32"
-              width="22"
-              height="12"
-              rx="3"
-              fill="#111823"
-              stroke="#1eeff2"
-              stroke-width="1.6"></rect>
-            <circle cx="184" cy="38" r="3.6" fill="#1eeff2"></circle>
-            <path
-              d="M177 32 V25"
-              stroke="#1eeff2"
-              stroke-width="1.6"
-              stroke-linecap="round"></path>
-          </g>
-
-          <!-- Dach -->
-          <path d="M26 88 L120 24 L214 88 Z" fill="url(#demo-roof)"></path>
-          <path
-            d="M26 88 L120 24 L214 88 Z"
-            fill="none"
-            stroke="#1eeff2"
-            stroke-opacity="0.55"
-            stroke-width="2"></path>
-
-          <!-- Korpus -->
-          <rect x="48" y="86" width="144" height="90" rx="2" fill="url(#demo-wall)"
-          ></rect>
-          <rect
-            x="48"
-            y="86"
-            width="144"
-            height="90"
-            rx="2"
-            fill="none"
-            stroke="#c9d4e0"
-            stroke-opacity="0.35"
-            stroke-width="1.4"></rect>
-
-          <!-- Licht hinter Tür/Fenster, sichtbar wenn offen -->
-          <rect
-            x="70"
-            y="124"
-            width="32"
-            height="50"
-            rx="2"
-            fill="#1eeff2"
-            opacity="0.22"></rect>
-          <rect
-            x="142"
-            y="102"
-            width="38"
-            height="32"
-            rx="2"
-            fill="#1eeff2"
-            opacity="0.2"></rect>
-
-          <!-- Außensirene -->
-          <g data-demo-siren>
-            <rect
-              x="24"
-              y="102"
-              width="20"
-              height="18"
-              rx="4"
-              fill="#111823"
-              stroke="#1eeff2"
-              stroke-width="1.4"></rect>
-            <path
-              d="M29 102 C34 92 34 92 39 102"
-              fill="#1eeff2"
-              fill-opacity="0.55"
-              data-siren-glow></path>
-            <circle cx="34" cy="111" r="3.4" fill="#1eeff2" data-siren-core></circle>
-          </g>
-
-          <!-- Übertragung -->
-          <g data-demo-tx>
-            <rect
-              x="196"
-              y="124"
-              width="20"
-              height="24"
-              rx="3"
-              fill="#111823"
-              stroke="#8a97a6"
-              stroke-width="1.4"></rect>
-            <path
-              d="M206 124 V112 M200 116 H212"
-              stroke="#8a97a6"
-              stroke-width="1.6"
-              data-tx-antenna></path>
-            <circle cx="206" cy="136" r="2.6" fill="#8a97a6" data-tx-core></circle>
-          </g>
-
-          <!-- Fenster -->
-          <g data-window-leaf>
-            <rect
-              x="142"
-              y="102"
-              width="38"
-              height="32"
-              rx="2"
-              fill="#0e3a42"
-              stroke="#5cf1f7"
-              stroke-width="2"></rect>
-            <path
-              d="M161 102 V134 M142 118 H180"
-              stroke="#5cf1f7"
-              stroke-opacity="0.7"
-              stroke-width="1.4"></path>
-          </g>
-
-          <!-- Tür -->
-          <g data-door-leaf>
-            <rect
-              x="70"
-              y="124"
-              width="32"
-              height="50"
-              rx="2"
-              fill="#1b2430"
-              stroke="#5cf1f7"
-              stroke-width="2"></rect>
-            <circle cx="96" cy="150" r="2.4" fill="#1eeff2"></circle>
-          </g>
-        </svg>
+          <div class="demo-ground" aria-hidden="true"></div>
+          <div class="demo-house">
+            <div class="demo-roof" aria-hidden="true"></div>
+            <div class="demo-roof-side" aria-hidden="true"></div>
+            <div class="demo-side" data-demo-tx>
+              <span class="demo-tx"></span>
+            </div>
+            <div class="demo-front">
+              <button
+                type="button"
+                class="demo-door"
+                data-demo-door
+                aria-pressed="false"
+                aria-label={demo.house.doorClosed}
+              >
+                <span class="demo-opening" aria-hidden="true"></span>
+                <span class="demo-leaf demo-door-leaf" data-door-leaf></span>
+              </button>
+              <button
+                type="button"
+                class="demo-window"
+                data-demo-window
+                aria-pressed="false"
+                aria-label={demo.house.windowClosed}
+              >
+                <span class="demo-opening" aria-hidden="true"></span>
+                <span class="demo-leaf demo-window-leaf" data-window-leaf></span>
+              </button>
+              <span class="demo-siren" data-demo-siren aria-hidden="true"></span>
+              <button
+                type="button"
+                class="demo-camera"
+                data-demo-camera
+                aria-label={demo.house.camera}
+              >
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="mt-3 flex flex-wrap gap-2">
@@ -413,48 +302,267 @@ import { demo } from "../data/site";
 </div>
 
 <style>
-  [data-alarm-demo][data-door-open] [data-door-leaf] {
-    transform: rotate(-58deg);
+  .demo-stage {
+    --hw: 9.75rem;
+    --hd: 5.75rem;
+    --hh: 7.25rem;
+    overflow: visible;
   }
 
-  [data-alarm-demo][data-window-open] [data-window-leaf] {
-    transform: rotate(-48deg);
+  .demo-scene {
+    position: relative;
+    height: 15.5rem;
+    perspective: 880px;
+    perspective-origin: 46% 42%;
   }
 
-  [data-door-leaf],
-  [data-window-leaf] {
-    transform-box: fill-box;
-    transition: transform 0.45s var(--ease-out-expo);
+  .demo-ground {
+    position: absolute;
+    inset-inline: 12%;
+    bottom: 1.15rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgb(0 0 0 / 0.55), transparent 72%);
+    transform: rotateX(68deg);
   }
 
-  [data-door-leaf] {
-    transform-origin: left bottom;
+  .demo-house {
+    position: absolute;
+    top: 3.1rem;
+    left: 50%;
+    width: var(--hw);
+    height: var(--hh);
+    margin-left: calc(var(--hw) / -2);
+    transform: rotateX(16deg) rotateY(-32deg);
+    transform-style: preserve-3d;
   }
 
-  [data-window-leaf] {
+  .demo-front,
+  .demo-side,
+  .demo-roof,
+  .demo-roof-side {
+    position: absolute;
+    transform-style: preserve-3d;
+  }
+
+  .demo-front {
+    inset: 0;
+    background: linear-gradient(180deg, #6b7d94 0%, #3d4b5e 58%, #2a3546 100%);
+    border: 1px solid rgb(92 241 247 / 0.28);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.12);
+    transform: translateZ(calc(var(--hd) / 2));
+  }
+
+  .demo-side {
+    top: 0;
+    left: 50%;
+    width: var(--hd);
+    height: var(--hh);
+    margin-left: calc(var(--hd) / -2);
+    background: linear-gradient(180deg, #3f4d61 0%, #1c2532 100%);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    transform: rotateY(90deg) translateZ(calc(var(--hw) / 2));
+  }
+
+  .demo-roof {
+    left: -0.45rem;
+    top: -2.55rem;
+    width: calc(var(--hw) + 0.9rem);
+    height: 5.1rem;
+    background: linear-gradient(180deg, #8ea0b8 0%, #4c5d73 55%, #2b384a 100%);
+    border: 1px solid rgb(92 241 247 / 0.22);
+    transform-origin: bottom center;
+    transform: translateZ(calc(var(--hd) / 2)) rotateX(64deg);
+  }
+
+  .demo-roof-side {
+    left: calc(50% - 0.15rem);
+    top: -2.55rem;
+    width: calc(var(--hd) + 0.5rem);
+    height: 5.1rem;
+    margin-left: calc((var(--hd) + 0.5rem) / -2);
+    background: linear-gradient(180deg, #5a6b82 0%, #243140 100%);
+    border: 1px solid rgb(255 255 255 / 0.06);
+    transform-origin: bottom center;
+    transform: rotateY(90deg) translateZ(calc(var(--hw) / 2)) rotateX(64deg);
+  }
+
+  .demo-door,
+  .demo-window,
+  .demo-camera {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .demo-door,
+  .demo-window {
+    position: absolute;
+    transform-style: preserve-3d;
+  }
+
+  .demo-door {
+    left: 0.85rem;
+    bottom: 0;
+    width: 2.15rem;
+    height: 3.85rem;
+  }
+
+  .demo-window {
+    right: 0.85rem;
+    top: 1.35rem;
+    width: 2.55rem;
+    height: 2.15rem;
+  }
+
+  .demo-opening {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #1eeff2 0%, #0a3a40 100%);
+    opacity: 0.35;
+    box-shadow: inset 0 0 12px rgb(30 239 242 / 0.45);
+  }
+
+  .demo-leaf {
+    position: absolute;
+    inset: 0;
     transform-origin: left center;
+    transition: transform 0.5s var(--ease-out-expo);
+    box-shadow: 0 8px 16px rgb(0 0 0 / 0.35);
   }
 
-  [data-alarm-demo][data-alarm] [data-demo-siren] rect {
-    stroke: #ffb545;
+  .demo-door-leaf {
+    background: linear-gradient(90deg, #141b26 0%, #243044 70%, #1b2430 100%);
+    border: 2px solid #5cf1f7;
   }
 
-  [data-alarm-demo][data-alarm] [data-siren-glow] {
-    fill: #ffb545;
-    fill-opacity: 0.95;
+  .demo-door-leaf::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.28rem;
+    width: 0.28rem;
+    height: 0.28rem;
+    border-radius: 999px;
+    background: #1eeff2;
+    transform: translateY(-50%);
   }
 
-  [data-alarm-demo][data-alarm] [data-siren-core] {
-    fill: #ffb545;
+  .demo-window-leaf {
+    background: linear-gradient(180deg, rgb(30 239 242 / 0.28), #0e3a42);
+    border: 2px solid #5cf1f7;
   }
 
-  [data-alarm-demo][data-sending] [data-demo-tx] rect,
-  [data-alarm-demo][data-sending] [data-tx-antenna] {
-    stroke: #1eeff2;
+  .demo-window-leaf::before,
+  .demo-window-leaf::after {
+    content: "";
+    position: absolute;
+    background: rgb(92 241 247 / 0.55);
   }
 
-  [data-alarm-demo][data-sending] [data-tx-core] {
-    fill: #1eeff2;
+  .demo-window-leaf::before {
+    inset: 0 auto 0 50%;
+    width: 1px;
+  }
+
+  .demo-window-leaf::after {
+    inset: 50% 0 auto;
+    height: 1px;
+  }
+
+  [data-alarm-demo][data-door-open] .demo-door-leaf {
+    transform: rotateY(-78deg);
+  }
+
+  [data-alarm-demo][data-window-open] .demo-window-leaf {
+    transform: rotateY(-70deg);
+  }
+
+  .demo-siren {
+    position: absolute;
+    top: 1.05rem;
+    left: -0.55rem;
+    width: 0.85rem;
+    height: 0.7rem;
+    border-radius: 0.2rem;
+    background: #111823;
+    border: 1px solid #1eeff2;
+    box-shadow: 0 0 10px rgb(30 239 242 / 0.25);
+    transform: translateZ(0.35rem);
+  }
+
+  .demo-siren::after {
+    content: "";
+    position: absolute;
+    inset: -0.35rem 0.1rem auto;
+    height: 0.35rem;
+    border-radius: 50% 50% 0 0;
+    background: rgb(30 239 242 / 0.55);
+  }
+
+  .demo-tx {
+    position: absolute;
+    right: 0.7rem;
+    bottom: 1.2rem;
+    width: 0.85rem;
+    height: 1.15rem;
+    border-radius: 0.15rem;
+    background: #111823;
+    border: 1px solid #8a97a6;
+    transform: translateZ(0.2rem);
+  }
+
+  .demo-tx::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 1px;
+    height: 0.55rem;
+    background: #8a97a6;
+  }
+
+  .demo-camera {
+    position: absolute;
+    top: -0.15rem;
+    right: 0.7rem;
+    width: 1.15rem;
+    height: 0.7rem;
+    border-radius: 0.2rem;
+    background: #111823;
+    border: 1px solid #1eeff2;
+    transform: translateZ(0.4rem);
+  }
+
+  .demo-camera::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0.12rem;
+    width: 0.32rem;
+    height: 0.32rem;
+    border-radius: 999px;
+    background: #1eeff2;
+    transform: translateY(-50%);
+  }
+
+  [data-alarm-demo][data-alarm] .demo-siren {
+    border-color: #ffb545;
+    box-shadow: 0 0 16px rgb(255 181 69 / 0.7);
+  }
+
+  [data-alarm-demo][data-alarm] .demo-siren::after {
+    background: #ffb545;
+  }
+
+  [data-alarm-demo][data-sending] .demo-tx {
+    border-color: #1eeff2;
+    box-shadow: 0 0 12px rgb(30 239 242 / 0.55);
+  }
+
+  [data-alarm-demo][data-sending] .demo-tx::before {
+    background: #1eeff2;
   }
 
   [data-alarm-demo][data-alarm] [data-demo-status-wrap] {
@@ -469,8 +577,7 @@ import { demo } from "../data/site";
   }
 
   @media (prefers-reduced-motion: reduce) {
-    [data-door-leaf],
-    [data-window-leaf] {
+    .demo-leaf {
       transition: none;
     }
   }
