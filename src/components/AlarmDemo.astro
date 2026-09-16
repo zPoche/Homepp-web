@@ -435,18 +435,25 @@ import { demo } from "../data/site";
     transform-origin: left center;
   }
 
+  [data-alarm-demo][data-alarm] [data-demo-siren] rect {
+    stroke: #ffb545;
+  }
+
   [data-alarm-demo][data-alarm] [data-siren-glow] {
-    fill: #1eeff2;
-    fill-opacity: 0.85;
+    fill: #ffb545;
+    fill-opacity: 0.95;
   }
 
   [data-alarm-demo][data-alarm] [data-siren-core] {
     fill: #ffb545;
   }
 
-  [data-alarm-demo][data-sending] [data-tx-core],
+  [data-alarm-demo][data-sending] [data-demo-tx] rect,
   [data-alarm-demo][data-sending] [data-tx-antenna] {
     stroke: #1eeff2;
+  }
+
+  [data-alarm-demo][data-sending] [data-tx-core] {
     fill: #1eeff2;
   }
 
