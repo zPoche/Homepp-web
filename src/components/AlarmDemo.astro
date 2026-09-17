@@ -71,184 +71,279 @@ import { demo } from "../data/site";
           <div class="demo-model">
             <svg
               class="demo-house-svg"
-              viewBox="0 0 270 226"
+              viewBox="0 0 250 228"
               role="img"
               aria-label="Einfamilienhaus mit Satteldach. Tür und Fenster sind anklickbar."
             >
               <defs>
                 <linearGradient id="demo-wall-front" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#c5d0dc"></stop>
-                  <stop offset="1" stop-color="#8b97a8"></stop>
+                  <stop offset="0" stop-color="#d5dde6"></stop>
+                  <stop offset="0.55" stop-color="#b7c2ce"></stop>
+                  <stop offset="1" stop-color="#8e9aaa"></stop>
                 </linearGradient>
                 <linearGradient id="demo-wall-side" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#6d7b8d"></stop>
-                  <stop offset="1" stop-color="#3d4a5c"></stop>
+                  <stop offset="0" stop-color="#7b8898"></stop>
+                  <stop offset="1" stop-color="#3b4656"></stop>
                 </linearGradient>
-                <linearGradient id="demo-roof-r" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#4a5d73"></stop>
-                  <stop offset="0.45" stop-color="#243044"></stop>
-                  <stop offset="1" stop-color="#141b26"></stop>
+                <linearGradient id="demo-roof-r" x1="0" y1="0" x2="0.9" y2="1">
+                  <stop offset="0" stop-color="#5d738c"></stop>
+                  <stop offset="0.4" stop-color="#2a3a4e"></stop>
+                  <stop offset="1" stop-color="#121820"></stop>
                 </linearGradient>
                 <linearGradient id="demo-roof-l" x1="1" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#5a6e84"></stop>
+                  <stop offset="0" stop-color="#6d8298"></stop>
+                  <stop offset="1" stop-color="#1d2836"></stop>
+                </linearGradient>
+                <linearGradient id="demo-open-fill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#1eeff2" stop-opacity="0.55"></stop>
+                  <stop offset="1" stop-color="#0a3036"></stop>
+                </linearGradient>
+                <linearGradient id="demo-porch" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#4a5d73"></stop>
                   <stop offset="1" stop-color="#1b2430"></stop>
                 </linearGradient>
                 <pattern
-                  id="demo-tiles"
-                  width="10"
-                  height="7"
+                  id="demo-tiles-r"
+                  width="9"
+                  height="6"
+                  patternUnits="userSpaceOnUse"
+                  patternTransform="rotate(36 0 0)"
+                >
+                  <path
+                    d="M0 5.4 H9"
+                    fill="none"
+                    stroke="#05080d"
+                    stroke-opacity="0.45"
+                    stroke-width="0.7"></path>
+                  <path
+                    d="M0 2 H9"
+                    fill="none"
+                    stroke="#1eeff2"
+                    stroke-opacity="0.07"
+                    stroke-width="0.6"></path>
+                </pattern>
+                <pattern
+                  id="demo-tiles-l"
+                  width="9"
+                  height="6"
                   patternUnits="userSpaceOnUse"
                   patternTransform="rotate(-32 0 0)"
                 >
                   <path
-                    d="M0 6.2 H10"
-                    fill="none"
-                    stroke="#1eeff2"
-                    stroke-opacity="0.09"
-                    stroke-width="0.7"></path>
-                  <path
-                    d="M0 2.2 H10"
+                    d="M0 5.4 H9"
                     fill="none"
                     stroke="#05080d"
                     stroke-opacity="0.35"
-                    stroke-width="0.6"></path>
+                    stroke-width="0.7"></path>
                 </pattern>
-                <linearGradient id="demo-open-fill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#1eeff2"></stop>
-                  <stop offset="1" stop-color="#0a3a40"></stop>
-                </linearGradient>
+                <filter id="demo-soft" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="1.1"></feGaussianBlur>
+                </filter>
               </defs>
 
               <ellipse
-                class="demo-ground"
-                cx="138"
-                cy="210"
-                rx="118"
-                ry="16"
-                fill="rgb(0 0 0 / 0.55)"></ellipse>
+                cx="128"
+                cy="214"
+                rx="112"
+                ry="12"
+                fill="rgb(0 0 0 / 0.5)"
+                filter="url(#demo-soft)"></ellipse>
               <path
-                d="M58 201 C72 216 118 222 148 218 C120 224 64 218 52 204 Z"
-                fill="#1b2430"></path>
-              <ellipse cx="32" cy="200" rx="16" ry="9" fill="#1a2c28"></ellipse>
-              <ellipse cx="22" cy="204" rx="10" ry="6" fill="#152420"></ellipse>
-              <ellipse cx="236" cy="176" rx="18" ry="9" fill="#1a2c28"></ellipse>
+                d="M40 214 C72 226 128 230 168 220 C130 228 70 224 36 214 Z"
+                fill="#161d28"></path>
 
-              <polygon points="103,162 235,166 235,84 103,80" fill="#243044"></polygon>
+              <g>
+                <ellipse cx="20" cy="208" rx="17" ry="9" fill="#142822"></ellipse>
+                <ellipse cx="12" cy="206" rx="10" ry="7" fill="#1a332c"></ellipse>
+                <ellipse cx="28" cy="205" rx="9" ry="6" fill="#18302a"></ellipse>
+              </g>
+              <g>
+                <ellipse cx="228" cy="178" rx="16" ry="8" fill="#142822"></ellipse>
+                <ellipse cx="220" cy="176" rx="9" ry="6" fill="#1a332c"></ellipse>
+              </g>
+
               <polygon
-                points="176,202 235,166 235,84 176,120"
+                points="80.2,181.4 218.2,181.4 218.2,103.4 80.2,103.4"
+                fill="#1c2532"></polygon>
+              <polygon
+                points="166,212 218.2,181.4 218.2,103.4 166,134"
                 fill="url(#demo-wall-side)"
+                stroke="#1eeff2"
+                stroke-opacity="0.12"
+                stroke-width="0.9"></polygon>
+              <polygon
+                points="28,212 166,212 166,134 97,76 28,134"
+                fill="url(#demo-wall-front)"
+                stroke="#edf4fa"
+                stroke-opacity="0.35"
+                stroke-width="0.8"></polygon>
+              <polygon
+                points="28,212 166,212 166,200 28,200"
+                fill="#5c6b7c"
+                opacity="0.38"></polygon>
+
+              <polygon
+                points="91.2,79.4 155,42 76,100 12.2,137.4"
+                fill="url(#demo-roof-l)"
+                stroke="#9aafc2"
+                stroke-opacity="0.22"
+                stroke-width="0.9"></polygon>
+              <polygon
+                points="91.2,79.4 155,42 76,100 12.2,137.4"
+                fill="url(#demo-tiles-l)"></polygon>
+              <polygon
+                points="91.2,79.4 170.2,137.4 234,100 155,42"
+                fill="url(#demo-roof-r)"
                 stroke="#1eeff2"
                 stroke-opacity="0.16"
                 stroke-width="1"></polygon>
               <polygon
-                points="44,198 176,202 176,120 110,58 44,116"
-                fill="url(#demo-wall-front)"
-                stroke="#1eeff2"
-                stroke-opacity="0.22"
-                stroke-width="1.1"></polygon>
-              <polygon
-                points="44,198 176,202 176,190 44,186"
-                fill="#5c6b7d"
-                opacity="0.45"></polygon>
-
-              <polygon
-                points="110,58 169,22 103,80 44,116"
-                fill="url(#demo-roof-l)"
-                stroke="#8aa0b6"
-                stroke-opacity="0.28"
-                stroke-width="1"></polygon>
-              <polygon
-                points="110,58 176,120 235,84 169,22"
-                fill="url(#demo-roof-r)"
-                stroke="#1eeff2"
-                stroke-opacity="0.2"
-                stroke-width="1.1"></polygon>
-              <polygon points="110,58 176,120 235,84 169,22" fill="url(#demo-tiles)"
-              ></polygon>
+                points="91.2,79.4 170.2,137.4 234,100 155,42"
+                fill="url(#demo-tiles-r)"></polygon>
               <path
-                d="M110 58 L169 22"
+                d="M91.2 79.4 L155 42"
                 fill="none"
                 stroke="#0a0f17"
-                stroke-width="3"
-                stroke-linecap="round"></path>
-              <path
-                d="M44 116 L110 58 L176 120"
-                fill="none"
-                stroke="#0f1724"
                 stroke-width="3.2"
                 stroke-linecap="round"></path>
+              <path
+                d="M28 134 L97 76 L166 134"
+                fill="none"
+                stroke="#121820"
+                stroke-width="3.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+              <path
+                d="M170.2 137.4 L234 100"
+                fill="none"
+                stroke="#8aa0b4"
+                stroke-opacity="0.35"
+                stroke-width="2.2"
+                stroke-linecap="round"></path>
+              <path
+                d="M166 136 L166 200"
+                fill="none"
+                stroke="#6d7d8c"
+                stroke-opacity="0.7"
+                stroke-width="1.4"></path>
 
-              <polygon points="172,108 186,112 186,28 172,24" fill="#6b7d90"></polygon>
-              <polygon points="186,112 198,102 198,22 186,28" fill="#3d4a5c"></polygon>
+              <polygon points="145,87.3 159,87.3 168.3,81.9 154.3,81.9" fill="#0e141c"
+              ></polygon>
+              <polygon points="145,87.3 159,87.3 159,36 145,36" fill="#7b8c9d"
+              ></polygon>
+              <polygon points="159,87.3 168.3,81.9 168.3,32 159,36" fill="#3d4a5c"
+              ></polygon>
               <polygon
-                points="170,24 184,28 196,18 182,14"
-                fill="#121820"
+                points="143,36 157,36 166.3,30 152.3,30"
+                fill="#10161e"
                 stroke="#1eeff2"
-                stroke-opacity="0.2"
+                stroke-opacity="0.18"
                 stroke-width="0.8"></polygon>
 
               <circle
-                cx="110"
-                cy="86"
-                r="8"
-                fill="#0e3a42"
+                cx="97"
+                cy="112"
+                r="8.5"
+                fill="#0c3338"
                 stroke="#5cf1f7"
-                stroke-width="1.6"></circle>
+                stroke-width="1.7"></circle>
               <path
-                d="M110 78 V94 M102 86 H118"
+                d="M97 104.2 V119.8 M89.2 112 H104.8"
+                fill="none"
+                stroke="#5cf1f7"
+                stroke-opacity="0.75"
+                stroke-width="1.1"></path>
+
+              <polygon
+                points="181.1,175.2 198.5,165 198.5,139 181.1,149.2"
+                fill="#0c3338"
+                stroke="#5cf1f7"
+                stroke-width="1.6"></polygon>
+              <path
+                d="M189.8 170.1 V144.1 M181.1 162.2 L198.5 152"
                 fill="none"
                 stroke="#5cf1f7"
                 stroke-opacity="0.7"
                 stroke-width="1"></path>
 
               <polygon
-                points="195,133 214,121 214,149 195,161"
-                fill="#0e3a42"
+                points="43,153 81,153 81,212 43,212"
+                fill="#1a222c"
                 stroke="#5cf1f7"
-                stroke-width="1.5"></polygon>
-              <path
-                d="M204.5 127 V155 M195 147 L214 135"
-                fill="none"
-                stroke="#5cf1f7"
-                stroke-opacity="0.65"
-                stroke-width="1"></path>
-
-              <polygon points="58,200 97,202 102,208 53,206" fill="#121820"></polygon>
-              <polygon points="63,143 91,145 91,201 63,199" fill="url(#demo-open-fill)"
+                stroke-width="1.4"></polygon>
+              <polygon points="46,156 78,156 78,212 46,212" fill="url(#demo-open-fill)"
               ></polygon>
               <polygon
-                points="127,141 161,142 161,170 127,169"
+                points="105,153 149,153 149,186 105,186"
+                fill="#1a222c"
+                stroke="#5cf1f7"
+                stroke-width="1.4"></polygon>
+              <polygon
+                points="108,156 146,156 146,186 108,186"
                 fill="url(#demo-open-fill)"></polygon>
+              <polygon points="102.3,186 148.3,186 150,190 101,190" fill="#243044"
+              ></polygon>
+
+              <polygon
+                points="35.4,148.7 81.4,148.7 90.6,143.3 44.6,143.3"
+                fill="url(#demo-porch)"></polygon>
+              <polygon
+                points="35.4,148.7 81.4,148.7 81.4,153.7 35.4,153.7"
+                fill="#1b2430"></polygon>
+              <circle cx="60.7" cy="155.4" r="2.1" fill="#1eeff2" opacity="0.85"
+              ></circle>
+
+              <polygon
+                points="38.5,216 78.5,216 73.9,218.8 33.9,218.8"
+                fill="#10161e"
+                stroke="#1eeff2"
+                stroke-opacity="0.16"
+                stroke-width="0.8"></polygon>
+              <polygon points="42,212 74,212 78.5,216 38.5,216" fill="#1b2430"
+              ></polygon>
 
               <g class="demo-siren" data-demo-siren>
                 <rect
-                  x="46"
-                  y="104"
-                  width="11"
+                  x="30"
+                  y="124"
+                  width="12"
                   height="9"
-                  rx="1.5"
+                  rx="1.6"
                   fill="#111823"
                   stroke="#1eeff2"
                   stroke-width="1.2"></rect>
                 <ellipse
                   class="demo-siren-glow"
-                  cx="51.5"
-                  cy="104"
-                  rx="5"
-                  ry="3"
+                  cx="36"
+                  cy="124"
+                  rx="5.4"
+                  ry="3.1"
                   fill="rgb(30 239 242 / 0.55)"></ellipse>
               </g>
               <g class="demo-tx">
                 <rect
-                  x="218"
-                  y="148"
-                  width="10"
-                  height="14"
-                  rx="1.2"
+                  x="202"
+                  y="158"
+                  width="11"
+                  height="15"
+                  rx="1.4"
                   fill="#111823"
                   stroke="#8a97a6"
                   stroke-width="1.1"></rect>
-                <path d="M223 148 V140" stroke="#8a97a6" stroke-width="1.2"></path>
+                <path d="M207.5 158 V148" stroke="#8a97a6" stroke-width="1.3"></path>
+                <circle cx="207.5" cy="147" r="1.6" fill="#8a97a6"></circle>
+              </g>
+              <g class="demo-camera-mark">
+                <rect
+                  x="136"
+                  y="128"
+                  width="16"
+                  height="9"
+                  rx="1.8"
+                  fill="#111823"
+                  stroke="#1eeff2"
+                  stroke-width="1.2"></rect>
+                <circle cx="147.5" cy="132.5" r="2.3" fill="#1eeff2"></circle>
               </g>
             </svg>
 
@@ -483,7 +578,7 @@ import { demo } from "../data/site";
 
   .demo-model {
     position: relative;
-    width: min(100%, 22rem);
+    width: min(100%, 24rem);
     margin-inline: auto;
   }
 
@@ -510,39 +605,24 @@ import { demo } from "../data/site";
   }
 
   .demo-door {
-    left: 22.8%;
-    top: 62.4%;
-    width: 11%;
-    height: 26%;
+    left: 18.4%;
+    top: 68.42%;
+    width: 12.8%;
+    height: 24.56%;
   }
 
   .demo-window {
-    left: 46.6%;
-    top: 61.7%;
-    width: 13.2%;
-    height: 13.6%;
+    left: 43.2%;
+    top: 68.42%;
+    width: 15.2%;
+    height: 13.16%;
   }
 
   .demo-camera {
-    left: 57.6%;
-    top: 49.2%;
+    left: 54.4%;
+    top: 56.14%;
     width: 6.4%;
-    height: 4.2%;
-    border-radius: 0.2rem;
-    background: #111823;
-    border: 1px solid #1eeff2;
-  }
-
-  .demo-camera::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0.12rem;
-    width: 0.32rem;
-    height: 0.32rem;
-    border-radius: 999px;
-    background: #1eeff2;
-    transform: translateY(-50%);
+    height: 3.95%;
   }
 
   .demo-opening {
@@ -575,7 +655,10 @@ import { demo } from "../data/site";
   }
 
   .demo-door-leaf {
-    background: linear-gradient(90deg, #141b26 0%, #243044 70%, #1b2430 100%);
+    background:
+      linear-gradient(#5cf1f7, #5cf1f7) 50% 32% / 62% 1px no-repeat,
+      linear-gradient(#5cf1f7, #5cf1f7) 50% 68% / 62% 1px no-repeat,
+      linear-gradient(90deg, #141b26 0%, #2a3648 70%, #1b2430 100%);
     border: 2px solid #5cf1f7;
   }
 
@@ -597,8 +680,13 @@ import { demo } from "../data/site";
         no-repeat,
       linear-gradient(rgb(92 241 247 / 0.55), rgb(92 241 247 / 0.55)) center / 100% 1px
         no-repeat,
-      linear-gradient(180deg, rgb(30 239 242 / 0.28), #0e3a42);
+      linear-gradient(180deg, rgb(30 239 242 / 0.2), #0c3338);
     border: 2px solid #5cf1f7;
+  }
+
+  .demo-door:hover .demo-door-leaf,
+  .demo-window:hover .demo-window-leaf {
+    filter: brightness(1.14);
   }
 
   [data-alarm-demo][data-door-open] .demo-door-leaf {
