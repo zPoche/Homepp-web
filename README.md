@@ -103,7 +103,38 @@ Mailversand für die Domain funktionieren (oft schon der Fall).
 ```
 
 Der Wert landet im ausgelieferten HTML. Das Formular hat ein Honeypot-Feld gegen
-Bots, ein einfaches Rate-Limit und verlangt die Datenschutz-Einwilligung.
+einfache Bots, ein Rate-Limit (5 Anfragen pro IP und Stunde, hinter Cloudflare
+über `CF-Connecting-IP`) und verlangt die Datenschutz-Einwilligung.
+
+### Spam-Schutz mit Cloudflare Turnstile
+
+Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/).
+Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
+`homepowerplus.de` (und `www`, falls genutzt) zulassen.
+
+Zwei Schlüssel, nie vertauschen:
+
+| Schlüssel | Wo er hingehört |
+| --- | --- |
+| Sitekey (öffentlich) | `PUBLIC_TURNSTILE_SITE_KEY` beim Build |
+| Secret key | nur auf dem Server, nie ins Frontend |
+
+```bash
+PUBLIC_TURNSTILE_SITE_KEY="0x..." npm run build
+```
+
+Das Secret liest `public/api/contact.php` in dieser Reihenfolge:
+
+1. Umgebungsvariable `TURNSTILE_SECRET_KEY` (auf Plesk unter PHP-Einstellungen)
+2. Datei `turnstile-secret.php` eine Ebene über dem Webroot, Inhalt
+   `<?php return '0x...';` – die Datei liegt außerhalb von `httpdocs` und ist
+   gitignored
+
+Solange der Sitekey fehlt, bleibt das Formular beim Honeypot. Ist das Secret
+gesetzt, lehnt das PHP jede Anfrage ohne gültiges Token ab. Das Skript von
+`challenges.cloudflare.com` lädt erst, wenn das Formular benutzt wird, nicht
+beim Seitenaufruf. Die Datenschutzerklärung nennt Cloudflare nur, wenn der
+Sitekey beim Build gesetzt ist.
 
 ## Deployment
 

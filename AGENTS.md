@@ -41,6 +41,11 @@ Zwei Regeln, die `npm run check:legal` erzwingt:
 `npm run check:privacy` stellt sicher, dass keine Ressource von Drittanbietern
 in den Build gelangt – sonst wird die Datenschutzerklärung unwahr.
 
+Ausnahme Kontaktformular: Cloudflare Turnstile wird nur geladen, wenn
+`PUBLIC_TURNSTILE_SITE_KEY` gesetzt ist, und erst bei Benutzung des Formulars
+(kein `<script src>` im HTML). Der Secret Key bleibt serverseitig. Die
+Datenschutzerklärung muss den Dienst dann nennen; `check:legal` prüft das.
+
 ## Dokumentation
 
 Astro-Doku: https://docs.astro.build – insbesondere

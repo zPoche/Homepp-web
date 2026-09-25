@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Cloudflare-Turnstile-Secret, nur auf dem Server (siehe README)
+turnstile-secret.php
+
 # macOS-specific files
 .DS_Store
 
