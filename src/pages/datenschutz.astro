@@ -19,9 +19,6 @@ try {
   contactEndpointHost = "";
 }
 const usesOwnMailEndpoint = Boolean(contactEndpoint) && !contactEndpointHost;
-
-/** Nur gesetzt, wenn das Formular Cloudflare Turnstile einbindet. */
-const usesTurnstile = (import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "") !== "";
 ---
 
 <Legal
@@ -69,16 +66,9 @@ const usesTurnstile = (import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "") 
     <li>
       <strong>Keine externen Inhalte beim Aufruf.</strong> Es werden keine Karten, Videos
       oder Schriften von Drittanbietern nachgeladen. Beim bloßen Aufruf der Seite geht keine
-      Anfrage an einen fremden Server.
-      {
-        usesTurnstile && (
-          <>
-            {" "}
-            Erst wenn Du das Kontaktformular benutzt, lädt der Browser zur Spam-Prüfung
-            Cloudflare Turnstile. Details stehen in Abschnitt 5.
-          </>
-        )
-      }
+      Anfrage an einen fremden Server. Erst wenn Du das Kontaktformular benutzt und der Spam-Schutz
+      eingerichtet ist, lädt der Browser zur Prüfung Cloudflare Turnstile. Details stehen
+      in Abschnitt 5.
     </li>
   </ul>
 
@@ -173,32 +163,25 @@ const usesTurnstile = (import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "") 
     )
   }
 
-  {
-    usesTurnstile && (
-      <>
-        <h3>Spam-Schutz (Cloudflare Turnstile)</h3>
-        <p>
-          Damit das Kontaktformular nicht automatisiert missbraucht wird, binden wir
-          Cloudflare Turnstile ein. Das Häkchen und das zugehörige Skript von{" "}
-          <strong>challenges.cloudflare.com</strong> werden erst geladen, wenn Du das
-          Formular benutzt – nicht schon beim Aufruf der Seite. Cloudflare verarbeitet
-          dabei insbesondere Deine IP-Adresse und technische Merkmale des Browsers, um
-          zu unterscheiden, ob die Anfrage von einem Menschen stammt.
-        </p>
-        <p>
-          Anbieter ist die Cloudflare, Inc., 101 Townsend Street, San Francisco, CA
-          94107, USA. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: unser berechtigtes
-          Interesse, das Formular vor Spam zu schützen. Weitere Informationen stehen in
-          der{" "}
-          <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">
-            Datenschutzerklärung von Cloudflare
-          </a>
-          . Für den Einsatz ist der Auftragsverarbeitungsvertrag im Cloudflare-Konto
-          maßgeblich (Art. 28 DSGVO).
-        </p>
-      </>
-    )
-  }
+  <h3>Spam-Schutz (Cloudflare Turnstile)</h3>
+  <p>
+    Damit das Kontaktformular nicht automatisiert missbraucht wird, kann Cloudflare
+    Turnstile eingebunden sein. Das Häkchen und das zugehörige Skript von{" "}
+    <strong>challenges.cloudflare.com</strong> werden erst geladen, wenn Du das Formular benutzt
+    und der Schutz auf dem Server eingerichtet ist – nicht schon beim Aufruf der Seite. Cloudflare
+    verarbeitet dabei insbesondere Deine IP-Adresse und technische Merkmale des Browsers,
+    um zu unterscheiden, ob die Anfrage von einem Menschen stammt.
+  </p>
+  <p>
+    Anbieter ist die Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107,
+    USA. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: unser berechtigtes Interesse,
+    das Formular vor Spam zu schützen. Weitere Informationen stehen in der{" "}
+    <a href="https://www.cloudflare.com/privacypolicy/" rel="noopener noreferrer">
+      Datenschutzerklärung von Cloudflare
+    </a>
+    . Für den Einsatz ist der Auftragsverarbeitungsvertrag im Cloudflare-Konto maßgeblich
+    (Art. 28 DSGVO).
+  </p>
 
   <h3>Anfragen per E-Mail oder Telefon</h3>
   <p>

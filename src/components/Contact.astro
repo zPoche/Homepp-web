@@ -10,9 +10,8 @@ const configured = import.meta.env.PUBLIC_CONTACT_ENDPOINT;
 const endpoint = configured === "" ? "" : (configured ?? "/api/contact.php");
 
 /**
- * Öffentlicher Sitekey von Cloudflare Turnstile. Leer = nur Honeypot.
- * Das Widget (Häkchen) wird erst geladen, wenn das Formular benutzt wird.
- * Den geheimen Schlüssel liest ausschließlich contact.php.
+ * Optionaler Sitekey nur für lokale Tests. Im Betrieb liest das Formular
+ * den Sitekey von /api/turnstile-sitekey.php, ohne neuen Build.
  */
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? "";
 
@@ -225,21 +224,22 @@ const channels = [
               </label>
             </div>
 
-            {
-              turnstileSiteKey && (
-                <div class="sm:col-span-2">
-                  <div
-                    data-turnstile
-                    data-sitekey={turnstileSiteKey}
-                    class="min-h-[65px]"
-                  />
-                  <p class="text-ink-500 mt-2 text-xs leading-relaxed">
-                    Bitte setze das Häkchen. Die Prüfung läuft über Cloudflare und
-                    startet erst, wenn Du dieses Formular benutzt.
-                  </p>
-                </div>
-              )
-            }
+            <div
+              class:list={["sm:col-span-2", !turnstileSiteKey && "hidden"]}
+              data-turnstile-slot
+            >
+              <div
+                data-turnstile
+                data-sitekey={turnstileSiteKey || undefined}
+                data-config="/api/turnstile-sitekey.php"
+                class="min-h-[65px]"
+              >
+              </div>
+              <p class="text-ink-500 mt-2 text-xs leading-relaxed">
+                Bitte setze das Häkchen. Die Prüfung läuft über Cloudflare und startet
+                erst, wenn Du dieses Formular benutzt.
+              </p>
+            </div>
           </div>
 
           <button

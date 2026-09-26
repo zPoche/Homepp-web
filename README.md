@@ -112,29 +112,24 @@ Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/
 Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
 `homepowerplus.de` (und `www`, falls genutzt) zulassen.
 
-Zwei Schlüssel, nie vertauschen:
+Beide Schlüssel liegen in **einer** Datei auf dem Server, eine Ebene über `dist`.
+Auf Plesk ist das `httpdocs/turnstile-secret.php`, nicht im Ordner `dist` und nicht
+im Repository:
 
-| Schlüssel | Wo er hingehört |
-| --- | --- |
-| Sitekey (öffentlich) | `PUBLIC_TURNSTILE_SITE_KEY` beim Build |
-| Secret key | nur auf dem Server, nie ins Frontend |
-
-```bash
-PUBLIC_TURNSTILE_SITE_KEY="0x..." npm run build
+```php
+<?php
+return [
+    'sitekey' => '0x...',
+    'secret' => '0x...',
+];
 ```
 
-Das Secret liest `public/api/contact.php` in dieser Reihenfolge:
-
-1. Umgebungsvariable `TURNSTILE_SECRET_KEY` (auf Plesk unter PHP-Einstellungen)
-2. Datei `turnstile-secret.php` eine Ebene über dem Webroot, Inhalt
-   `<?php return '0x...';` – die Datei liegt außerhalb von `httpdocs` und ist
-   gitignored
-
-Solange der Sitekey fehlt, bleibt das Formular beim Honeypot. Ist das Secret
-gesetzt, lehnt das PHP jede Anfrage ohne gültiges Token ab. Das Skript von
-`challenges.cloudflare.com` lädt erst, wenn das Formular benutzt wird, nicht
-beim Seitenaufruf. Die Datenschutzerklärung nennt Cloudflare nur, wenn der
-Sitekey beim Build gesetzt ist.
+Kein erneuter Build nötig, um die Schlüssel zu ändern. Das Formular holt den
+Sitekey über `/api/turnstile-sitekey.php`; das Secret gibt diese Adresse nicht
+heraus. Solange die Datei fehlt oder unvollständig ist, bleibt das Formular beim
+Honeypot. Ist das Secret gesetzt, lehnt `contact.php` jede Anfrage ohne gültiges
+Häkchen ab. Das Skript von `challenges.cloudflare.com` lädt erst, wenn das
+Formular benutzt wird.
 
 ## Deployment
 

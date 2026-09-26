@@ -7,6 +7,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/turnstile-config.php';
+
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 header('Cache-Control: no-store');
@@ -57,32 +59,6 @@ function client_ip(): string
     }
     $remote = $_SERVER['REMOTE_ADDR'] ?? '';
     return is_string($remote) && $remote !== '' ? $remote : 'unknown';
-}
-
-/**
- * Secret nur serverseitig: Umgebungsvariable oder Datei außerhalb des
- * Webroots (eine Ebene über public/ bzw. über httpdocs auf Plesk).
- * Die Datei gibt den Secret-String per return zurück und wird nicht
- * mit ausgeliefert.
- */
-function turnstile_secret(): string
-{
-    $fromEnv = getenv('TURNSTILE_SECRET_KEY');
-    if (is_string($fromEnv) && $fromEnv !== '') {
-        return $fromEnv;
-    }
-    $fromServer = $_SERVER['TURNSTILE_SECRET_KEY'] ?? '';
-    if (is_string($fromServer) && $fromServer !== '') {
-        return $fromServer;
-    }
-    $file = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'turnstile-secret.php';
-    if (is_file($file)) {
-        $value = include $file;
-        if (is_string($value) && $value !== '') {
-            return $value;
-        }
-    }
-    return '';
 }
 
 /** @return 'ok'|'invalid'|'unavailable' */

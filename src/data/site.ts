@@ -70,7 +70,7 @@ export const legal = {
     address: "Promenade 18, 91522 Ansbach",
   },
 
-  lastUpdated: "2026-08-03",
+  lastUpdated: "2026-09-26",
 } as const;
 
 export type Service = {

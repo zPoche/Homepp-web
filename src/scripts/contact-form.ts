@@ -12,9 +12,12 @@ if (form) {
   const endpoint = form.dataset.endpoint?.trim();
   const mailto = form.dataset.mailto ?? "";
   const turnstileHost = form.querySelector<HTMLElement>("[data-turnstile]");
-  const turnstileSiteKey = turnstileHost?.dataset.sitekey?.trim() ?? "";
+  const turnstileSlot = form.querySelector<HTMLElement>("[data-turnstile-slot]");
+  let turnstileSiteKey = turnstileHost?.dataset.sitekey?.trim() ?? "";
+  const turnstileConfigUrl = turnstileHost?.dataset.config?.trim() ?? "";
   let turnstileWidgetId = "";
   let turnstileLoad: Promise<void> | null = null;
+  let siteKeyLookup: Promise<string> | null = null;
 
   type TurnstileApi = {
     render: (
@@ -37,67 +40,87 @@ if (form) {
   const turnstileApi = () =>
     (window as Window & { turnstile?: TurnstileApi }).turnstile;
 
+  const resolveSiteKey = () => {
+    if (turnstileSiteKey) return Promise.resolve(turnstileSiteKey);
+    if (!turnstileConfigUrl) return Promise.resolve("");
+    if (siteKeyLookup) return siteKeyLookup;
+
+    siteKeyLookup = fetch(turnstileConfigUrl, {
+      headers: { Accept: "application/json" },
+    })
+      .then(async (response) => {
+        if (!response.ok) return "";
+        const payload = (await response.json()) as { sitekey?: unknown };
+        const key = typeof payload.sitekey === "string" ? payload.sitekey.trim() : "";
+        if (!/^0x[A-Za-z0-9_-]{16,200}$/.test(key)) return "";
+        turnstileSiteKey = key;
+        return key;
+      })
+      .catch(() => "");
+
+    return siteKeyLookup;
+  };
+
   const ensureTurnstile = () => {
-    if (!turnstileSiteKey || !turnstileHost) return Promise.resolve();
+    if (!turnstileHost) return Promise.resolve();
     if (turnstileLoad) return turnstileLoad;
 
-    turnstileLoad = new Promise<void>((resolve, reject) => {
-      const existing = turnstileApi();
-      const render = () => {
-        const api = turnstileApi();
-        if (!api) {
-          reject(new Error("turnstile"));
-          return;
-        }
-        if (!turnstileWidgetId) {
-          turnstileWidgetId = api.render(turnstileHost, {
-            sitekey: turnstileSiteKey,
-            theme: "dark",
-            language: "de",
-            appearance: "always",
-            action: "contact",
-            callback: () => {},
-            "error-callback": () => {},
-            "expired-callback": () => {
-              api.reset(turnstileWidgetId);
-            },
-          });
-        }
-        resolve();
-      };
+    turnstileLoad = resolveSiteKey()
+      .then((sitekey) => {
+        if (!sitekey) return;
+        turnstileSlot?.classList.remove("hidden");
+        return new Promise<void>((resolve, reject) => {
+          const render = () => {
+            const api = turnstileApi();
+            if (!api) {
+              reject(new Error("turnstile"));
+              return;
+            }
+            if (!turnstileWidgetId) {
+              turnstileWidgetId = api.render(turnstileHost, {
+                sitekey,
+                theme: "dark",
+                language: "de",
+                appearance: "always",
+                action: "contact",
+                callback: () => {},
+                "error-callback": () => {},
+                "expired-callback": () => {
+                  api.reset(turnstileWidgetId);
+                },
+              });
+            }
+            resolve();
+          };
 
-      if (existing) {
-        render();
-        return;
-      }
+          if (turnstileApi()) {
+            render();
+            return;
+          }
 
-      const script = document.createElement("script");
-      script.src =
-        "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-      script.async = true;
-      script.onload = () => render();
-      script.onerror = () => reject(new Error("turnstile-load"));
-      document.head.appendChild(script);
-    }).catch((error) => {
-      turnstileLoad = null;
-      throw error;
-    });
+          const script = document.createElement("script");
+          script.src =
+            "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+          script.async = true;
+          script.onload = () => render();
+          script.onerror = () => reject(new Error("turnstile-load"));
+          document.head.appendChild(script);
+        });
+      })
+      .catch((error) => {
+        turnstileLoad = null;
+        throw error;
+      });
 
     return turnstileLoad;
   };
 
-  if (turnstileSiteKey) {
-    form.addEventListener("focusin", () => void ensureTurnstile().catch(() => {}), {
-      once: true,
-    });
-    form.addEventListener(
-      "pointerenter",
-      () => void ensureTurnstile().catch(() => {}),
-      {
-        once: true,
-      },
-    );
-  }
+  form.addEventListener("focusin", () => void ensureTurnstile().catch(() => {}), {
+    once: true,
+  });
+  form.addEventListener("pointerenter", () => void ensureTurnstile().catch(() => {}), {
+    once: true,
+  });
 
   const setStatus = (message: string, tone: "ok" | "error" | "info") => {
     if (!status) return;
@@ -143,17 +166,17 @@ if (form) {
       return;
     }
 
-    if (turnstileSiteKey) {
-      try {
-        await ensureTurnstile();
-      } catch {
-        setStatus(
-          `Die Sicherheitsprüfung konnte nicht geladen werden. Schreib uns bitte direkt an ${mailto}.`,
-          "error",
-        );
-        return;
-      }
+    try {
+      await ensureTurnstile();
+    } catch {
+      setStatus(
+        `Die Sicherheitsprüfung konnte nicht geladen werden. Schreib uns bitte direkt an ${mailto}.`,
+        "error",
+      );
+      return;
+    }
 
+    if (turnstileSiteKey) {
       const token = turnstileApi()?.getResponse(turnstileWidgetId) ?? "";
       if (!token) {
         setStatus(
