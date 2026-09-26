@@ -112,8 +112,8 @@ Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/
 Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
 `homepowerplus.de` (und `www`, falls genutzt) zulassen.
 
-Beide Schlüssel stehen in `httpdocs/turnstile-secret.php`, eine Ebene über dem
-Ordner `dist`. Ein neuer Build und das Hochladen von `dist` ersetzen diese Datei
+Beide Schlüssel stehen in `httpdocs/turnstile-secret.php`, direkt im Ordner
+`httpdocs`. Ein neuer Build und das Hochladen von `dist` ersetzen diese Datei
 nicht. In `dist/api/turnstile-secret.example.php` liegt nur die leere Vorlage:
 
 ```php
