@@ -1,8 +1,8 @@
 <?php
 /**
- * Liest Sitekey und Secret aus turnstile-secret.php.
- * Zuerst die mitgelieferte Datei neben diesem Skript, danach eine Datei
- * außerhalb des Webroots, falls dort schon Werte stehen.
+ * Liest Sitekey und Secret. Die ausgefüllte Datei liegt eine Ebene über dist
+ * (auf Plesk: httpdocs/turnstile-secret.php) und wird von einem neuen Build
+ * nicht angefasst. Eine Datei direkt neben diesem Skript gilt nur als Notnagel.
  */
 
 declare(strict_types=1);
@@ -11,8 +11,8 @@ declare(strict_types=1);
 function turnstile_config_paths(): array
 {
     return [
-        __DIR__ . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
         dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
+        __DIR__ . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
     ];
 }
 
