@@ -112,9 +112,10 @@ Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/
 Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
 `homepowerplus.de` (und `www`, falls genutzt) zulassen.
 
-Beide Schlüssel stehen in `httpdocs/turnstile-secret.php`, direkt im Ordner
-`httpdocs`. Ein neuer Build und das Hochladen von `dist` ersetzen diese Datei
-nicht. In `dist/api/turnstile-secret.example.php` liegt nur die leere Vorlage:
+Beide Schlüssel stehen in `dist/api/turnstile-secret.php`, im selben Ordner wie
+`contact.php`. In `dist/api/turnstile-secret.example.php` liegt nur die leere
+Vorlage. Ein neuer Build enthält `turnstile-secret.php` nicht. Beim Hochladen
+von `dist` diese Datei liegen lassen und den Ordner `api` nicht vorher leeren:
 
 ```php
 <?php
@@ -124,7 +125,7 @@ return [
 ];
 ```
 
-Die Vorlage einmal nach `httpdocs/turnstile-secret.php` kopieren und dort die
+Die Vorlage einmal nach `dist/api/turnstile-secret.php` kopieren und dort die
 Werte eintragen. Solange die Datei fehlt oder leer ist, bleibt das Formular beim
 Honeypot. Ist das Secret gesetzt, lehnt `contact.php` jede Anfrage ohne gültiges
 Häkchen ab. Das Skript von `challenges.cloudflare.com` lädt erst, wenn das

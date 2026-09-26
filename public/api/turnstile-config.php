@@ -1,9 +1,8 @@
 <?php
 /**
- * Liest Sitekey und Secret aus httpdocs/turnstile-secret.php.
- * Gesucht wird vom Skript aus aufwärts: direkt in httpdocs, wenn api dort liegt,
- * und eine Ebene über dist, wenn die Website aus dist läuft. Ein neuer Build
- * fasst diese Datei nicht an. Eine Kopie neben diesem Skript gilt nur als Notnagel.
+ * Liest Sitekey und Secret. Auf dem Server liegt die Datei neben diesem Skript
+ * (dist/api/turnstile-secret.php). Ein neuer Build liefert sie nicht mit.
+ * Zusätzlich wird aufwärts gesucht, falls die Datei außerhalb von dist liegt.
  */
 
 declare(strict_types=1);
@@ -32,7 +31,7 @@ function turnstile_config_paths(): array
         }
     }
 
-    return array_values(array_unique(array_merge($parents, $besideScript)));
+    return array_values(array_unique(array_merge($besideScript, $parents)));
 }
 
 /** @return array{sitekey: string, secret: string} */
