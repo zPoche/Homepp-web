@@ -43,8 +43,8 @@ in den Build gelangt – sonst wird die Datenschutzerklärung unwahr.
 
 Ausnahme Kontaktformular: Cloudflare Turnstile lädt erst bei Benutzung des
 Formulars (kein `<script src>` im HTML). Sitekey und Secret stehen in
-`turnstile-secret.php` außerhalb des Webroots. Die Datenschutzerklärung nennt
-den Dienst; `check:legal` prüft das.
+`public/api/turnstile-secret.php` und werden nicht per HTTP ausgeliefert. Die
+Datenschutzerklärung nennt den Dienst; `check:legal` prüft das.
 
 ## Dokumentation
 

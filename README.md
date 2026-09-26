@@ -112,24 +112,21 @@ Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/
 Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
 `homepowerplus.de` (und `www`, falls genutzt) zulassen.
 
-Beide Schlüssel liegen in **einer** Datei auf dem Server, eine Ebene über `dist`.
-Auf Plesk ist das `httpdocs/turnstile-secret.php`, nicht im Ordner `dist` und nicht
-im Repository:
+Beide Schlüssel stehen in `dist/api/turnstile-secret.php`. Die Datei liegt leer
+im Build. Auf dem Server nur die beiden Werte eintragen:
 
 ```php
-<?php
 return [
     'sitekey' => '0x...',
     'secret' => '0x...',
 ];
 ```
 
-Kein erneuter Build nötig, um die Schlüssel zu ändern. Das Formular holt den
-Sitekey über `/api/turnstile-sitekey.php`; das Secret gibt diese Adresse nicht
-heraus. Solange die Datei fehlt oder unvollständig ist, bleibt das Formular beim
-Honeypot. Ist das Secret gesetzt, lehnt `contact.php` jede Anfrage ohne gültiges
-Häkchen ab. Das Skript von `challenges.cloudflare.com` lädt erst, wenn das
-Formular benutzt wird.
+Direkt aufrufen lässt sie sich nicht. Beim nächsten Hochladen von `dist` diese
+Datei nicht überschreiben, sonst sind die Schlüssel wieder leer. Solange sie leer
+ist, bleibt das Formular beim Honeypot. Ist das Secret gesetzt, lehnt
+`contact.php` jede Anfrage ohne gültiges Häkchen ab. Das Skript von
+`challenges.cloudflare.com` lädt erst, wenn das Formular benutzt wird.
 
 ## Deployment
 

@@ -1,14 +1,19 @@
 <?php
 /**
- * Liest Sitekey und Secret aus turnstile-secret.php außerhalb des Webroots.
- * Die Datei selbst gibt nichts aus. Den Sitekey liefert nur turnstile-sitekey.php.
+ * Liest Sitekey und Secret aus turnstile-secret.php.
+ * Zuerst die mitgelieferte Datei neben diesem Skript, danach eine Datei
+ * außerhalb des Webroots, falls dort schon Werte stehen.
  */
 
 declare(strict_types=1);
 
-function turnstile_config_path(): string
+/** @return list<string> */
+function turnstile_config_paths(): array
 {
-    return dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'turnstile-secret.php';
+    return [
+        __DIR__ . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
+        dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
+    ];
 }
 
 /** @return array{sitekey: string, secret: string} */
@@ -33,18 +38,20 @@ function turnstile_config(): array
         $sitekey = is_string($fromServer) ? $fromServer : '';
     }
 
-    $file = turnstile_config_path();
-    if (is_file($file)) {
+    foreach (turnstile_config_paths() as $file) {
+        if (!is_file($file)) {
+            continue;
+        }
         $value = include $file;
         if (is_string($value)) {
-            if ($secret === '' && $value !== '') {
+            if ($value !== '') {
                 $secret = $value;
             }
         } elseif (is_array($value)) {
-            if ($secret === '' && isset($value['secret']) && is_string($value['secret'])) {
+            if (isset($value['secret']) && is_string($value['secret']) && $value['secret'] !== '') {
                 $secret = $value['secret'];
             }
-            if ($sitekey === '' && isset($value['sitekey']) && is_string($value['sitekey'])) {
+            if (isset($value['sitekey']) && is_string($value['sitekey']) && $value['sitekey'] !== '') {
                 $sitekey = $value['sitekey'];
             }
         }
