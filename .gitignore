@@ -17,6 +17,9 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Ausgefüllte Kopie außerhalb des Webroots, nicht die leere Vorlage
+/turnstile-secret.php
+
 # macOS-specific files
 .DS_Store
 

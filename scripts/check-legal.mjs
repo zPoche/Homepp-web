@@ -151,7 +151,21 @@ for (const page of pages) {
 }
 
 /* ------------------------------------------------------------------ *
- * 7. Offene Platzhalter
+ * 7. Turnstile darf nur laufen, wenn die Datenschutzerklärung ihn nennt
+ * ------------------------------------------------------------------ */
+for (const page of pages) {
+  const markup = page.html.replace(/<script[\s\S]*?<\/script>/g, " ");
+  if (!markup.includes("data-turnstile")) continue;
+  if (!datenschutz?.text.includes("Cloudflare Turnstile")) {
+    errors.push(
+      `${page.file} bindet Cloudflare Turnstile ein, die Datenschutzerklärung ` +
+        "nennt den Dienst aber nicht.",
+    );
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * 8. Offene Platzhalter
  * ------------------------------------------------------------------ */
 for (const page of pages) {
   const matches = [...page.text.matchAll(/TODO_IMPRESSUM:?\s*([^<"]{0,90})/g)];

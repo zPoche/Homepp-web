@@ -11,6 +11,116 @@ if (form) {
   const label = form.querySelector<HTMLElement>("[data-submit-label]");
   const endpoint = form.dataset.endpoint?.trim();
   const mailto = form.dataset.mailto ?? "";
+  const turnstileHost = form.querySelector<HTMLElement>("[data-turnstile]");
+  const turnstileSlot = form.querySelector<HTMLElement>("[data-turnstile-slot]");
+  let turnstileSiteKey = turnstileHost?.dataset.sitekey?.trim() ?? "";
+  const turnstileConfigUrl = turnstileHost?.dataset.config?.trim() ?? "";
+  let turnstileWidgetId = "";
+  let turnstileLoad: Promise<void> | null = null;
+  let siteKeyLookup: Promise<string> | null = null;
+
+  type TurnstileApi = {
+    render: (
+      element: HTMLElement,
+      options: {
+        sitekey: string;
+        theme: "dark";
+        language: "de";
+        appearance: "always";
+        action: "contact";
+        callback: () => void;
+        "error-callback": () => void;
+        "expired-callback": () => void;
+      },
+    ) => string;
+    reset: (widgetId?: string) => void;
+    getResponse: (widgetId?: string) => string | undefined;
+  };
+
+  const turnstileApi = () =>
+    (window as Window & { turnstile?: TurnstileApi }).turnstile;
+
+  const resolveSiteKey = () => {
+    if (turnstileSiteKey) return Promise.resolve(turnstileSiteKey);
+    if (!turnstileConfigUrl) return Promise.resolve("");
+    if (siteKeyLookup) return siteKeyLookup;
+
+    siteKeyLookup = fetch(turnstileConfigUrl, {
+      headers: { Accept: "application/json" },
+    })
+      .then(async (response) => {
+        if (!response.ok) return "";
+        const payload = (await response.json()) as { sitekey?: unknown };
+        const key = typeof payload.sitekey === "string" ? payload.sitekey.trim() : "";
+        if (!/^0x[A-Za-z0-9_-]{16,200}$/.test(key)) return "";
+        turnstileSiteKey = key;
+        return key;
+      })
+      .catch(() => "");
+
+    return siteKeyLookup;
+  };
+
+  const ensureTurnstile = () => {
+    if (!turnstileHost) return Promise.resolve();
+    if (turnstileLoad) return turnstileLoad;
+
+    turnstileLoad = resolveSiteKey()
+      .then((sitekey) => {
+        if (!sitekey) return;
+        turnstileSlot?.classList.remove("hidden");
+        return new Promise<void>((resolve, reject) => {
+          const render = () => {
+            const api = turnstileApi();
+            if (!api) {
+              reject(new Error("turnstile"));
+              return;
+            }
+            if (!turnstileWidgetId) {
+              turnstileWidgetId = api.render(turnstileHost, {
+                sitekey,
+                theme: "dark",
+                language: "de",
+                appearance: "always",
+                action: "contact",
+                callback: () => {},
+                "error-callback": () => {},
+                "expired-callback": () => {
+                  api.reset(turnstileWidgetId);
+                },
+              });
+            }
+            resolve();
+          };
+
+          if (turnstileApi()) {
+            render();
+            return;
+          }
+
+          const script = document.createElement("script");
+          script.src =
+            "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+          script.async = true;
+          script.onload = () => render();
+          script.onerror = () => reject(new Error("turnstile-load"));
+          document.head.appendChild(script);
+        });
+      })
+      .catch((error) => {
+        turnstileLoad = null;
+        throw error;
+      });
+
+    return turnstileLoad;
+  };
+
+  form.addEventListener("focusin", () => void ensureTurnstile().catch(() => {}), {
+    once: true,
+  });
+  form.addEventListener("pointerenter", () => void ensureTurnstile().catch(() => {}), {
+    once: true,
+  });
 
   const setStatus = (message: string, tone: "ok" | "error" | "info") => {
     if (!status) return;
@@ -56,6 +166,28 @@ if (form) {
       return;
     }
 
+    try {
+      await ensureTurnstile();
+    } catch {
+      setStatus(
+        `Die Sicherheitsprüfung konnte nicht geladen werden. Schreib uns bitte direkt an ${mailto}.`,
+        "error",
+      );
+      return;
+    }
+
+    if (turnstileSiteKey) {
+      const token = turnstileApi()?.getResponse(turnstileWidgetId) ?? "";
+      if (!token) {
+        setStatus(
+          "Bitte setze zuerst das Häkchen bei der Sicherheitsprüfung.",
+          "error",
+        );
+        turnstileHost?.scrollIntoView({ block: "nearest" });
+        return;
+      }
+    }
+
     const data = new FormData(form);
     data.delete("company");
 
@@ -93,7 +225,34 @@ if (form) {
         headers: { Accept: "application/json" },
       });
 
-      if (!response.ok) throw new Error(String(response.status));
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        const error = payload?.error;
+        if (error === "turnstile") {
+          turnstileApi()?.reset(turnstileWidgetId);
+          setStatus(
+            "Die Sicherheitsprüfung ist abgelaufen oder ungültig. Bitte setze das Häkchen erneut.",
+            "error",
+          );
+        } else if (error === "turnstile_unavailable") {
+          setStatus(
+            `Die Sicherheitsprüfung ist gerade nicht erreichbar. Schreib uns bitte direkt an ${mailto}.`,
+            "error",
+          );
+        } else if (error === "rate_limit") {
+          setStatus(
+            `Zu viele Anfragen hintereinander. Bitte warte eine Stunde oder schreib uns direkt an ${mailto}.`,
+            "error",
+          );
+        } else {
+          throw new Error(String(response.status));
+        }
+        if (label) label.textContent = "Nachricht senden";
+        if (button) button.disabled = false;
+        return;
+      }
 
       form.reset();
       setStatus(

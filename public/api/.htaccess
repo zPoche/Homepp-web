@@ -1,0 +1,9 @@
+# Schlüsseldatei nicht ausliefern, auch wenn PHP sie nicht ausführt.
+<Files "turnstile-secret.php">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Deny from all
+  </IfModule>
+</Files>

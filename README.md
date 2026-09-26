@@ -103,7 +103,32 @@ Mailversand für die Domain funktionieren (oft schon der Fall).
 ```
 
 Der Wert landet im ausgelieferten HTML. Das Formular hat ein Honeypot-Feld gegen
-Bots, ein einfaches Rate-Limit und verlangt die Datenschutz-Einwilligung.
+einfache Bots, ein Rate-Limit (5 Anfragen pro IP und Stunde, hinter Cloudflare
+über `CF-Connecting-IP`) und verlangt die Datenschutz-Einwilligung.
+
+### Spam-Schutz mit Cloudflare Turnstile
+
+Das Häkchen kommt von [Cloudflare Turnstile](https://developers.cloudflare.com/turnstile/).
+Widget-Typ im Dashboard: **Managed**, damit das Häkchen sichtbar ist. Hostname
+`homepowerplus.de` (und `www`, falls genutzt) zulassen.
+
+Beide Schlüssel stehen in `httpdocs/turnstile-secret.php`, eine Ebene über dem
+Ordner `dist`. Ein neuer Build und das Hochladen von `dist` ersetzen diese Datei
+nicht. In `dist/api/turnstile-secret.example.php` liegt nur die leere Vorlage:
+
+```php
+<?php
+return [
+    'sitekey' => '0x...',
+    'secret' => '0x...',
+];
+```
+
+Die Vorlage einmal nach `httpdocs/turnstile-secret.php` kopieren und dort die
+Werte eintragen. Solange die Datei fehlt oder leer ist, bleibt das Formular beim
+Honeypot. Ist das Secret gesetzt, lehnt `contact.php` jede Anfrage ohne gültiges
+Häkchen ab. Das Skript von `challenges.cloudflare.com` lädt erst, wenn das
+Formular benutzt wird.
 
 ## Deployment
 
