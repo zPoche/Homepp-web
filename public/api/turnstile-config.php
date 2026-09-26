@@ -1,8 +1,9 @@
 <?php
 /**
- * Liest Sitekey und Secret. Die ausgefüllte Datei liegt eine Ebene über dist
- * (auf Plesk: httpdocs/turnstile-secret.php) und wird von einem neuen Build
- * nicht angefasst. Eine Datei direkt neben diesem Skript gilt nur als Notnagel.
+ * Liest Sitekey und Secret aus httpdocs/turnstile-secret.php.
+ * Gesucht wird vom Skript aus aufwärts: direkt in httpdocs, wenn api dort liegt,
+ * und eine Ebene über dist, wenn die Website aus dist läuft. Ein neuer Build
+ * fasst diese Datei nicht an. Eine Kopie neben diesem Skript gilt nur als Notnagel.
  */
 
 declare(strict_types=1);
@@ -10,10 +11,28 @@ declare(strict_types=1);
 /** @return list<string> */
 function turnstile_config_paths(): array
 {
-    return [
-        dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
-        __DIR__ . DIRECTORY_SEPARATOR . 'turnstile-secret.php',
-    ];
+    $starts = [__DIR__];
+    $cwd = getcwd();
+    if (is_string($cwd) && $cwd !== '') {
+        $starts[] = $cwd;
+    }
+
+    $parents = [];
+    $besideScript = [];
+    foreach ($starts as $start) {
+        $besideScript[] = $start . DIRECTORY_SEPARATOR . 'turnstile-secret.php';
+        $dir = $start;
+        for ($level = 0; $level < 4; $level++) {
+            $parent = dirname($dir);
+            if ($parent === $dir) {
+                break;
+            }
+            $dir = $parent;
+            $parents[] = $dir . DIRECTORY_SEPARATOR . 'turnstile-secret.php';
+        }
+    }
+
+    return array_values(array_unique(array_merge($parents, $besideScript)));
 }
 
 /** @return array{sitekey: string, secret: string} */
@@ -44,14 +63,14 @@ function turnstile_config(): array
         }
         $value = include $file;
         if (is_string($value)) {
-            if ($value !== '') {
+            if ($secret === '' && $value !== '') {
                 $secret = $value;
             }
         } elseif (is_array($value)) {
-            if (isset($value['secret']) && is_string($value['secret']) && $value['secret'] !== '') {
+            if ($secret === '' && isset($value['secret']) && is_string($value['secret']) && $value['secret'] !== '') {
                 $secret = $value['secret'];
             }
-            if (isset($value['sitekey']) && is_string($value['sitekey']) && $value['sitekey'] !== '') {
+            if ($sitekey === '' && isset($value['sitekey']) && is_string($value['sitekey']) && $value['sitekey'] !== '') {
                 $sitekey = $value['sitekey'];
             }
         }
